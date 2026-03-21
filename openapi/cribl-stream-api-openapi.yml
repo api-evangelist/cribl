@@ -1,0 +1,894 @@
+openapi: 3.1.0
+info:
+  title: Cribl Stream API
+  description: >-
+    The Cribl Stream API provides programmatic access to Cribl Stream, an
+    observability pipeline platform that processes and routes telemetry data
+    in real time. Through the API, developers can manage pipelines, routes,
+    sources, destinations, and worker groups. It enables automation of data
+    collection, transformation, and routing workflows, allowing
+    organizations to control how observability data flows between sources
+    and analytics tools without vendor lock-in. Stream API endpoints are
+    accessed through the Cribl Cloud control plane or directly on
+    on-premises deployments.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+externalDocs:
+  description: Cribl Stream Documentation
+  url: https://docs.cribl.io/stream/
+servers:
+  - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud
+    variables:
+      workspaceName:
+        default: default
+        description: The name of the Cribl Cloud workspace
+      organizationId:
+        default: org-id
+        description: The Cribl Cloud organization identifier
+  - url: https://{hostname}:{port}/api/v1
+    description: On-Premises Deployment
+    variables:
+      hostname:
+        default: localhost
+        description: The hostname of the Cribl instance
+      port:
+        default: '9000'
+        description: The port of the Cribl instance
+tags:
+  - name: Pipelines
+    description: >-
+      Manage Stream processing pipelines containing ordered sequences of
+      functions for transforming, filtering, and enriching events in
+      real time.
+  - name: Routes
+    description: >-
+      Manage Stream routes that apply filter expressions on incoming events
+      to send matching results to appropriate pipelines and destinations.
+  - name: Sources
+    description: >-
+      Manage Stream data input sources including Syslog, HTTP, Kafka,
+      Splunk HEC, TCP JSON, file monitors, and other protocol endpoints.
+  - name: Destinations
+    description: >-
+      Manage Stream data output destinations including Splunk, S3,
+      Elasticsearch, Kafka, webhook, and other analytics platforms.
+  - name: Functions
+    description: >-
+      Retrieve available Stream processing functions for use in pipelines
+      including eval, regex extract, rename, mask, aggregate, and others.
+  - name: Worker Groups
+    description: >-
+      Manage Stream worker groups that organize worker nodes and deploy
+      shared pipeline configurations across clusters.
+  - name: Collectors
+    description: >-
+      Manage scheduled and on-demand data collection tasks using REST API,
+      database, script, and S3 collectors for batch data ingestion.
+  - name: Packs
+    description: >-
+      Install and manage reusable configuration packs containing bundled
+      pipelines, routes, sources, destinations, and other Stream resources.
+  - name: Lookups
+    description: >-
+      Manage lookup files and tables used for enriching events during
+      pipeline processing with reference data.
+  - name: Notifications
+    description: >-
+      Configure notification rules for monitoring data flow rates and
+      system events with webhook and PagerDuty targets.
+security:
+  - bearerAuth: []
+paths:
+  /m/{groupId}/pipelines:
+    get:
+      operationId: listStreamPipelines
+      summary: List Stream pipelines in a worker group
+      description: >-
+        Retrieves all processing pipelines configured within a specific
+        worker group context, including their function chains and settings.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved pipelines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pipeline'
+                  count:
+                    type: integer
+                    description: Total number of pipelines
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamPipeline
+      summary: Create a Stream pipeline in a worker group
+      description: >-
+        Creates a new processing pipeline within a specific worker group
+        with the specified functions and configuration for real-time
+        data transformation.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+      responses:
+        '200':
+          description: Pipeline created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '400':
+          description: Invalid pipeline configuration
+        '401':
+          description: Unauthorized
+  /m/{groupId}/pipelines/{id}:
+    get:
+      operationId: getStreamPipeline
+      summary: Get a Stream pipeline by ID
+      description: >-
+        Retrieves the configuration of a specific Stream pipeline within
+        a worker group context.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved pipeline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+    patch:
+      operationId: updateStreamPipeline
+      summary: Update a Stream pipeline
+      description: >-
+        Updates the configuration of an existing Stream pipeline within
+        a worker group context.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+      responses:
+        '200':
+          description: Pipeline updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '400':
+          description: Invalid pipeline configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+    delete:
+      operationId: deleteStreamPipeline
+      summary: Delete a Stream pipeline
+      description: >-
+        Deletes a processing pipeline from a worker group by its unique
+        ID. The pipeline must not be referenced by active routes.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Pipeline deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+  /m/{groupId}/routes:
+    get:
+      operationId: listStreamRoutes
+      summary: List Stream routes in a worker group
+      description: >-
+        Retrieves all routes configured within a worker group context that
+        filter and direct incoming data to pipelines and destinations.
+      tags:
+        - Routes
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved routes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Route'
+                  count:
+                    type: integer
+                    description: Total number of routes
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamRoute
+      summary: Create a Stream route in a worker group
+      description: >-
+        Creates a new route within a worker group to filter and direct
+        incoming events to specified pipelines and destinations.
+      tags:
+        - Routes
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid route configuration
+        '401':
+          description: Unauthorized
+  /m/{groupId}/system/sources:
+    get:
+      operationId: listStreamSources
+      summary: List Stream sources in a worker group
+      description: >-
+        Retrieves all data input sources configured within a specific
+        worker group including Syslog, HTTP, Kafka, and other sources.
+      tags:
+        - Sources
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Source'
+                  count:
+                    type: integer
+                    description: Total number of sources
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamSource
+      summary: Create a Stream source in a worker group
+      description: >-
+        Creates a new data input source within a worker group with the
+        specified type and configuration for data collection.
+      tags:
+        - Sources
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '200':
+          description: Source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+  /m/{groupId}/system/outputs:
+    get:
+      operationId: listStreamDestinations
+      summary: List Stream destinations in a worker group
+      description: >-
+        Retrieves all data output destinations configured within a
+        specific worker group context.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Destination'
+                  count:
+                    type: integer
+                    description: Total number of destinations
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamDestination
+      summary: Create a Stream destination in a worker group
+      description: >-
+        Creates a new data output destination within a worker group with
+        the specified type and configuration.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+      responses:
+        '200':
+          description: Destination created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+  /system/functions:
+    get:
+      operationId: listStreamFunctions
+      summary: List available Stream functions
+      description: >-
+        Retrieves all available processing functions that can be used in
+        Stream pipelines including eval, regex extract, rename, mask,
+        aggregate, publish metrics, and others.
+      tags:
+        - Functions
+      responses:
+        '200':
+          description: Successfully retrieved functions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Function'
+                  count:
+                    type: integer
+                    description: Total number of functions
+        '401':
+          description: Unauthorized
+  /master/groups:
+    get:
+      operationId: listWorkerGroups
+      summary: List all Stream worker groups
+      description: >-
+        Retrieves all worker groups configured for Stream deployments
+        including their node counts and configuration versions.
+      tags:
+        - Worker Groups
+      responses:
+        '200':
+          description: Successfully retrieved worker groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkerGroup'
+                  count:
+                    type: integer
+                    description: Total number of worker groups
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createWorkerGroup
+      summary: Create a worker group
+      description: >-
+        Creates a new Stream worker group for organizing and deploying
+        configurations to a set of worker nodes.
+      tags:
+        - Worker Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkerGroup'
+      responses:
+        '200':
+          description: Worker group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkerGroup'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+  /master/groups/{id}/deploy:
+    post:
+      operationId: deployWorkerGroup
+      summary: Deploy configuration to a worker group
+      description: >-
+        Deploys the current configuration to all worker nodes in the
+        specified group, making configuration changes effective.
+      tags:
+        - Worker Groups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+  /system/collectors:
+    get:
+      operationId: listStreamCollectors
+      summary: List all Stream collectors
+      description: >-
+        Retrieves all configured data collection tasks for batch
+        ingestion from REST APIs, databases, scripts, and cloud storage.
+      tags:
+        - Collectors
+      responses:
+        '200':
+          description: Successfully retrieved collectors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Collector'
+                  count:
+                    type: integer
+                    description: Total number of collectors
+        '401':
+          description: Unauthorized
+  /packs:
+    get:
+      operationId: listStreamPacks
+      summary: List all installed Stream packs
+      description: >-
+        Retrieves all installed configuration packs containing bundled
+        pipelines, routes, and other Stream resources.
+      tags:
+        - Packs
+      responses:
+        '200':
+          description: Successfully retrieved packs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pack'
+                  count:
+                    type: integer
+                    description: Total number of packs
+        '401':
+          description: Unauthorized
+    post:
+      operationId: installStreamPack
+      summary: Install a Stream pack
+      description: >-
+        Installs a configuration pack from a source URL or uploads a
+        pack archive containing bundled Stream resources.
+      tags:
+        - Packs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pack'
+      responses:
+        '200':
+          description: Pack installed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '400':
+          description: Invalid pack configuration
+        '401':
+          description: Unauthorized
+  /system/lookups:
+    get:
+      operationId: listStreamLookups
+      summary: List all Stream lookups
+      description: >-
+        Retrieves all configured lookup files and tables used for
+        enriching events during Stream pipeline processing.
+      tags:
+        - Lookups
+      responses:
+        '200':
+          description: Successfully retrieved lookups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lookup'
+                  count:
+                    type: integer
+                    description: Total number of lookups
+        '401':
+          description: Unauthorized
+  /notifications:
+    get:
+      operationId: listStreamNotifications
+      summary: List Stream notification rules
+      description: >-
+        Retrieves all configured notification rules for monitoring
+        Stream data flow rates and triggering alerts via webhook
+        or PagerDuty targets.
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: Successfully retrieved notification rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  count:
+                    type: integer
+                    description: Total number of notification rules
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via OAuth 2.0 client credentials grant
+        (Cribl Cloud) or the /auth/login endpoint (on-premises).
+  parameters:
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  schemas:
+    Pipeline:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the pipeline
+        conf:
+          type: object
+          description: Pipeline configuration object
+          properties:
+            functions:
+              type: array
+              description: Ordered list of processing functions
+              items:
+                $ref: '#/components/schemas/PipelineFunction'
+            description:
+              type: string
+              description: A human-readable description
+            asyncFuncTimeout:
+              type: integer
+              description: Timeout for async functions in milliseconds
+            output:
+              type: string
+              description: Default output destination
+            streamtags:
+              type: array
+              items:
+                type: string
+              description: Tags applied to events in this pipeline
+    PipelineFunction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The function type identifier
+        filter:
+          type: string
+          description: JavaScript expression to filter events
+        disabled:
+          type: boolean
+          description: Whether this function is disabled
+        conf:
+          type: object
+          description: Function-specific configuration
+        description:
+          type: string
+          description: A human-readable description
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the route
+        name:
+          type: string
+          description: Display name for the route
+        filter:
+          type: string
+          description: JavaScript filter expression for matching events
+        pipeline:
+          type: string
+          description: The pipeline ID for processing matched events
+        output:
+          type: string
+          description: The destination ID for processed events
+        final:
+          type: boolean
+          description: Whether matched events stop further evaluation
+        disabled:
+          type: boolean
+          description: Whether this route is disabled
+        description:
+          type: string
+          description: A human-readable description
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the source
+        type:
+          type: string
+          description: >-
+            The source type such as syslog, http, kafka, splunk_tcp,
+            tcp_json, file_monitor, or others
+        disabled:
+          type: boolean
+          description: Whether the source is disabled
+        host:
+          type: string
+          description: The host or address to listen on
+        port:
+          type: integer
+          description: The port number to listen on
+        pipeline:
+          type: string
+          description: The pipeline to process events from this source
+        description:
+          type: string
+          description: A human-readable description
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to events from this source
+    Destination:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the destination
+        type:
+          type: string
+          description: >-
+            The destination type such as splunk, s3, elasticsearch,
+            webhook, syslog, kafka, or others
+        disabled:
+          type: boolean
+          description: Whether the destination is disabled
+        host:
+          type: string
+          description: The target host address
+        port:
+          type: integer
+          description: The target port number
+        description:
+          type: string
+          description: A human-readable description
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags for filtering events
+    Function:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the function type
+        category:
+          type: string
+          description: The function category
+        description:
+          type: string
+          description: A human-readable description
+    WorkerGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the worker group
+        name:
+          type: string
+          description: Display name for the worker group
+        description:
+          type: string
+          description: A human-readable description
+        workerCount:
+          type: integer
+          description: Number of connected worker nodes
+        configVersion:
+          type: string
+          description: The current deployed configuration version
+        tags:
+          type: object
+          description: Key-value tags for organizing groups
+    Collector:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the collector
+        type:
+          type: string
+          description: The collector type such as rest, script, or database
+        schedule:
+          type: object
+          description: The collection schedule configuration
+          properties:
+            cronSchedule:
+              type: string
+              description: Cron expression for scheduled collection
+            enabled:
+              type: boolean
+              description: Whether the schedule is enabled
+        conf:
+          type: object
+          description: Collector-specific configuration
+        description:
+          type: string
+          description: A human-readable description
+    Pack:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the pack
+        source:
+          type: string
+          description: The source URL or registry path
+        version:
+          type: string
+          description: The installed version
+        author:
+          type: string
+          description: The pack author
+        description:
+          type: string
+          description: A human-readable description
+        displayName:
+          type: string
+          description: The display name
+    Lookup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the lookup
+        type:
+          type: string
+          description: The lookup type such as file or database
+        fileInfo:
+          type: object
+          description: File-based lookup metadata
+          properties:
+            filename:
+              type: string
+              description: The lookup filename
+            size:
+              type: integer
+              description: The file size in bytes
+        description:
+          type: string
+          description: A human-readable description
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the notification rule
+        type:
+          type: string
+          description: The notification type
+        targets:
+          type: array
+          description: List of notification targets
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Target type such as webhook or pagerduty
+              url:
+                type: string
+                description: The target webhook URL
+        description:
+          type: string
+          description: A human-readable description

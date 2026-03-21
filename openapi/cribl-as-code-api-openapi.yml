@@ -1,0 +1,525 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API
+  description: >-
+    The Cribl As Code API enables developers to manage Cribl configurations
+    programmatically using infrastructure-as-code principles. The management
+    plane API provides endpoints for administrative tasks in Cribl Cloud
+    including managing organizations, workspaces, and API credentials.
+    Developers can use this API alongside SDKs for Python, Go, and
+    TypeScript, or through Terraform providers, to onboard sources, build
+    and maintain pipelines, and standardize workflows at scale. The
+    management plane supports creating and configuring Cribl Cloud
+    workspaces, managing API credentials, and controlling access to
+    organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/
+servers:
+  - url: https://gateway.cribl.cloud
+    description: Cribl Cloud Management Plane
+tags:
+  - name: Health
+    description: >-
+      Check the health and availability of the Cribl Cloud management
+      plane services.
+  - name: Organizations
+    description: >-
+      Manage Cribl Cloud organizations which serve as the account
+      boundary for unique customers, providing access control,
+      authorization, billing, and metering services.
+  - name: Workspaces
+    description: >-
+      Manage Cribl Cloud workspaces which are unique VPC containers
+      each isolating an instance of the Cribl Product Suite including
+      Stream, Edge, Search, and Lake.
+  - name: API Credentials
+    description: >-
+      Manage API credentials used for OAuth 2.0 client credentials
+      authentication. Credentials consist of a client ID and client
+      secret used to obtain bearer tokens for API access.
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      operationId: getManagementHealth
+      summary: Check management plane health
+      description: >-
+        Returns the health status of the Cribl Cloud management plane
+        services including availability and version information.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Management plane is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The health status
+                    enum:
+                      - healthy
+                      - degraded
+                      - unhealthy
+                  version:
+                    type: string
+                    description: The management plane version
+  /v1/organizations/{organizationId}/workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List all workspaces
+      description: >-
+        Retrieves all workspaces for the specified Cribl Cloud
+        organization. Each workspace is an isolated VPC container
+        running an instance of the Cribl Product Suite.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+      responses:
+        '200':
+          description: Successfully retrieved workspaces
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+                  count:
+                    type: integer
+                    description: Total number of workspaces
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+    post:
+      operationId: createWorkspace
+      summary: Create a workspace
+      description: >-
+        Creates a new workspace within the specified Cribl Cloud
+        organization. The workspace provisions an isolated VPC
+        container with the Cribl Product Suite.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceCreate'
+      responses:
+        '200':
+          description: Workspace created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '400':
+          description: Invalid workspace configuration
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+  /v1/organizations/{organizationId}/workspaces/{workspaceId}:
+    get:
+      operationId: getWorkspace
+      summary: Get a workspace by ID
+      description: >-
+        Retrieves the configuration and status of a specific workspace
+        within the organization.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/workspaceId'
+      responses:
+        '200':
+          description: Successfully retrieved workspace
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: Workspace not found
+    patch:
+      operationId: updateWorkspace
+      summary: Update a workspace
+      description: >-
+        Updates the configuration of an existing workspace within the
+        organization.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/workspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceUpdate'
+      responses:
+        '200':
+          description: Workspace updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '400':
+          description: Invalid workspace configuration
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: Workspace not found
+    delete:
+      operationId: deleteWorkspace
+      summary: Delete a workspace
+      description: >-
+        Deletes a workspace and all its contained resources from the
+        organization. This operation is irreversible.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/workspaceId'
+      responses:
+        '200':
+          description: Workspace deleted successfully
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: Workspace not found
+  /v1/organizations/{organizationId}/api-credentials:
+    get:
+      operationId: listApiCredentials
+      summary: List API credentials
+      description: >-
+        Retrieves all API credentials configured for the specified
+        organization. Each credential consists of a client ID and
+        client secret used for OAuth 2.0 client credentials
+        authentication.
+      tags:
+        - API Credentials
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+      responses:
+        '200':
+          description: Successfully retrieved API credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApiCredential'
+                  count:
+                    type: integer
+                    description: Total number of API credentials
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+    post:
+      operationId: createApiCredential
+      summary: Create an API credential
+      description: >-
+        Creates a new API credential for the specified organization.
+        The response includes the client secret which is only shown
+        once and must be stored securely.
+      tags:
+        - API Credentials
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCredentialCreate'
+      responses:
+        '200':
+          description: API credential created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCredentialWithSecret'
+        '400':
+          description: Invalid credential configuration
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+  /v1/organizations/{organizationId}/api-credentials/{credentialId}:
+    get:
+      operationId: getApiCredential
+      summary: Get an API credential by ID
+      description: >-
+        Retrieves the metadata of a specific API credential. The
+        client secret is not included in the response.
+      tags:
+        - API Credentials
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/credentialId'
+      responses:
+        '200':
+          description: Successfully retrieved API credential
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCredential'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: API credential not found
+    patch:
+      operationId: updateApiCredential
+      summary: Update an API credential
+      description: >-
+        Updates the metadata of an existing API credential such as
+        its description or permissions scope.
+      tags:
+        - API Credentials
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/credentialId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCredentialUpdate'
+      responses:
+        '200':
+          description: API credential updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCredential'
+        '400':
+          description: Invalid credential configuration
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: API credential not found
+    delete:
+      operationId: deleteApiCredential
+      summary: Delete an API credential
+      description: >-
+        Deletes an API credential by its unique ID. Any applications
+        using this credential will lose API access.
+      tags:
+        - API Credentials
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/credentialId'
+      responses:
+        '200':
+          description: API credential deleted successfully
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: API credential not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via OAuth 2.0 client credentials grant
+        from https://login.cribl.cloud/oauth/token. Tokens expire
+        after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 client credentials flow for Cribl Cloud management
+        plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+  parameters:
+    organizationId:
+      name: organizationId
+      in: path
+      required: true
+      description: The Cribl Cloud organization identifier
+      schema:
+        type: string
+    workspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: The workspace identifier
+      schema:
+        type: string
+    credentialId:
+      name: credentialId
+      in: path
+      required: true
+      description: The API credential identifier
+      schema:
+        type: string
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the workspace
+        name:
+          type: string
+          description: Display name of the workspace
+        description:
+          type: string
+          description: A human-readable description
+        organizationId:
+          type: string
+          description: The parent organization identifier
+        status:
+          type: string
+          description: The current workspace status
+          enum:
+            - active
+            - provisioning
+            - deprovisioning
+            - error
+        region:
+          type: string
+          description: The cloud region where the workspace is deployed
+        url:
+          type: string
+          description: The workspace access URL
+          format: uri
+        createdAt:
+          type: string
+          description: Workspace creation timestamp
+          format: date-time
+        updatedAt:
+          type: string
+          description: Workspace last update timestamp
+          format: date-time
+    WorkspaceCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Display name for the new workspace
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          description: A human-readable description
+          maxLength: 256
+        region:
+          type: string
+          description: The cloud region for the workspace
+    WorkspaceUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated display name
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          description: Updated description
+          maxLength: 256
+    ApiCredential:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the API credential
+        clientId:
+          type: string
+          description: The OAuth 2.0 client ID
+        description:
+          type: string
+          description: A human-readable description of the credential
+        organizationId:
+          type: string
+          description: The parent organization identifier
+        createdAt:
+          type: string
+          description: Credential creation timestamp
+          format: date-time
+        updatedAt:
+          type: string
+          description: Credential last update timestamp
+          format: date-time
+    ApiCredentialCreate:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: A human-readable description for the credential
+          maxLength: 256
+    ApiCredentialUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Updated description
+          maxLength: 256
+    ApiCredentialWithSecret:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the API credential
+        clientId:
+          type: string
+          description: The OAuth 2.0 client ID
+        clientSecret:
+          type: string
+          description: >-
+            The OAuth 2.0 client secret. This value is only returned
+            once at creation time and cannot be retrieved again.
+        description:
+          type: string
+          description: A human-readable description
+        organizationId:
+          type: string
+          description: The parent organization identifier
+        createdAt:
+          type: string
+          description: Credential creation timestamp
+          format: date-time

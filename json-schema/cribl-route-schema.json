@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.cribl.io/schemas/cribl/route.json",
+  "title": "Cribl Route",
+  "description": "A Cribl route that applies filter expressions on incoming data events to direct matching results to the appropriate pipeline and destination for processing and delivery.",
+  "type": "object",
+  "required": ["id", "filter"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the route",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name for the route"
+    },
+    "filter": {
+      "type": "string",
+      "description": "JavaScript filter expression that determines which events match this route. Use true to match all events."
+    },
+    "pipeline": {
+      "type": "string",
+      "description": "The pipeline identifier to process matching events through"
+    },
+    "output": {
+      "type": "string",
+      "description": "The destination identifier where processed events are sent"
+    },
+    "final": {
+      "type": "boolean",
+      "description": "Whether matching events stop being evaluated by subsequent routes in the route table",
+      "default": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether this route is disabled and should be skipped during evaluation",
+      "default": false
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the route purpose and behavior"
+    },
+    "groups": {
+      "type": "object",
+      "description": "Worker group or fleet-specific route configuration overrides",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Group-specific route settings"
+      }
+    },
+    "clones": {
+      "type": "array",
+      "description": "Additional pipeline and destination pairs that receive copies of matching events",
+      "items": {
+        "$ref": "#/$defs/RouteClone"
+      }
+    }
+  },
+  "$defs": {
+    "RouteClone": {
+      "type": "object",
+      "description": "A clone destination that receives a copy of events matching the parent route.",
+      "properties": {
+        "pipeline": {
+          "type": "string",
+          "description": "The pipeline identifier for processing cloned events"
+        },
+        "output": {
+          "type": "string",
+          "description": "The destination identifier for the cloned events"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Additional filter expression for this clone"
+        }
+      }
+    }
+  }
+}

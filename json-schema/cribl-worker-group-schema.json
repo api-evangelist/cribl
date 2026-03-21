@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.cribl.io/schemas/cribl/worker-group.json",
+  "title": "Cribl Worker Group",
+  "description": "A Cribl worker group or edge fleet that organizes nodes and deploys shared configurations for processing observability data at scale.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the worker group or fleet",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the group"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the group purpose"
+    },
+    "isFleet": {
+      "type": "boolean",
+      "description": "Whether this group is an edge fleet rather than a stream worker group",
+      "default": false
+    },
+    "workerCount": {
+      "type": "integer",
+      "description": "Number of connected worker or edge nodes in this group",
+      "minimum": 0
+    },
+    "configVersion": {
+      "type": "string",
+      "description": "The currently deployed configuration version identifier"
+    },
+    "tags": {
+      "type": "object",
+      "description": "Key-value tags for organizing and categorizing groups",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "provisioned": {
+      "type": "boolean",
+      "description": "Whether the group has been provisioned and is ready to accept nodes"
+    },
+    "cloud": {
+      "type": "object",
+      "description": "Cloud-specific configuration for Cribl Cloud deployments",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The cloud provider",
+          "enum": ["aws", "azure", "gcp"]
+        },
+        "region": {
+          "type": "string",
+          "description": "The cloud region for the worker group"
+        }
+      }
+    }
+  }
+}

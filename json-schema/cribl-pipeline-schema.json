@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.cribl.io/schemas/cribl/pipeline.json",
+  "title": "Cribl Pipeline",
+  "description": "A Cribl processing pipeline that defines an ordered sequence of functions for transforming, filtering, and enriching observability data events in real time.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the pipeline",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "conf": {
+      "type": "object",
+      "description": "Pipeline configuration containing functions and settings",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "description": "Ordered list of processing functions that events pass through sequentially",
+          "items": {
+            "$ref": "#/$defs/PipelineFunction"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the pipeline purpose"
+        },
+        "asyncFuncTimeout": {
+          "type": "integer",
+          "description": "Timeout for asynchronous functions in milliseconds",
+          "minimum": 0,
+          "maximum": 300000
+        },
+        "output": {
+          "type": "string",
+          "description": "Default output destination for processed events"
+        },
+        "streamtags": {
+          "type": "array",
+          "description": "Tags applied to all events processed by this pipeline",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groups": {
+          "type": "object",
+          "description": "Worker group or fleet-specific configuration overrides",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Group-specific pipeline settings"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "PipelineFunction": {
+      "type": "object",
+      "description": "A processing function within a pipeline that performs a specific data transformation operation.",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The function type identifier such as eval, regex_extract, rename, mask, aggregate, or serialize"
+        },
+        "filter": {
+          "type": "string",
+          "description": "JavaScript expression that determines which events this function processes. Returns true to process, false to skip."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether this function is disabled and should be skipped during processing",
+          "default": false
+        },
+        "conf": {
+          "type": "object",
+          "description": "Function-specific configuration parameters that vary by function type"
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of what this function does"
+        },
+        "final": {
+          "type": "boolean",
+          "description": "Whether to stop processing subsequent functions after this one",
+          "default": false
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Group identifier for visually grouping functions in the UI"
+        }
+      }
+    }
+  }
+}

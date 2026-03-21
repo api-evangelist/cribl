@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.cribl.io/schemas/cribl/destination.json",
+  "title": "Cribl Destination",
+  "description": "A Cribl data output destination that receives processed events from pipelines and delivers them to analytics platforms, storage systems, and other downstream targets.",
+  "type": "object",
+  "required": ["id", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the destination",
+      "pattern": "^[a-zA-Z0-9_:-]+$"
+    },
+    "type": {
+      "type": "string",
+      "description": "The destination type that determines the delivery protocol and configuration options",
+      "enum": [
+        "splunk",
+        "splunk_hec",
+        "s3",
+        "elasticsearch",
+        "kafka",
+        "kinesis",
+        "syslog",
+        "tcp_json",
+        "webhook",
+        "azure_blob",
+        "azure_event_hub",
+        "azure_monitor",
+        "google_cloud_storage",
+        "google_cloud_pubsub",
+        "google_chronicle",
+        "datadog",
+        "new_relic",
+        "sumo_logic",
+        "cribl_lake",
+        "cribl_http",
+        "filesystem",
+        "devnull",
+        "default",
+        "graphite",
+        "statsd",
+        "honeycomb",
+        "loki",
+        "minio",
+        "snowflake"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the destination is disabled",
+      "default": false
+    },
+    "host": {
+      "type": "string",
+      "description": "The target host address for the destination"
+    },
+    "port": {
+      "type": "integer",
+      "description": "The target port number",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "tls": {
+      "type": "object",
+      "description": "TLS/SSL configuration for encrypted delivery",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether TLS is disabled",
+          "default": true
+        },
+        "certPath": {
+          "type": "string",
+          "description": "Path to the TLS certificate file"
+        },
+        "privKeyPath": {
+          "type": "string",
+          "description": "Path to the TLS private key file"
+        },
+        "caPath": {
+          "type": "string",
+          "description": "Path to the CA certificate for server verification"
+        },
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "description": "Whether to reject connections with invalid certificates",
+          "default": true
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the destination purpose"
+    },
+    "environment": {
+      "type": "string",
+      "description": "The environment context tag for this destination"
+    },
+    "streamtags": {
+      "type": "array",
+      "description": "Tags used for filtering events to this destination",
+      "items": {
+        "type": "string"
+      }
+    },
+    "throttleRatePerSec": {
+      "type": "integer",
+      "description": "Maximum events per second to send to this destination",
+      "minimum": 0
+    },
+    "onBackpressure": {
+      "type": "string",
+      "description": "Behavior when the destination cannot keep up with incoming events",
+      "enum": [
+        "drop",
+        "block",
+        "queue"
+      ]
+    },
+    "pq": {
+      "$ref": "#/$defs/PersistentQueue"
+    }
+  },
+  "$defs": {
+    "PersistentQueue": {
+      "type": "object",
+      "description": "Persistent queue configuration for buffering events during destination outages.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether persistent queuing is enabled",
+          "default": false
+        },
+        "maxSize": {
+          "type": "string",
+          "description": "Maximum queue size with unit suffix such as 1GB, 500MB",
+          "pattern": "^[0-9]+(GB|MB|KB)$"
+        },
+        "maxEvents": {
+          "type": "integer",
+          "description": "Maximum number of events to queue",
+          "minimum": 0
+        },
+        "compress": {
+          "type": "boolean",
+          "description": "Whether to compress queued data",
+          "default": false
+        }
+      }
+    }
+  }
+}

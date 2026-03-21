@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.cribl.io/schemas/cribl/source.json",
+  "title": "Cribl Source",
+  "description": "A Cribl data input source that collects events from various systems and protocols for processing through pipelines and delivery to destinations.",
+  "type": "object",
+  "required": ["id", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the source",
+      "pattern": "^[a-zA-Z0-9_:-]+$"
+    },
+    "type": {
+      "type": "string",
+      "description": "The source type that determines the collection protocol and configuration options",
+      "enum": [
+        "syslog",
+        "http",
+        "splunk_tcp",
+        "splunk_hec",
+        "tcp_json",
+        "kafka",
+        "kinesis",
+        "s3",
+        "sqs",
+        "azure_blob",
+        "azure_event_hub",
+        "google_cloud_pubsub",
+        "file_monitor",
+        "windows_event_log",
+        "system_metrics",
+        "appscope",
+        "journald",
+        "cribl_http",
+        "cribl_tcp",
+        "snmp",
+        "graphite",
+        "statsd",
+        "collectd",
+        "elastic"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the source is disabled and not actively collecting data",
+      "default": false
+    },
+    "host": {
+      "type": "string",
+      "description": "The host or IP address to listen on for network-based sources",
+      "format": "hostname"
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port number to listen on for network-based sources",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "tls": {
+      "$ref": "#/$defs/TlsConfig"
+    },
+    "authType": {
+      "type": "string",
+      "description": "The authentication method required for incoming connections",
+      "enum": [
+        "none",
+        "token",
+        "basic",
+        "mutual_tls"
+      ]
+    },
+    "authToken": {
+      "type": "string",
+      "description": "The authentication token required for token-based authentication"
+    },
+    "pipeline": {
+      "type": "string",
+      "description": "The pipeline identifier to route events from this source to"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the source purpose"
+    },
+    "environment": {
+      "type": "string",
+      "description": "The environment context tag applied to events from this source"
+    },
+    "streamtags": {
+      "type": "array",
+      "description": "Tags applied to all events collected from this source",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxConnections": {
+      "type": "integer",
+      "description": "Maximum number of concurrent connections for network sources",
+      "minimum": 1
+    },
+    "enableProxyHeader": {
+      "type": "boolean",
+      "description": "Whether to honor proxy protocol headers",
+      "default": false
+    }
+  },
+  "$defs": {
+    "TlsConfig": {
+      "type": "object",
+      "description": "TLS/SSL configuration for encrypted connections.",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether TLS is disabled",
+          "default": true
+        },
+        "certPath": {
+          "type": "string",
+          "description": "Path to the TLS certificate file"
+        },
+        "privKeyPath": {
+          "type": "string",
+          "description": "Path to the TLS private key file"
+        },
+        "caPath": {
+          "type": "string",
+          "description": "Path to the CA certificate for client verification"
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Minimum TLS version to accept",
+          "enum": ["TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3"],
+          "default": "TLSv1.2"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Cribl Lake API
+  description: >-
+    The Cribl Lake API provides programmatic access to Cribl Lake, a data
+    lake solution purpose-built for observability and security data. The API
+    enables developers to manage data storage, retention policies, and
+    access controls for large volumes of telemetry data. Cribl Lake stores
+    data in open formats, making it accessible to any analytics tool, and
+    provides cost-effective long-term storage that keeps data usable and
+    valuable to the teams and tools that need it. Lake API endpoints are
+    accessible through the Cribl Cloud control plane.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+externalDocs:
+  description: Cribl Lake Documentation
+  url: https://docs.cribl.io/lake/
+servers:
+  - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud
+    variables:
+      workspaceName:
+        default: default
+        description: The name of the Cribl Cloud workspace
+      organizationId:
+        default: org-id
+        description: The Cribl Cloud organization identifier
+tags:
+  - name: Datasets
+    description: >-
+      Manage Cribl Lake datasets that define storage buckets for
+      observability and security data in open formats.
+  - name: Retention
+    description: >-
+      Configure data retention policies that control how long data
+      is stored in Lake datasets before automatic cleanup.
+  - name: Ingestion
+    description: >-
+      Manage data ingestion configurations for routing processed data
+      from Stream and Edge into Lake datasets.
+security:
+  - bearerAuth: []
+paths:
+  /lake/datasets:
+    get:
+      operationId: listLakeDatasets
+      summary: List all Lake datasets
+      description: >-
+        Retrieves a list of all Cribl Lake datasets including their
+        storage configuration, retention policies, and data volume
+        metrics. Available on Cribl Cloud only.
+      tags:
+        - Datasets
+      responses:
+        '200':
+          description: Successfully retrieved Lake datasets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LakeDataset'
+                  count:
+                    type: integer
+                    description: Total number of datasets
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createLakeDataset
+      summary: Create a Lake dataset
+      description: >-
+        Creates a new Cribl Lake dataset for storing observability
+        data in open formats. Configure storage format, retention
+        period, and access permissions.
+      tags:
+        - Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LakeDataset'
+      responses:
+        '200':
+          description: Lake dataset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '400':
+          description: Invalid dataset configuration
+        '401':
+          description: Unauthorized
+  /lake/datasets/{id}:
+    get:
+      operationId: getLakeDataset
+      summary: Get a Lake dataset by ID
+      description: >-
+        Retrieves the configuration, retention policy, and storage
+        metadata of a specific Cribl Lake dataset.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved Lake dataset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+    patch:
+      operationId: updateLakeDataset
+      summary: Update a Lake dataset
+      description: >-
+        Updates the configuration of an existing Lake dataset including
+        its retention policy and access settings.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LakeDataset'
+      responses:
+        '200':
+          description: Lake dataset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '400':
+          description: Invalid dataset configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+    delete:
+      operationId: deleteLakeDataset
+      summary: Delete a Lake dataset
+      description: >-
+        Deletes a Cribl Lake dataset and its associated data by its
+        unique ID. This operation is irreversible and will permanently
+        remove all stored data.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Dataset deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+  /lake/datasets/{id}/retention:
+    get:
+      operationId: getLakeDatasetRetention
+      summary: Get dataset retention policy
+      description: >-
+        Retrieves the retention policy for a specific Lake dataset
+        including the retention period and cleanup schedule.
+      tags:
+        - Retention
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved retention policy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicy'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+    patch:
+      operationId: updateLakeDatasetRetention
+      summary: Update dataset retention policy
+      description: >-
+        Updates the retention policy for a Lake dataset controlling
+        how long data is stored before automatic cleanup.
+      tags:
+        - Retention
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionPolicy'
+      responses:
+        '200':
+          description: Retention policy updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionPolicy'
+        '400':
+          description: Invalid retention policy
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via OAuth 2.0 client credentials grant
+        for Cribl Cloud authentication. Tokens expire after 24 hours.
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  schemas:
+    LakeDataset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the Lake dataset
+        name:
+          type: string
+          description: Display name of the dataset
+        description:
+          type: string
+          description: A human-readable description of the dataset
+        retentionDays:
+          type: integer
+          description: Number of days to retain data
+          minimum: 1
+        format:
+          type: string
+          description: The storage format for the dataset
+          enum:
+            - parquet
+            - json
+        totalSize:
+          type: integer
+          description: Total data size in bytes
+        eventCount:
+          type: integer
+          description: Total number of stored events
+        createdAt:
+          type: string
+          description: Dataset creation timestamp
+          format: date-time
+        updatedAt:
+          type: string
+          description: Dataset last update timestamp
+          format: date-time
+    RetentionPolicy:
+      type: object
+      properties:
+        retentionDays:
+          type: integer
+          description: Number of days to retain data before cleanup
+          minimum: 1
+        enabled:
+          type: boolean
+          description: Whether automatic retention cleanup is enabled
+        cleanupSchedule:
+          type: string
+          description: Cron schedule for running retention cleanup

@@ -1,0 +1,704 @@
+openapi: 3.1.0
+info:
+  title: Cribl Edge API
+  description: >-
+    The Cribl Edge API provides programmatic access to Cribl Edge, which
+    extends Stream capabilities to the network edge by deploying lightweight
+    agents on endpoints. The API allows developers to manage edge fleets,
+    configure data collection from endpoints, and control data processing
+    closer to the source. This reduces bandwidth consumption and latency
+    by filtering and transforming data at the point of origin before
+    forwarding it to centralized destinations. Edge API endpoints are
+    accessed through the Cribl Cloud control plane using fleet context
+    paths.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+externalDocs:
+  description: Cribl Edge Documentation
+  url: https://docs.cribl.io/edge/
+servers:
+  - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud
+    variables:
+      workspaceName:
+        default: default
+        description: The name of the Cribl Cloud workspace
+      organizationId:
+        default: org-id
+        description: The Cribl Cloud organization identifier
+  - url: https://{hostname}:{port}/api/v1
+    description: On-Premises Deployment
+    variables:
+      hostname:
+        default: localhost
+        description: The hostname of the Cribl instance
+      port:
+        default: '9000'
+        description: The port of the Cribl instance
+tags:
+  - name: Edge Fleets
+    description: >-
+      Manage edge fleets that organize groups of edge nodes deployed
+      on endpoints for local data collection and processing.
+  - name: Edge Nodes
+    description: >-
+      Monitor and manage individual edge nodes deployed on endpoints
+      including their status, version, and resource utilization.
+  - name: Edge Sources
+    description: >-
+      Manage data input sources on edge nodes including file monitors,
+      Windows Event Log, system metrics, AppScope, and other local
+      collection methods.
+  - name: Edge Destinations
+    description: >-
+      Manage data output destinations for edge nodes including
+      forwarding to Stream workers, cloud storage, and analytics
+      platforms.
+  - name: Edge Pipelines
+    description: >-
+      Manage processing pipelines running on edge nodes for local
+      data transformation and filtering before forwarding.
+  - name: Edge Routes
+    description: >-
+      Manage routes on edge nodes for directing collected data to
+      appropriate pipelines and destinations.
+security:
+  - bearerAuth: []
+paths:
+  /master/groups:
+    get:
+      operationId: listEdgeFleets
+      summary: List all edge fleets
+      description: >-
+        Retrieves all edge fleets configured in the deployment. Edge
+        fleets organize edge nodes and allow deploying shared
+        configurations to groups of endpoint agents.
+      tags:
+        - Edge Fleets
+      parameters:
+        - name: product
+          in: query
+          description: Filter by product type to show only edge fleets
+          schema:
+            type: string
+            enum:
+              - edge
+      responses:
+        '200':
+          description: Successfully retrieved edge fleets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeFleet'
+                  count:
+                    type: integer
+                    description: Total number of edge fleets
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createEdgeFleet
+      summary: Create a new edge fleet
+      description: >-
+        Creates a new edge fleet for organizing and managing a group
+        of edge nodes deployed on endpoint systems.
+      tags:
+        - Edge Fleets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeFleet'
+      responses:
+        '200':
+          description: Edge fleet created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeFleet'
+        '400':
+          description: Invalid fleet configuration
+        '401':
+          description: Unauthorized
+  /master/groups/{id}:
+    get:
+      operationId: getEdgeFleet
+      summary: Get an edge fleet by ID
+      description: >-
+        Retrieves the configuration and status of a specific edge fleet
+        including its node count and deployment state.
+      tags:
+        - Edge Fleets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved edge fleet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeFleet'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge fleet not found
+    patch:
+      operationId: updateEdgeFleet
+      summary: Update an edge fleet
+      description: >-
+        Updates the configuration of an existing edge fleet including
+        its name, description, and deployment settings.
+      tags:
+        - Edge Fleets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeFleet'
+      responses:
+        '200':
+          description: Edge fleet updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeFleet'
+        '400':
+          description: Invalid fleet configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge fleet not found
+    delete:
+      operationId: deleteEdgeFleet
+      summary: Delete an edge fleet
+      description: >-
+        Deletes an edge fleet by its unique ID. Connected edge nodes
+        will be disconnected.
+      tags:
+        - Edge Fleets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Edge fleet deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge fleet not found
+  /master/groups/{id}/deploy:
+    post:
+      operationId: deployEdgeFleet
+      summary: Deploy configuration to an edge fleet
+      description: >-
+        Deploys the current configuration to all edge nodes in the
+        specified fleet, pushing updated sources, pipelines, and
+        routes to endpoints.
+      tags:
+        - Edge Fleets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge fleet not found
+  /master/workers:
+    get:
+      operationId: listEdgeNodes
+      summary: List all edge nodes
+      description: >-
+        Retrieves all connected edge nodes across all fleets including
+        their status, OS, version, and resource utilization metrics.
+      tags:
+        - Edge Nodes
+      responses:
+        '200':
+          description: Successfully retrieved edge nodes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeNode'
+                  count:
+                    type: integer
+                    description: Total number of edge nodes
+        '401':
+          description: Unauthorized
+  /master/workers/{id}:
+    get:
+      operationId: getEdgeNode
+      summary: Get an edge node by ID
+      description: >-
+        Retrieves the status and details of a specific edge node
+        including its OS, version, fleet membership, and resource
+        utilization.
+      tags:
+        - Edge Nodes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved edge node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeNode'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge node not found
+  /master/workers/{id}/restart:
+    post:
+      operationId: restartEdgeNode
+      summary: Restart an edge node
+      description: >-
+        Initiates a restart of a specific edge node agent on the
+        endpoint system.
+      tags:
+        - Edge Nodes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Restart initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Edge node not found
+  /m/{fleetId}/system/sources:
+    get:
+      operationId: listEdgeSources
+      summary: List edge sources in a fleet
+      description: >-
+        Retrieves all data input sources configured for an edge fleet
+        including file monitors, Windows Event Log, system metrics,
+        AppScope, and other local collection sources.
+      tags:
+        - Edge Sources
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      responses:
+        '200':
+          description: Successfully retrieved edge sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeSource'
+                  count:
+                    type: integer
+                    description: Total number of sources
+        '401':
+          description: Unauthorized
+        '404':
+          description: Fleet not found
+    post:
+      operationId: createEdgeSource
+      summary: Create an edge source in a fleet
+      description: >-
+        Creates a new data input source for an edge fleet to collect
+        data from endpoints.
+      tags:
+        - Edge Sources
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeSource'
+      responses:
+        '200':
+          description: Edge source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeSource'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+  /m/{fleetId}/system/outputs:
+    get:
+      operationId: listEdgeDestinations
+      summary: List edge destinations in a fleet
+      description: >-
+        Retrieves all data output destinations configured for an edge
+        fleet for forwarding collected and processed data.
+      tags:
+        - Edge Destinations
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      responses:
+        '200':
+          description: Successfully retrieved edge destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeDestination'
+                  count:
+                    type: integer
+                    description: Total number of destinations
+        '401':
+          description: Unauthorized
+        '404':
+          description: Fleet not found
+    post:
+      operationId: createEdgeDestination
+      summary: Create an edge destination in a fleet
+      description: >-
+        Creates a new data output destination for an edge fleet to
+        forward processed data to centralized systems.
+      tags:
+        - Edge Destinations
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeDestination'
+      responses:
+        '200':
+          description: Edge destination created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeDestination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+  /m/{fleetId}/pipelines:
+    get:
+      operationId: listEdgePipelines
+      summary: List edge pipelines in a fleet
+      description: >-
+        Retrieves all processing pipelines configured for an edge fleet
+        for local data transformation on endpoints.
+      tags:
+        - Edge Pipelines
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      responses:
+        '200':
+          description: Successfully retrieved edge pipelines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgePipeline'
+                  count:
+                    type: integer
+                    description: Total number of pipelines
+        '401':
+          description: Unauthorized
+        '404':
+          description: Fleet not found
+    post:
+      operationId: createEdgePipeline
+      summary: Create an edge pipeline in a fleet
+      description: >-
+        Creates a new processing pipeline for an edge fleet to
+        transform data locally on endpoints before forwarding.
+      tags:
+        - Edge Pipelines
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgePipeline'
+      responses:
+        '200':
+          description: Edge pipeline created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgePipeline'
+        '400':
+          description: Invalid pipeline configuration
+        '401':
+          description: Unauthorized
+  /m/{fleetId}/routes:
+    get:
+      operationId: listEdgeRoutes
+      summary: List edge routes in a fleet
+      description: >-
+        Retrieves all routes configured for an edge fleet that direct
+        collected data to pipelines and destinations on edge nodes.
+      tags:
+        - Edge Routes
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      responses:
+        '200':
+          description: Successfully retrieved edge routes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeRoute'
+                  count:
+                    type: integer
+                    description: Total number of routes
+        '401':
+          description: Unauthorized
+        '404':
+          description: Fleet not found
+    post:
+      operationId: createEdgeRoute
+      summary: Create an edge route in a fleet
+      description: >-
+        Creates a new route for an edge fleet to filter and direct
+        collected data on endpoints.
+      tags:
+        - Edge Routes
+      parameters:
+        - $ref: '#/components/parameters/fleetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeRoute'
+      responses:
+        '200':
+          description: Edge route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeRoute'
+        '400':
+          description: Invalid route configuration
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via OAuth 2.0 client credentials grant
+        (Cribl Cloud) or the /auth/login endpoint (on-premises).
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    fleetId:
+      name: fleetId
+      in: path
+      required: true
+      description: The edge fleet identifier
+      schema:
+        type: string
+  schemas:
+    EdgeFleet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge fleet
+        name:
+          type: string
+          description: Display name for the edge fleet
+        description:
+          type: string
+          description: A human-readable description
+        isFleet:
+          type: boolean
+          description: Indicates this is an edge fleet
+        workerCount:
+          type: integer
+          description: Number of connected edge nodes
+        configVersion:
+          type: string
+          description: The current deployed configuration version
+        tags:
+          type: object
+          description: Key-value tags for organizing fleets
+    EdgeNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge node
+        hostname:
+          type: string
+          description: The endpoint hostname
+        group:
+          type: string
+          description: The fleet the node belongs to
+        version:
+          type: string
+          description: The Cribl Edge agent version
+        status:
+          type: string
+          description: The current node status
+          enum:
+            - online
+            - offline
+            - degraded
+        os:
+          type: string
+          description: The operating system of the endpoint
+        cpuUsage:
+          type: number
+          description: Current CPU utilization percentage
+          format: float
+        memUsage:
+          type: number
+          description: Current memory utilization percentage
+          format: float
+        ip:
+          type: string
+          description: The IP address of the endpoint
+    EdgeSource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge source
+        type:
+          type: string
+          description: >-
+            The source type such as file_monitor, windows_event_log,
+            system_metrics, appscope, syslog, or journald
+        disabled:
+          type: boolean
+          description: Whether the source is disabled
+        description:
+          type: string
+          description: A human-readable description
+        pipeline:
+          type: string
+          description: The pipeline to process events
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to events from this source
+    EdgeDestination:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge destination
+        type:
+          type: string
+          description: >-
+            The destination type such as cribl_http, splunk, s3,
+            syslog, or filesystem
+        disabled:
+          type: boolean
+          description: Whether the destination is disabled
+        host:
+          type: string
+          description: The target host address
+        port:
+          type: integer
+          description: The target port number
+        description:
+          type: string
+          description: A human-readable description
+    EdgePipeline:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge pipeline
+        conf:
+          type: object
+          description: Pipeline configuration object
+          properties:
+            functions:
+              type: array
+              description: Ordered list of processing functions
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The function type identifier
+                  filter:
+                    type: string
+                    description: JavaScript expression to filter events
+                  disabled:
+                    type: boolean
+                    description: Whether this function is disabled
+                  conf:
+                    type: object
+                    description: Function-specific configuration
+            description:
+              type: string
+              description: A human-readable description
+    EdgeRoute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge route
+        name:
+          type: string
+          description: Display name for the route
+        filter:
+          type: string
+          description: JavaScript filter expression for matching events
+        pipeline:
+          type: string
+          description: The pipeline ID for processing matched events
+        output:
+          type: string
+          description: The destination ID for processed events
+        final:
+          type: boolean
+          description: Whether matched events stop further evaluation
+        disabled:
+          type: boolean
+          description: Whether this route is disabled
+        description:
+          type: string
+          description: A human-readable description

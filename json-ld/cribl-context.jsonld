@@ -1,0 +1,243 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "cribl": "https://schemas.cribl.io/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Pipeline": {
+      "@id": "cribl:Pipeline",
+      "@context": {
+        "id": "schema:identifier",
+        "description": "schema:description",
+        "functions": {
+          "@id": "cribl:hasFunctions",
+          "@container": "@list"
+        },
+        "output": {
+          "@id": "cribl:outputDestination"
+        },
+        "streamtags": {
+          "@id": "cribl:streamtags",
+          "@container": "@set"
+        },
+        "asyncFuncTimeout": {
+          "@id": "cribl:asyncFuncTimeout",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "PipelineFunction": {
+      "@id": "cribl:PipelineFunction",
+      "@context": {
+        "id": "schema:identifier",
+        "description": "schema:description",
+        "filter": "cribl:filterExpression",
+        "disabled": {
+          "@id": "cribl:isDisabled",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Route": {
+      "@id": "cribl:Route",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "filter": "cribl:filterExpression",
+        "pipeline": {
+          "@id": "cribl:routesPipeline"
+        },
+        "output": {
+          "@id": "cribl:routesDestination"
+        },
+        "final": {
+          "@id": "cribl:isFinalRoute",
+          "@type": "xsd:boolean"
+        },
+        "disabled": {
+          "@id": "cribl:isDisabled",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Source": {
+      "@id": "cribl:Source",
+      "@context": {
+        "id": "schema:identifier",
+        "type": "cribl:sourceType",
+        "description": "schema:description",
+        "host": {
+          "@id": "cribl:hostAddress"
+        },
+        "port": {
+          "@id": "cribl:portNumber",
+          "@type": "xsd:integer"
+        },
+        "disabled": {
+          "@id": "cribl:isDisabled",
+          "@type": "xsd:boolean"
+        },
+        "pipeline": {
+          "@id": "cribl:routesPipeline"
+        },
+        "streamtags": {
+          "@id": "cribl:streamtags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Destination": {
+      "@id": "cribl:Destination",
+      "@context": {
+        "id": "schema:identifier",
+        "type": "cribl:destinationType",
+        "description": "schema:description",
+        "host": {
+          "@id": "cribl:hostAddress"
+        },
+        "port": {
+          "@id": "cribl:portNumber",
+          "@type": "xsd:integer"
+        },
+        "disabled": {
+          "@id": "cribl:isDisabled",
+          "@type": "xsd:boolean"
+        },
+        "streamtags": {
+          "@id": "cribl:streamtags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "WorkerGroup": {
+      "@id": "cribl:WorkerGroup",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "isFleet": {
+          "@id": "cribl:isEdgeFleet",
+          "@type": "xsd:boolean"
+        },
+        "workerCount": {
+          "@id": "cribl:nodeCount",
+          "@type": "xsd:integer"
+        },
+        "configVersion": "cribl:configurationVersion"
+      }
+    },
+
+    "Node": {
+      "@id": "cribl:Node",
+      "@context": {
+        "id": "schema:identifier",
+        "hostname": "cribl:hostname",
+        "group": {
+          "@id": "cribl:belongsToGroup"
+        },
+        "version": "schema:softwareVersion",
+        "status": "cribl:operationalStatus",
+        "os": "schema:operatingSystem",
+        "cpuUsage": {
+          "@id": "cribl:cpuUtilization",
+          "@type": "xsd:float"
+        },
+        "memUsage": {
+          "@id": "cribl:memoryUtilization",
+          "@type": "xsd:float"
+        }
+      }
+    },
+
+    "Workspace": {
+      "@id": "cribl:Workspace",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "organizationId": "cribl:belongsToOrganization",
+        "status": "cribl:operationalStatus",
+        "region": "cribl:cloudRegion",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "LakeDataset": {
+      "@id": "cribl:LakeDataset",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "retentionDays": {
+          "@id": "cribl:retentionPeriodDays",
+          "@type": "xsd:integer"
+        },
+        "format": "cribl:storageFormat",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "SearchJob": {
+      "@id": "cribl:SearchJob",
+      "@context": {
+        "id": "schema:identifier",
+        "query": "cribl:searchQuery",
+        "status": "cribl:operationalStatus",
+        "dataset": "cribl:searchesDataset",
+        "startTime": {
+          "@id": "schema:startDate",
+          "@type": "xsd:integer"
+        },
+        "endTime": {
+          "@id": "schema:endDate",
+          "@type": "xsd:integer"
+        },
+        "numResults": {
+          "@id": "cribl:resultCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Pack": {
+      "@id": "cribl:Pack",
+      "@context": {
+        "id": "schema:identifier",
+        "source": {
+          "@id": "schema:codeRepository",
+          "@type": "@id"
+        },
+        "version": "schema:softwareVersion",
+        "author": "schema:author",
+        "description": "schema:description",
+        "displayName": "schema:name"
+      }
+    }
+  }
+}

@@ -1,0 +1,2042 @@
+openapi: 3.1.0
+info:
+  title: Cribl Cloud API
+  description: >-
+    The Cribl Cloud API is a RESTful API that provides a centrally managed
+    control plane for programmatically configuring and managing Cribl resources
+    across Stream, Edge, Search, and Lake deployments. It allows developers to
+    retrieve and manage data, automate repetitive manual processes, and
+    integrate with third-party applications. The API uses OAuth 2.0
+    authentication via client credentials and follows a resource-based
+    structure where each endpoint corresponds to a specific Cribl resource or
+    collection of resources. The size limit for requests is 5 MB.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+externalDocs:
+  description: Cribl API Reference
+  url: https://docs.cribl.io/api-reference/
+servers:
+  - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud
+    variables:
+      workspaceName:
+        default: default
+        description: The name of the Cribl Cloud workspace
+      organizationId:
+        default: org-id
+        description: The Cribl Cloud organization identifier
+  - url: https://{hostname}:{port}/api/v1
+    description: On-Premises Deployment
+    variables:
+      hostname:
+        default: localhost
+        description: The hostname of the Cribl instance
+      port:
+        default: '9000'
+        description: The port of the Cribl instance
+tags:
+  - name: Authentication
+    description: >-
+      Obtain and manage authentication tokens for API access.
+  - name: Health
+    description: >-
+      Check the health status of the Cribl instance.
+  - name: Sources
+    description: >-
+      Manage data input sources that collect events from various systems
+      including Syslog, HTTP, Kafka, Splunk, and other protocols.
+  - name: Destinations
+    description: >-
+      Manage data output destinations where processed events are sent,
+      including Splunk, S3, Elasticsearch, and webhook endpoints.
+  - name: Pipelines
+    description: >-
+      Manage processing pipelines that contain ordered sequences of functions
+      for transforming, filtering, and enriching events.
+  - name: Routes
+    description: >-
+      Manage routes that filter and direct incoming data across pipelines and
+      destinations using filter expressions.
+  - name: Functions
+    description: >-
+      Retrieve available processing functions that can be used within
+      pipelines for data transformation.
+  - name: Groups
+    description: >-
+      Manage Worker Groups and Edge Fleets, which organize and deploy
+      configurations to sets of worker nodes or edge agents.
+  - name: Nodes
+    description: >-
+      Monitor and manage individual worker nodes and edge nodes within
+      groups and fleets.
+  - name: Collectors
+    description: >-
+      Manage scheduled and on-demand data collection jobs from REST APIs,
+      databases, scripts, and other sources.
+  - name: Jobs
+    description: >-
+      Monitor and manage running and completed collection and processing jobs.
+  - name: Packs
+    description: >-
+      Install, manage, and distribute reusable configuration packs containing
+      pipelines, routes, and other resources.
+  - name: Lake Datasets
+    description: >-
+      Manage Cribl Lake datasets for storing and organizing observability
+      data in open formats.
+  - name: Database Connections
+    description: >-
+      Configure and manage database connections used by collectors and
+      lookup functions.
+  - name: Lookups
+    description: >-
+      Manage lookup files and tables used for data enrichment in pipelines.
+  - name: Notifications
+    description: >-
+      Configure notification rules and targets for alerting on data flow
+      anomalies and system events.
+  - name: System
+    description: >-
+      Access system-level settings including Git configuration, licensing,
+      and global preferences.
+  - name: Versioning
+    description: >-
+      Manage configuration versions, commits, and deployment history.
+security:
+  - bearerAuth: []
+paths:
+  /auth/login:
+    post:
+      operationId: login
+      summary: Authenticate and obtain a bearer token
+      description: >-
+        Authenticates with username and password credentials for on-premises
+        deployments and returns a bearer token for subsequent API requests.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: The username for authentication
+                password:
+                  type: string
+                  description: The password for authentication
+                  format: password
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The bearer token for API access
+        '401':
+          description: Invalid credentials
+  /health:
+    get:
+      operationId: getHealth
+      summary: Check server health
+      description: >-
+        Returns the health status of the Cribl instance including version
+        information and operational state.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /system/sources:
+    get:
+      operationId: listSources
+      summary: List all sources
+      description: >-
+        Retrieves a list of all configured data input sources in the current
+        context, including their type, status, and configuration details.
+      tags:
+        - Sources
+      responses:
+        '200':
+          description: Successfully retrieved sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Source'
+                  count:
+                    type: integer
+                    description: Total number of sources
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createSource
+      summary: Create a new source
+      description: >-
+        Creates a new data input source with the specified type and
+        configuration. The source type determines which configuration
+        properties are required.
+      tags:
+        - Sources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '200':
+          description: Source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+  /system/sources/{id}:
+    get:
+      operationId: getSource
+      summary: Get a source by ID
+      description: >-
+        Retrieves the configuration and status of a specific data input
+        source identified by its unique ID.
+      tags:
+        - Sources
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+    patch:
+      operationId: updateSource
+      summary: Update a source
+      description: >-
+        Updates the configuration of an existing data input source. Only
+        provided fields are modified.
+      tags:
+        - Sources
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '200':
+          description: Source updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+    delete:
+      operationId: deleteSource
+      summary: Delete a source
+      description: >-
+        Deletes a data input source by its unique ID. The source must not
+        be actively receiving data.
+      tags:
+        - Sources
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Source deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+  /system/outputs:
+    get:
+      operationId: listDestinations
+      summary: List all destinations
+      description: >-
+        Retrieves a list of all configured data output destinations
+        including their type, status, and configuration.
+      tags:
+        - Destinations
+      responses:
+        '200':
+          description: Successfully retrieved destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Destination'
+                  count:
+                    type: integer
+                    description: Total number of destinations
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createDestination
+      summary: Create a new destination
+      description: >-
+        Creates a new data output destination with the specified type and
+        configuration. The destination type determines which configuration
+        properties are required.
+      tags:
+        - Destinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+      responses:
+        '200':
+          description: Destination created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+  /system/outputs/{id}:
+    get:
+      operationId: getDestination
+      summary: Get a destination by ID
+      description: >-
+        Retrieves the configuration and status of a specific data output
+        destination identified by its unique ID.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved destination
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+    patch:
+      operationId: updateDestination
+      summary: Update a destination
+      description: >-
+        Updates the configuration of an existing data output destination.
+        Only provided fields are modified.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+      responses:
+        '200':
+          description: Destination updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+    delete:
+      operationId: deleteDestination
+      summary: Delete a destination
+      description: >-
+        Deletes a data output destination by its unique ID.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Destination deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+  /system/outputs/{id}/statuses:
+    get:
+      operationId: getDestinationStatus
+      summary: Get destination status
+      description: >-
+        Retrieves the current operational status of a specific destination
+        including throughput metrics and error counts.
+      tags:
+        - Destinations
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved destination status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DestinationStatus'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+  /pipelines:
+    get:
+      operationId: listPipelines
+      summary: List all pipelines
+      description: >-
+        Retrieves a list of all configured processing pipelines including
+        their functions, configuration, and status.
+      tags:
+        - Pipelines
+      responses:
+        '200':
+          description: Successfully retrieved pipelines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pipeline'
+                  count:
+                    type: integer
+                    description: Total number of pipelines
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createPipeline
+      summary: Create a new pipeline
+      description: >-
+        Creates a new processing pipeline with the specified functions and
+        configuration. Pipelines define ordered sequences of functions for
+        data transformation.
+      tags:
+        - Pipelines
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+      responses:
+        '200':
+          description: Pipeline created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '400':
+          description: Invalid pipeline configuration
+        '401':
+          description: Unauthorized
+  /pipelines/{id}:
+    get:
+      operationId: getPipeline
+      summary: Get a pipeline by ID
+      description: >-
+        Retrieves the configuration of a specific processing pipeline
+        including its functions and metadata.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved pipeline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+    patch:
+      operationId: updatePipeline
+      summary: Update a pipeline
+      description: >-
+        Updates the configuration of an existing processing pipeline
+        including its functions and settings.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+      responses:
+        '200':
+          description: Pipeline updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+        '400':
+          description: Invalid pipeline configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+    delete:
+      operationId: deletePipeline
+      summary: Delete a pipeline
+      description: >-
+        Deletes a processing pipeline by its unique ID. The pipeline must
+        not be referenced by any active routes.
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Pipeline deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pipeline not found
+  /routes:
+    get:
+      operationId: listRoutes
+      summary: List all routes
+      description: >-
+        Retrieves a list of all configured routes that filter and direct
+        incoming data to the appropriate pipelines and destinations.
+      tags:
+        - Routes
+      responses:
+        '200':
+          description: Successfully retrieved routes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Route'
+                  count:
+                    type: integer
+                    description: Total number of routes
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createRoute
+      summary: Create a new route
+      description: >-
+        Creates a new route with filter expressions to direct matching
+        events to specified pipelines and destinations.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid route configuration
+        '401':
+          description: Unauthorized
+  /routes/{id}:
+    get:
+      operationId: getRoute
+      summary: Get a route by ID
+      description: >-
+        Retrieves the configuration of a specific route including its
+        filter expression, pipeline, and destination assignments.
+      tags:
+        - Routes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved route
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Route not found
+    patch:
+      operationId: updateRoute
+      summary: Update a route
+      description: >-
+        Updates the configuration of an existing route including its
+        filter expression and pipeline assignments.
+      tags:
+        - Routes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Route updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid route configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Route not found
+    delete:
+      operationId: deleteRoute
+      summary: Delete a route
+      description: >-
+        Deletes a route by its unique ID.
+      tags:
+        - Routes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Route deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Route not found
+  /system/functions:
+    get:
+      operationId: listFunctions
+      summary: List available functions
+      description: >-
+        Retrieves a list of all available processing functions that can be
+        used within pipelines for data transformation, filtering,
+        enrichment, and routing.
+      tags:
+        - Functions
+      responses:
+        '200':
+          description: Successfully retrieved functions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Function'
+                  count:
+                    type: integer
+                    description: Total number of functions
+        '401':
+          description: Unauthorized
+  /system/functions/{id}:
+    get:
+      operationId: getFunction
+      summary: Get a function by ID
+      description: >-
+        Retrieves the details of a specific processing function including
+        its configuration schema and description.
+      tags:
+        - Functions
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved function
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Function not found
+  /master/groups:
+    get:
+      operationId: listGroups
+      summary: List all worker groups and fleets
+      description: >-
+        Retrieves a list of all worker groups and edge fleets configured
+        in the Cribl instance, including their deployment status and
+        node counts.
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: Successfully retrieved groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+                  count:
+                    type: integer
+                    description: Total number of groups
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createGroup
+      summary: Create a new worker group or fleet
+      description: >-
+        Creates a new worker group or edge fleet with the specified
+        configuration. Groups organize worker nodes and allow shared
+        configuration deployment.
+      tags:
+        - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+  /master/groups/{id}:
+    get:
+      operationId: getGroup
+      summary: Get a group by ID
+      description: >-
+        Retrieves the configuration and status of a specific worker group
+        or edge fleet including its nodes and deployment state.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    patch:
+      operationId: updateGroup
+      summary: Update a group
+      description: >-
+        Updates the configuration of an existing worker group or edge
+        fleet.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: Group updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    delete:
+      operationId: deleteGroup
+      summary: Delete a group
+      description: >-
+        Deletes a worker group or edge fleet by its unique ID.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Group deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+  /master/groups/{id}/deploy:
+    post:
+      operationId: deployGroup
+      summary: Deploy configuration to a group
+      description: >-
+        Deploys the current configuration to all worker nodes or edge
+        agents in the specified group or fleet.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+  /master/workers:
+    get:
+      operationId: listNodes
+      summary: List all worker and edge nodes
+      description: >-
+        Retrieves a list of all connected worker nodes and edge nodes
+        including their status, version, and resource utilization.
+      tags:
+        - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved nodes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Node'
+                  count:
+                    type: integer
+                    description: Total number of nodes
+        '401':
+          description: Unauthorized
+  /master/workers/{id}:
+    get:
+      operationId: getNode
+      summary: Get a node by ID
+      description: >-
+        Retrieves the status and details of a specific worker or edge
+        node identified by its node ID.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Node not found
+  /master/workers/{id}/restart:
+    post:
+      operationId: restartNode
+      summary: Restart a node
+      description: >-
+        Initiates a restart of the specified worker or edge node.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Restart initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Node not found
+  /master/workers/count:
+    get:
+      operationId: getNodeCount
+      summary: Get node count
+      description: >-
+        Returns the total count of connected worker and edge nodes.
+      tags:
+        - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved node count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of connected nodes
+        '401':
+          description: Unauthorized
+  /system/collectors:
+    get:
+      operationId: listCollectors
+      summary: List all collectors
+      description: >-
+        Retrieves a list of all configured data collectors including
+        REST API collectors, database collectors, and script collectors.
+      tags:
+        - Collectors
+      responses:
+        '200':
+          description: Successfully retrieved collectors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Collector'
+                  count:
+                    type: integer
+                    description: Total number of collectors
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createCollector
+      summary: Create a new collector
+      description: >-
+        Creates a new data collector with the specified type, schedule,
+        and configuration for automated data collection.
+      tags:
+        - Collectors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collector'
+      responses:
+        '200':
+          description: Collector created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '400':
+          description: Invalid collector configuration
+        '401':
+          description: Unauthorized
+  /system/collectors/{id}:
+    get:
+      operationId: getCollector
+      summary: Get a collector by ID
+      description: >-
+        Retrieves the configuration and status of a specific data
+        collector identified by its unique ID.
+      tags:
+        - Collectors
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved collector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+    patch:
+      operationId: updateCollector
+      summary: Update a collector
+      description: >-
+        Updates the configuration of an existing data collector.
+      tags:
+        - Collectors
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collector'
+      responses:
+        '200':
+          description: Collector updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '400':
+          description: Invalid collector configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+    delete:
+      operationId: deleteCollector
+      summary: Delete a collector
+      description: >-
+        Deletes a data collector by its unique ID.
+      tags:
+        - Collectors
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Collector deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+  /jobs:
+    get:
+      operationId: listJobs
+      summary: List all jobs
+      description: >-
+        Retrieves a list of all running and completed collection and
+        processing jobs including their status and results.
+      tags:
+        - Jobs
+      responses:
+        '200':
+          description: Successfully retrieved jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+                  count:
+                    type: integer
+                    description: Total number of jobs
+        '401':
+          description: Unauthorized
+  /jobs/{id}:
+    get:
+      operationId: getJob
+      summary: Get a job by ID
+      description: >-
+        Retrieves the status and details of a specific job including
+        its progress, results, and any errors encountered.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Job not found
+  /packs:
+    get:
+      operationId: listPacks
+      summary: List all packs
+      description: >-
+        Retrieves a list of all installed configuration packs including
+        their version, author, and contained resources.
+      tags:
+        - Packs
+      responses:
+        '200':
+          description: Successfully retrieved packs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pack'
+                  count:
+                    type: integer
+                    description: Total number of packs
+        '401':
+          description: Unauthorized
+    post:
+      operationId: installPack
+      summary: Install a pack
+      description: >-
+        Installs a new configuration pack from a pack source URL or
+        uploads a pack archive.
+      tags:
+        - Packs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pack'
+      responses:
+        '200':
+          description: Pack installed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '400':
+          description: Invalid pack configuration
+        '401':
+          description: Unauthorized
+  /packs/{id}:
+    get:
+      operationId: getPack
+      summary: Get a pack by ID
+      description: >-
+        Retrieves the details and contents of a specific configuration
+        pack identified by its unique ID.
+      tags:
+        - Packs
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved pack
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+    patch:
+      operationId: updatePack
+      summary: Update a pack
+      description: >-
+        Updates the configuration or version of an existing pack.
+      tags:
+        - Packs
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pack'
+      responses:
+        '200':
+          description: Pack updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '400':
+          description: Invalid pack configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+    delete:
+      operationId: deletePack
+      summary: Delete a pack
+      description: >-
+        Uninstalls and removes a configuration pack by its unique ID.
+      tags:
+        - Packs
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Pack deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+  /lake/datasets:
+    get:
+      operationId: listLakeDatasets
+      summary: List all Lake datasets
+      description: >-
+        Retrieves a list of all Cribl Lake datasets configured for
+        storing observability and security data. Available on
+        Cribl Cloud only.
+      tags:
+        - Lake Datasets
+      responses:
+        '200':
+          description: Successfully retrieved Lake datasets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LakeDataset'
+                  count:
+                    type: integer
+                    description: Total number of datasets
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createLakeDataset
+      summary: Create a Lake dataset
+      description: >-
+        Creates a new Cribl Lake dataset for storing observability data
+        in open formats. Available on Cribl Cloud only.
+      tags:
+        - Lake Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LakeDataset'
+      responses:
+        '200':
+          description: Lake dataset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '400':
+          description: Invalid dataset configuration
+        '401':
+          description: Unauthorized
+  /lake/datasets/{id}:
+    get:
+      operationId: getLakeDataset
+      summary: Get a Lake dataset by ID
+      description: >-
+        Retrieves the configuration and metadata of a specific Cribl
+        Lake dataset.
+      tags:
+        - Lake Datasets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved Lake dataset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+    delete:
+      operationId: deleteLakeDataset
+      summary: Delete a Lake dataset
+      description: >-
+        Deletes a Cribl Lake dataset by its unique ID.
+      tags:
+        - Lake Datasets
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Dataset deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+  /system/database-connections:
+    get:
+      operationId: listDatabaseConnections
+      summary: List all database connections
+      description: >-
+        Retrieves a list of all configured database connections used by
+        collectors and lookup functions.
+      tags:
+        - Database Connections
+      responses:
+        '200':
+          description: Successfully retrieved database connections
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatabaseConnection'
+                  count:
+                    type: integer
+                    description: Total number of database connections
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createDatabaseConnection
+      summary: Create a database connection
+      description: >-
+        Creates a new database connection with the specified driver,
+        connection string, and credentials.
+      tags:
+        - Database Connections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseConnection'
+      responses:
+        '200':
+          description: Database connection created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '400':
+          description: Invalid connection configuration
+        '401':
+          description: Unauthorized
+  /system/database-connections/{id}:
+    get:
+      operationId: getDatabaseConnection
+      summary: Get a database connection by ID
+      description: >-
+        Retrieves the configuration of a specific database connection.
+      tags:
+        - Database Connections
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved database connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+    patch:
+      operationId: updateDatabaseConnection
+      summary: Update a database connection
+      description: >-
+        Updates the configuration of an existing database connection.
+      tags:
+        - Database Connections
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseConnection'
+      responses:
+        '200':
+          description: Database connection updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '400':
+          description: Invalid connection configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+    delete:
+      operationId: deleteDatabaseConnection
+      summary: Delete a database connection
+      description: >-
+        Deletes a database connection by its unique ID.
+      tags:
+        - Database Connections
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Database connection deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+  /system/lookups:
+    get:
+      operationId: listLookups
+      summary: List all lookups
+      description: >-
+        Retrieves a list of all configured lookup files and tables used
+        for data enrichment within pipelines.
+      tags:
+        - Lookups
+      responses:
+        '200':
+          description: Successfully retrieved lookups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lookup'
+                  count:
+                    type: integer
+                    description: Total number of lookups
+        '401':
+          description: Unauthorized
+  /system/lookups/{id}:
+    get:
+      operationId: getLookup
+      summary: Get a lookup by ID
+      description: >-
+        Retrieves the configuration and metadata of a specific lookup
+        file or table.
+      tags:
+        - Lookups
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved lookup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lookup'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Lookup not found
+  /notifications:
+    get:
+      operationId: listNotifications
+      summary: List all notification rules
+      description: >-
+        Retrieves a list of all configured notification rules and
+        targets for alerting on data flow anomalies and system events.
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: Successfully retrieved notifications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  count:
+                    type: integer
+                    description: Total number of notification rules
+        '401':
+          description: Unauthorized
+  /system/settings/git-settings:
+    get:
+      operationId: getGitSettings
+      summary: Get Git settings
+      description: >-
+        Retrieves the current Git integration settings including
+        repository URL, branch, and sync configuration.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Successfully retrieved Git settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitSettings'
+        '401':
+          description: Unauthorized
+    patch:
+      operationId: updateGitSettings
+      summary: Update Git settings
+      description: >-
+        Updates the Git integration settings for version-controlled
+        configuration management.
+      tags:
+        - System
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitSettings'
+      responses:
+        '200':
+          description: Git settings updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitSettings'
+        '400':
+          description: Invalid Git settings
+        '401':
+          description: Unauthorized
+  /version/commit:
+    post:
+      operationId: commitVersion
+      summary: Commit current configuration
+      description: >-
+        Creates a new configuration version commit capturing the current
+        state of all resources for version tracking and rollback.
+      tags:
+        - Versioning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: Commit message describing the changes
+                effective:
+                  type: boolean
+                  description: Whether to make this commit the effective version
+      responses:
+        '200':
+          description: Configuration committed successfully
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via OAuth 2.0 client credentials grant
+        (Cribl Cloud) or the /auth/login endpoint (on-premises).
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 client credentials flow for Cribl Cloud authentication.
+        Tokens expire after 24 hours.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The health status of the server
+          enum:
+            - healthy
+            - degraded
+            - unhealthy
+        version:
+          type: string
+          description: The Cribl software version
+        build:
+          type: string
+          description: The build identifier
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the source
+        type:
+          type: string
+          description: >-
+            The source type such as syslog, http, kafka, splunk_tcp,
+            tcp_json, file_monitor, or others
+        disabled:
+          type: boolean
+          description: Whether the source is disabled
+        host:
+          type: string
+          description: The host or address to listen on
+        port:
+          type: integer
+          description: The port number to listen on
+        description:
+          type: string
+          description: A human-readable description of the source
+        pipeline:
+          type: string
+          description: The pipeline to send events to
+        environment:
+          type: string
+          description: The environment context
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to events from this source
+    Destination:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the destination
+        type:
+          type: string
+          description: >-
+            The destination type such as splunk, s3, elasticsearch,
+            webhook, syslog, kafka, or others
+        disabled:
+          type: boolean
+          description: Whether the destination is disabled
+        host:
+          type: string
+          description: The target host address
+        port:
+          type: integer
+          description: The target port number
+        description:
+          type: string
+          description: A human-readable description of the destination
+        environment:
+          type: string
+          description: The environment context
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags for filtering events to this destination
+    DestinationStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The destination identifier
+        status:
+          type: string
+          description: The current operational status
+          enum:
+            - active
+            - inactive
+            - error
+        numEvents:
+          type: integer
+          description: Number of events processed
+        numBytes:
+          type: integer
+          description: Number of bytes processed
+    Pipeline:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the pipeline
+        conf:
+          type: object
+          description: Pipeline configuration object
+          properties:
+            functions:
+              type: array
+              description: Ordered list of processing functions
+              items:
+                $ref: '#/components/schemas/PipelineFunction'
+            description:
+              type: string
+              description: A human-readable description of the pipeline
+            asyncFuncTimeout:
+              type: integer
+              description: Timeout for async functions in milliseconds
+            output:
+              type: string
+              description: Default output destination
+            streamtags:
+              type: array
+              items:
+                type: string
+              description: Tags applied to events in this pipeline
+            groups:
+              type: object
+              description: Group-specific configuration overrides
+    PipelineFunction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The function type identifier
+        filter:
+          type: string
+          description: >-
+            JavaScript expression to filter which events this function
+            processes
+        disabled:
+          type: boolean
+          description: Whether this function is disabled
+        conf:
+          type: object
+          description: Function-specific configuration
+        description:
+          type: string
+          description: A human-readable description
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the route
+        name:
+          type: string
+          description: Display name for the route
+        filter:
+          type: string
+          description: >-
+            JavaScript filter expression that determines which events
+            match this route
+        pipeline:
+          type: string
+          description: The pipeline ID to process matching events
+        output:
+          type: string
+          description: The destination ID for processed events
+        final:
+          type: boolean
+          description: >-
+            Whether matching events stop being evaluated by subsequent
+            routes
+        disabled:
+          type: boolean
+          description: Whether this route is disabled
+        description:
+          type: string
+          description: A human-readable description of the route
+        groups:
+          type: object
+          description: Group-specific route configuration
+    Function:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the function type
+        category:
+          type: string
+          description: The function category
+        description:
+          type: string
+          description: A human-readable description of the function
+        conf:
+          type: object
+          description: The configuration schema for the function
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the group
+        name:
+          type: string
+          description: Display name for the group
+        description:
+          type: string
+          description: A human-readable description
+        isFleet:
+          type: boolean
+          description: Whether this group is an edge fleet
+        workerCount:
+          type: integer
+          description: Number of connected worker or edge nodes
+        configVersion:
+          type: string
+          description: The current deployed configuration version
+        tags:
+          type: object
+          description: Key-value tags for organizing groups
+    Node:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the worker or edge node
+        hostname:
+          type: string
+          description: The node hostname
+        group:
+          type: string
+          description: The group or fleet the node belongs to
+        version:
+          type: string
+          description: The Cribl software version on the node
+        status:
+          type: string
+          description: The current node status
+          enum:
+            - online
+            - offline
+            - degraded
+        os:
+          type: string
+          description: The operating system of the node
+        cpuUsage:
+          type: number
+          description: Current CPU utilization percentage
+          format: float
+        memUsage:
+          type: number
+          description: Current memory utilization percentage
+          format: float
+    Collector:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the collector
+        type:
+          type: string
+          description: >-
+            The collector type such as rest, script, database, or
+            s3
+        schedule:
+          type: object
+          description: The collection schedule configuration
+          properties:
+            cronSchedule:
+              type: string
+              description: Cron expression for scheduled collection
+            enabled:
+              type: boolean
+              description: Whether the schedule is enabled
+        conf:
+          type: object
+          description: Collector-specific configuration
+        description:
+          type: string
+          description: A human-readable description of the collector
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the job
+        collector:
+          type: string
+          description: The collector ID that initiated this job
+        status:
+          type: string
+          description: The current job status
+          enum:
+            - running
+            - completed
+            - failed
+            - cancelled
+        startTime:
+          type: integer
+          description: Job start time as a Unix timestamp
+        endTime:
+          type: integer
+          description: Job end time as a Unix timestamp
+        result:
+          type: object
+          description: Job result details
+          properties:
+            numEvents:
+              type: integer
+              description: Number of events collected
+            numBytes:
+              type: integer
+              description: Number of bytes collected
+            numErrors:
+              type: integer
+              description: Number of errors encountered
+    Pack:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the pack
+        source:
+          type: string
+          description: The source URL or registry path of the pack
+        version:
+          type: string
+          description: The installed version of the pack
+        author:
+          type: string
+          description: The pack author
+        description:
+          type: string
+          description: A human-readable description of the pack
+        displayName:
+          type: string
+          description: The display name of the pack
+    LakeDataset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the Lake dataset
+        name:
+          type: string
+          description: Display name of the dataset
+        description:
+          type: string
+          description: A human-readable description of the dataset
+        retentionDays:
+          type: integer
+          description: Number of days to retain data
+        format:
+          type: string
+          description: The storage format for the dataset
+    DatabaseConnection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the database connection
+        connectionString:
+          type: string
+          description: The database connection string
+        driver:
+          type: string
+          description: The database driver type
+        description:
+          type: string
+          description: A human-readable description
+    Lookup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the lookup
+        type:
+          type: string
+          description: The lookup type such as file or database
+        fileInfo:
+          type: object
+          description: File-based lookup metadata
+          properties:
+            filename:
+              type: string
+              description: The lookup filename
+            size:
+              type: integer
+              description: The file size in bytes
+        description:
+          type: string
+          description: A human-readable description of the lookup
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the notification rule
+        type:
+          type: string
+          description: The notification type
+        targets:
+          type: array
+          description: List of notification targets
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: >-
+                  The target type such as webhook, pagerduty, or email
+              url:
+                type: string
+                description: The target webhook URL
+        description:
+          type: string
+          description: A human-readable description
+    GitSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Git integration is enabled
+        repoUrl:
+          type: string
+          description: The Git repository URL
+        branch:
+          type: string
+          description: The Git branch to use
+        authType:
+          type: string
+          description: The authentication method for Git
+          enum:
+            - none
+            - token
+            - ssh
+        autoSync:
+          type: boolean
+          description: Whether to automatically sync with Git
