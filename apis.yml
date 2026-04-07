@@ -1,5 +1,6 @@
 aid: cribl
-url: https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: cribl:cloud-api
@@ -10,7 +11,8 @@ apis:
       - Cloud
       - Configuration
       - Management
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.cribl.cloud
     humanURL: https://docs.cribl.io/api-reference/
     properties:
@@ -19,14 +21,10 @@ apis:
       - url: openapi/cribl-cloud-api-openapi.yml
         type: OpenAPI
     description: >-
-      The Cribl Cloud API is a RESTful API that provides a centrally managed
-      control plane for programmatically configuring and managing Cribl
-      resources across Stream, Edge, Search, and Lake deployments. It allows
-      developers to retrieve and manage data, automate repetitive manual
-      processes, and integrate with third-party applications. The API uses
-      OAuth 2.0 authentication via client credentials and follows a
-      resource-based structure where each endpoint corresponds to a specific
-      Cribl resource or collection of resources.
+      The Cribl Cloud API is a RESTful API that provides a centrally managed control
+      plane for programmatically configuring and managing Cribl resources across Stream,
+      Edge, Search, and Lake deployments. It allows developers to retrieve and manage
+      data, automate repetitive manual processes, and integrate with third-party applications.
   - aid: cribl:stream-api
     name: Cribl Stream API
     tags:
@@ -35,7 +33,8 @@ apis:
       - Stream Processing
       - Telemetry
       - Routing
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/stream/
     properties:
@@ -59,7 +58,8 @@ apis:
       - Data Collection
       - Agents
       - Telemetry
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/edge/
     properties:
@@ -83,7 +83,8 @@ apis:
       - Data Exploration
       - Analytics
       - Querying
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/search/
     properties:
@@ -107,7 +108,8 @@ apis:
       - Storage
       - Data Management
       - Analytics
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/lake/
     properties:
@@ -124,14 +126,15 @@ apis:
       provides cost-effective long-term storage that keeps data usable and
       valuable to the teams and tools that need it.
   - aid: cribl:as-code-api
-    name: Cribl As Code API
+    name: Cribl as Code API
     tags:
       - Infrastructure As Code
       - Configuration
       - Automation
       - DevOps
       - Version Control
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://gateway.cribl.cloud
     humanURL: https://docs.cribl.io/cribl-as-code/api/
     properties:
@@ -160,3 +163,10 @@ common:
     url: json-schema/cribl-destination-schema.json
   - type: JSONSchema
     url: json-schema/cribl-worker-group-schema.json
+description: >-
+  Redirecting… You are being redirected to the API Reference. If you are not redirected
+  automatically, please click here. This API Reference lists the available endpoints
+  in the Cribl API. Select a category (or tag) to see the endpoints it contains. Select
+  an endpoint to see details like required and optional parameters and request and
+  response examples. Try It Out ​ This API Reference is also available in Cribl at
+  Settings > Global > API Reference.
