@@ -38,11 +38,6 @@ servers:
         default: '9000'
         description: The port of the Cribl instance
 tags:
-  - name: Search Jobs
-    description: >-
-      Execute and manage search queries across live and stored
-      observability data with support for federated search across
-      multiple data sources.
   - name: Datasets
     description: >-
       Manage search datasets that define the data sources available
@@ -52,6 +47,11 @@ tags:
     description: >-
       Create and manage saved search queries for reuse and sharing
       across teams and workflows.
+  - name: Search Jobs
+    description: >-
+      Execute and manage search queries across live and stored
+      observability data with support for federated search across
+      multiple data sources.
   - name: Search Notifications
     description: >-
       Configure notification rules that trigger alerts based on

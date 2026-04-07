@@ -39,6 +39,30 @@ servers:
         default: '9000'
         description: The port of the Cribl instance
 tags:
+  - name: Collectors
+    description: >-
+      Manage scheduled and on-demand data collection tasks using REST API,
+      database, script, and S3 collectors for batch data ingestion.
+  - name: Destinations
+    description: >-
+      Manage Stream data output destinations including Splunk, S3,
+      Elasticsearch, Kafka, webhook, and other analytics platforms.
+  - name: Functions
+    description: >-
+      Retrieve available Stream processing functions for use in pipelines
+      including eval, regex extract, rename, mask, aggregate, and others.
+  - name: Lookups
+    description: >-
+      Manage lookup files and tables used for enriching events during
+      pipeline processing with reference data.
+  - name: Notifications
+    description: >-
+      Configure notification rules for monitoring data flow rates and
+      system events with webhook and PagerDuty targets.
+  - name: Packs
+    description: >-
+      Install and manage reusable configuration packs containing bundled
+      pipelines, routes, sources, destinations, and other Stream resources.
   - name: Pipelines
     description: >-
       Manage Stream processing pipelines containing ordered sequences of
@@ -52,34 +76,10 @@ tags:
     description: >-
       Manage Stream data input sources including Syslog, HTTP, Kafka,
       Splunk HEC, TCP JSON, file monitors, and other protocol endpoints.
-  - name: Destinations
-    description: >-
-      Manage Stream data output destinations including Splunk, S3,
-      Elasticsearch, Kafka, webhook, and other analytics platforms.
-  - name: Functions
-    description: >-
-      Retrieve available Stream processing functions for use in pipelines
-      including eval, regex extract, rename, mask, aggregate, and others.
   - name: Worker Groups
     description: >-
       Manage Stream worker groups that organize worker nodes and deploy
       shared pipeline configurations across clusters.
-  - name: Collectors
-    description: >-
-      Manage scheduled and on-demand data collection tasks using REST API,
-      database, script, and S3 collectors for batch data ingestion.
-  - name: Packs
-    description: >-
-      Install and manage reusable configuration packs containing bundled
-      pipelines, routes, sources, destinations, and other Stream resources.
-  - name: Lookups
-    description: >-
-      Manage lookup files and tables used for enriching events during
-      pipeline processing with reference data.
-  - name: Notifications
-    description: >-
-      Configure notification rules for monitoring data flow rates and
-      system events with webhook and PagerDuty targets.
 security:
   - bearerAuth: []
 paths:

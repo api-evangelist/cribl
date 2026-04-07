@@ -37,10 +37,6 @@ tags:
     description: >-
       Configure data retention policies that control how long data
       is stored in Lake datasets before automatic cleanup.
-  - name: Ingestion
-    description: >-
-      Manage data ingestion configurations for routing processed data
-      from Stream and Edge into Lake datasets.
 security:
   - bearerAuth: []
 paths:

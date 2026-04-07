@@ -39,6 +39,11 @@ servers:
         default: '9000'
         description: The port of the Cribl instance
 tags:
+  - name: Edge Destinations
+    description: >-
+      Manage data output destinations for edge nodes including
+      forwarding to Stream workers, cloud storage, and analytics
+      platforms.
   - name: Edge Fleets
     description: >-
       Manage edge fleets that organize groups of edge nodes deployed
@@ -47,16 +52,6 @@ tags:
     description: >-
       Monitor and manage individual edge nodes deployed on endpoints
       including their status, version, and resource utilization.
-  - name: Edge Sources
-    description: >-
-      Manage data input sources on edge nodes including file monitors,
-      Windows Event Log, system metrics, AppScope, and other local
-      collection methods.
-  - name: Edge Destinations
-    description: >-
-      Manage data output destinations for edge nodes including
-      forwarding to Stream workers, cloud storage, and analytics
-      platforms.
   - name: Edge Pipelines
     description: >-
       Manage processing pipelines running on edge nodes for local
@@ -65,6 +60,11 @@ tags:
     description: >-
       Manage routes on edge nodes for directing collected data to
       appropriate pipelines and destinations.
+  - name: Edge Sources
+    description: >-
+      Manage data input sources on edge nodes including file monitors,
+      Windows Event Log, system metrics, AppScope, and other local
+      collection methods.
 security:
   - bearerAuth: []
 paths:

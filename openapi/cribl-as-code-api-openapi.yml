@@ -24,25 +24,20 @@ servers:
   - url: https://gateway.cribl.cloud
     description: Cribl Cloud Management Plane
 tags:
-  - name: Health
-    description: >-
-      Check the health and availability of the Cribl Cloud management
-      plane services.
-  - name: Organizations
-    description: >-
-      Manage Cribl Cloud organizations which serve as the account
-      boundary for unique customers, providing access control,
-      authorization, billing, and metering services.
-  - name: Workspaces
-    description: >-
-      Manage Cribl Cloud workspaces which are unique VPC containers
-      each isolating an instance of the Cribl Product Suite including
-      Stream, Edge, Search, and Lake.
   - name: API Credentials
     description: >-
       Manage API credentials used for OAuth 2.0 client credentials
       authentication. Credentials consist of a client ID and client
       secret used to obtain bearer tokens for API access.
+  - name: Health
+    description: >-
+      Check the health and availability of the Cribl Cloud management
+      plane services.
+  - name: Workspaces
+    description: >-
+      Manage Cribl Cloud workspaces which are unique VPC containers
+      each isolating an instance of the Cribl Product Suite including
+      Stream, Edge, Search, and Lake.
 security:
   - bearerAuth: []
 paths:

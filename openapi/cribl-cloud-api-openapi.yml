@@ -41,25 +41,18 @@ tags:
   - name: Authentication
     description: >-
       Obtain and manage authentication tokens for API access.
-  - name: Health
+  - name: Collectors
     description: >-
-      Check the health status of the Cribl instance.
-  - name: Sources
+      Manage scheduled and on-demand data collection jobs from REST APIs,
+      databases, scripts, and other sources.
+  - name: Database Connections
     description: >-
-      Manage data input sources that collect events from various systems
-      including Syslog, HTTP, Kafka, Splunk, and other protocols.
+      Configure and manage database connections used by collectors and
+      lookup functions.
   - name: Destinations
     description: >-
       Manage data output destinations where processed events are sent,
       including Splunk, S3, Elasticsearch, and webhook endpoints.
-  - name: Pipelines
-    description: >-
-      Manage processing pipelines that contain ordered sequences of functions
-      for transforming, filtering, and enriching events.
-  - name: Routes
-    description: >-
-      Manage routes that filter and direct incoming data across pipelines and
-      destinations using filter expressions.
   - name: Functions
     description: >-
       Retrieve available processing functions that can be used within
@@ -68,36 +61,43 @@ tags:
     description: >-
       Manage Worker Groups and Edge Fleets, which organize and deploy
       configurations to sets of worker nodes or edge agents.
-  - name: Nodes
+  - name: Health
     description: >-
-      Monitor and manage individual worker nodes and edge nodes within
-      groups and fleets.
-  - name: Collectors
-    description: >-
-      Manage scheduled and on-demand data collection jobs from REST APIs,
-      databases, scripts, and other sources.
+      Check the health status of the Cribl instance.
   - name: Jobs
     description: >-
       Monitor and manage running and completed collection and processing jobs.
-  - name: Packs
-    description: >-
-      Install, manage, and distribute reusable configuration packs containing
-      pipelines, routes, and other resources.
   - name: Lake Datasets
     description: >-
       Manage Cribl Lake datasets for storing and organizing observability
       data in open formats.
-  - name: Database Connections
-    description: >-
-      Configure and manage database connections used by collectors and
-      lookup functions.
   - name: Lookups
     description: >-
       Manage lookup files and tables used for data enrichment in pipelines.
+  - name: Nodes
+    description: >-
+      Monitor and manage individual worker nodes and edge nodes within
+      groups and fleets.
   - name: Notifications
     description: >-
       Configure notification rules and targets for alerting on data flow
       anomalies and system events.
+  - name: Packs
+    description: >-
+      Install, manage, and distribute reusable configuration packs containing
+      pipelines, routes, and other resources.
+  - name: Pipelines
+    description: >-
+      Manage processing pipelines that contain ordered sequences of functions
+      for transforming, filtering, and enriching events.
+  - name: Routes
+    description: >-
+      Manage routes that filter and direct incoming data across pipelines and
+      destinations using filter expressions.
+  - name: Sources
+    description: >-
+      Manage data input sources that collect events from various systems
+      including Syslog, HTTP, Kafka, Splunk, and other protocols.
   - name: System
     description: >-
       Access system-level settings including Git configuration, licensing,

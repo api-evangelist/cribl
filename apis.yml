@@ -1,18 +1,16 @@
 aid: cribl
-url: 
-  https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: cribl:cloud-api
     name: Cribl Cloud API
     tags:
-      - Observability
-      - Data Pipelines
       - Cloud
       - Configuration
+      - Data Pipelines
       - Management
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Observability
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.cribl.cloud
     humanURL: https://docs.cribl.io/api-reference/
     properties:
@@ -28,13 +26,12 @@ apis:
   - aid: cribl:stream-api
     name: Cribl Stream API
     tags:
-      - Observability
       - Data Pipelines
+      - Observability
+      - Routing
       - Stream Processing
       - Telemetry
-      - Routing
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/stream/
     properties:
@@ -53,13 +50,12 @@ apis:
   - aid: cribl:edge-api
     name: Cribl Edge API
     tags:
-      - Observability
-      - Edge Computing
-      - Data Collection
       - Agents
+      - Data Collection
+      - Edge Computing
+      - Observability
       - Telemetry
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/edge/
     properties:
@@ -78,13 +74,12 @@ apis:
   - aid: cribl:search-api
     name: Cribl Search API
     tags:
-      - Observability
-      - Search
-      - Data Exploration
       - Analytics
+      - Data Exploration
+      - Observability
       - Querying
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Search
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/search/
     properties:
@@ -103,13 +98,12 @@ apis:
   - aid: cribl:lake-api
     name: Cribl Lake API
     tags:
-      - Observability
-      - Data Lake
-      - Storage
-      - Data Management
       - Analytics
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Data Lake
+      - Data Management
+      - Observability
+      - Storage
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://docs.cribl.io/lake/
     properties:
@@ -128,13 +122,12 @@ apis:
   - aid: cribl:as-code-api
     name: Cribl as Code API
     tags:
-      - Infrastructure As Code
-      - Configuration
       - Automation
+      - Configuration
       - DevOps
+      - Infrastructure as Code
       - Version Control
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://gateway.cribl.cloud
     humanURL: https://docs.cribl.io/cribl-as-code/api/
     properties:
