@@ -1,0 +1,45 @@
+extends: ["spectral:oas"]
+documentationUrl: https://docs.cribl.io/stream/
+rules:
+  cribl-stream-info-contact:
+    description: API info object should reference Cribl support contact.
+    given: "$.info.contact"
+    severity: error
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "cribl"
+  cribl-stream-bearer-auth:
+    description: API must declare bearerAuth security scheme.
+    given: "$.components.securitySchemes"
+    severity: error
+    then:
+      field: bearerAuth
+      function: truthy
+  cribl-stream-pipelines-paths:
+    description: Stream API must define pipeline and route management paths.
+    given: "$.paths"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - /m/{group}/pipelines
+            - /m/{group}/routes
+  cribl-stream-operation-id:
+    description: All operations must define an operationId.
+    given: "$.paths.*.*"
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+  cribl-stream-tags:
+    description: All operations must define tags.
+    given: "$.paths.*.*"
+    severity: error
+    then:
+      field: tags
+      function: truthy

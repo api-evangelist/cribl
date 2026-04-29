@@ -1,0 +1,59 @@
+name: Cribl As Code API Capabilities
+description: >-
+  Workflow capabilities exposed by the Cribl As Code API for managing
+  configurations programmatically using infrastructure-as-code patterns.
+url: https://docs.cribl.io/cribl-as-code/api/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl As Code API
+baseURL: https://gateway.cribl.cloud
+capabilities:
+  - name: Configuration Export
+    description: >-
+      Export the current Cribl configuration as a versionable artifact
+      for storage in Git or other source control systems.
+    operations:
+      - exportConfig
+    inputs:
+      - workspace identifier
+    outputs:
+      - configuration archive
+  - name: Configuration Import
+    description: >-
+      Apply a previously exported or hand-authored configuration to a
+      target Cribl deployment, enabling reproducible promotions.
+    operations:
+      - importConfig
+    inputs:
+      - configuration archive
+      - target workspace
+    outputs:
+      - import status
+  - name: Configuration Diffing
+    description: >-
+      Compare configurations between deployments or between Git branches
+      and the live Cribl state to confirm drift or planned changes.
+    operations:
+      - diffConfig
+    inputs:
+      - source configuration
+      - target configuration
+    outputs:
+      - configuration diff
+useCases:
+  - name: GitOps Promotion Pipeline
+    description: Promote Cribl configurations from dev to staging to prod through Git-driven CI/CD pipelines.
+    capabilities:
+      - Configuration Export
+      - Configuration Import
+      - Configuration Diffing
+  - name: Disaster Recovery Snapshots
+    description: Periodically export Cribl configuration to back up state and rapidly restore from a known-good baseline.
+    capabilities:
+      - Configuration Export
+      - Configuration Import
+  - name: Drift Detection
+    description: Compare live Cribl configuration with the source-controlled baseline to surface drift to platform operators.
+    capabilities:
+      - Configuration Export
+      - Configuration Diffing

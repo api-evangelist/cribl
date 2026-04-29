@@ -1,0 +1,78 @@
+name: Cribl Stream API Capabilities
+description: >-
+  Workflow capabilities exposed by Cribl Stream's API for routing,
+  transforming, and shaping observability data in real time across worker
+  groups.
+url: https://docs.cribl.io/stream/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl Stream API
+baseURL: https://api.example.com
+capabilities:
+  - name: Worker Group Management
+    description: >-
+      Organize workers into groups, deploy configurations, and commit
+      changes across distributed deployments.
+    operations:
+      - listGroups
+      - getGroup
+      - commitGroup
+      - deployGroup
+    inputs:
+      - group identifier
+    outputs:
+      - group state and deployment status
+  - name: Pipeline Authoring
+    description: >-
+      Build, update, and version processing pipelines containing ordered
+      functions for parsing, redacting, enriching, and shaping events.
+    operations:
+      - listPipelines
+      - createPipeline
+      - updatePipeline
+    inputs:
+      - pipeline definition
+    outputs:
+      - pipeline object
+  - name: Route Filtering
+    description: >-
+      Define routes that filter incoming events with expressions and
+      direct them to pipelines and destinations.
+    operations:
+      - listRoutes
+      - createRoute
+      - reorderRoutes
+    inputs:
+      - filter expression
+      - target pipeline
+      - target destination
+    outputs:
+      - route object
+  - name: Source and Destination Plumbing
+    description: >-
+      Configure sources that receive events and destinations that emit
+      shaped events for downstream analytics tools.
+    operations:
+      - listSources
+      - listDestinations
+    inputs:
+      - source/destination configuration
+    outputs:
+      - source/destination object
+useCases:
+  - name: Reduce Splunk Volume
+    description: Route Splunk-bound events through pipelines that drop noise, sample, and reshape before forwarding.
+    capabilities:
+      - Pipeline Authoring
+      - Route Filtering
+      - Source and Destination Plumbing
+  - name: Multi-Destination Tee
+    description: Send the same event to multiple destinations such as Splunk and a low-cost archive simultaneously.
+    capabilities:
+      - Route Filtering
+      - Source and Destination Plumbing
+  - name: Group-Based Rollout
+    description: Stage configuration changes in a worker group, commit, and deploy progressively across the fleet.
+    capabilities:
+      - Worker Group Management
+      - Pipeline Authoring

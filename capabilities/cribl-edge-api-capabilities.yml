@@ -1,0 +1,73 @@
+name: Cribl Edge API Capabilities
+description: >-
+  Workflow capabilities exposed by Cribl Edge's API for managing edge
+  fleets, configuring data collection from endpoints, and controlling
+  data processing close to the source.
+url: https://docs.cribl.io/edge/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl Edge API
+baseURL: https://api.example.com
+capabilities:
+  - name: Fleet Management
+    description: >-
+      Organize edge nodes into fleets, deploy configurations, and observe
+      fleet-wide health.
+    operations:
+      - listFleets
+      - getFleet
+      - deployFleet
+    inputs:
+      - fleet identifier
+    outputs:
+      - fleet state
+  - name: Edge Node Inventory
+    description: >-
+      Enumerate registered edge nodes and inspect their installed
+      configuration, version, and connection state.
+    operations:
+      - listNodes
+      - getNode
+    inputs:
+      - node identifier
+    outputs:
+      - node metadata
+  - name: Endpoint Data Collection
+    description: >-
+      Configure sources that collect logs, metrics, and files from
+      endpoints, including filesystem, syslog, and process collectors.
+    operations:
+      - listEdgeSources
+      - createEdgeSource
+    inputs:
+      - source type
+      - collection configuration
+    outputs:
+      - source configuration
+  - name: Edge Pipeline Processing
+    description: >-
+      Author pipelines that filter, transform, and reduce data on the
+      endpoint before forwarding to centralized destinations.
+    operations:
+      - listPipelines
+      - createPipeline
+    inputs:
+      - pipeline definition
+    outputs:
+      - pipeline object
+useCases:
+  - name: Reduce Bandwidth from Edge
+    description: Apply pipelines on edge nodes to drop noise and compress events before they leave the host.
+    capabilities:
+      - Endpoint Data Collection
+      - Edge Pipeline Processing
+  - name: Centralized Fleet Rollout
+    description: Push configuration changes to entire fleets and confirm deployment status node-by-node.
+    capabilities:
+      - Fleet Management
+      - Edge Node Inventory
+  - name: Endpoint Forensics
+    description: Collect host-level signals and selectively forward enriched events for security investigation.
+    capabilities:
+      - Endpoint Data Collection
+      - Edge Pipeline Processing

@@ -1,0 +1,63 @@
+name: Cribl Search API Capabilities
+description: >-
+  Workflow capabilities exposed by Cribl Search's API for executing federated
+  queries across live and stored observability data without moving data.
+url: https://docs.cribl.io/search/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl Search API
+baseURL: https://api.example.com
+capabilities:
+  - name: Search Job Execution
+    description: >-
+      Submit search jobs, poll for completion, and retrieve results across
+      configured datasets and providers.
+    operations:
+      - createSearchJob
+      - getSearchJob
+      - getSearchResults
+    inputs:
+      - search query expression
+      - time range
+    outputs:
+      - search job ID
+      - paginated result set
+  - name: Dataset and Provider Configuration
+    description: >-
+      Register datasets and dataset providers (such as S3, Cribl Lake, or
+      Splunk) so search jobs can target them.
+    operations:
+      - listDatasets
+      - createDataset
+      - listProviders
+    inputs:
+      - dataset configuration
+    outputs:
+      - dataset object
+  - name: Saved Searches
+    description: >-
+      Save common search queries for reuse and scheduled execution.
+    operations:
+      - listSavedSearches
+      - createSavedSearch
+    inputs:
+      - query expression
+      - schedule
+    outputs:
+      - saved search object
+useCases:
+  - name: Federated Investigation
+    description: Run a single search across multiple object stores and live sources to investigate a security incident.
+    capabilities:
+      - Search Job Execution
+      - Dataset and Provider Configuration
+  - name: Cold Storage Querying
+    description: Query archived observability data in object storage without rehydrating it into a SIEM.
+    capabilities:
+      - Search Job Execution
+      - Dataset and Provider Configuration
+  - name: Recurring Compliance Search
+    description: Schedule a saved search to run on a cadence and report on policy compliance across data sources.
+    capabilities:
+      - Saved Searches
+      - Search Job Execution

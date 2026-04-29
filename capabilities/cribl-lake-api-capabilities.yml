@@ -1,0 +1,66 @@
+name: Cribl Lake API Capabilities
+description: >-
+  Workflow capabilities exposed by Cribl Lake's API for managing storage,
+  retention, and access of observability and security data in open
+  formats.
+url: https://docs.cribl.io/lake/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl Lake API
+baseURL: https://api.example.com
+capabilities:
+  - name: Dataset Management
+    description: >-
+      Create, list, and configure Cribl Lake datasets that hold observability
+      data in open formats compatible with downstream analytics tools.
+    operations:
+      - listDatasets
+      - createDataset
+      - getDataset
+      - updateDataset
+    inputs:
+      - dataset name
+      - storage configuration
+    outputs:
+      - dataset object
+  - name: Retention Policy Control
+    description: >-
+      Define and update retention policies that govern how long data is
+      kept and when it is archived or expired.
+    operations:
+      - listRetentionPolicies
+      - updateRetentionPolicy
+    inputs:
+      - retention duration
+      - dataset reference
+    outputs:
+      - retention policy object
+  - name: Access Control
+    description: >-
+      Manage which users, roles, and downstream tools can read and write
+      data stored in the lake.
+    operations:
+      - listAccessPolicies
+      - updateAccessPolicy
+    inputs:
+      - role or principal
+      - dataset reference
+      - permissions
+    outputs:
+      - access policy object
+useCases:
+  - name: Long-Term Cold Storage
+    description: Land high-volume telemetry into a low-cost lake while preserving query access from Cribl Search.
+    capabilities:
+      - Dataset Management
+      - Retention Policy Control
+  - name: Compliance Retention
+    description: Enforce regulatory retention policies for security and audit data lakes.
+    capabilities:
+      - Retention Policy Control
+      - Access Control
+  - name: Multi-Tool Access
+    description: Allow multiple analytics platforms to query the same lake in open formats without duplication.
+    capabilities:
+      - Dataset Management
+      - Access Control

@@ -1,0 +1,87 @@
+name: Cribl Cloud API Capabilities
+description: >-
+  Workflow capabilities exposed by the Cribl Cloud API control plane for
+  managing sources, destinations, pipelines, routes, and worker groups
+  across Stream, Edge, Search, and Lake.
+url: https://docs.cribl.io/api-reference/
+version: '1.0'
+modified: '2026-04-28'
+api: Cribl Cloud API
+baseURL: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+capabilities:
+  - name: Authentication and Token Management
+    description: >-
+      Authenticate with username/password (on-prem) or OAuth client
+      credentials (cloud) to obtain a Bearer token for subsequent calls.
+    operations:
+      - login
+    inputs:
+      - username and password or client credentials
+    outputs:
+      - bearer token
+  - name: Source Configuration
+    description: >-
+      List, create, update, and delete data input sources such as Syslog,
+      HTTP, Kafka, and Splunk so events can flow into Cribl.
+    operations:
+      - listSources
+      - createSource
+      - getSource
+    inputs:
+      - source type
+      - source configuration
+    outputs:
+      - source object with status
+  - name: Destination Configuration
+    description: >-
+      Manage data output destinations including Splunk, S3, Elasticsearch,
+      and webhooks where processed events are sent.
+    operations:
+      - listDestinations
+      - createDestination
+    inputs:
+      - destination type
+      - destination configuration
+    outputs:
+      - destination object
+  - name: Pipeline Authoring
+    description: >-
+      Create and update processing pipelines that contain ordered functions
+      for transforming, filtering, and enriching events.
+    operations:
+      - listPipelines
+      - createPipeline
+      - updatePipeline
+    inputs:
+      - pipeline definition with function chain
+    outputs:
+      - pipeline object
+  - name: Health Inspection
+    description: >-
+      Probe the health endpoint to confirm the Cribl instance is reachable
+      and operational.
+    operations:
+      - getHealth
+    inputs:
+      - none
+    outputs:
+      - health status response
+useCases:
+  - name: Onboard a New Data Source
+    description: Authenticate, create a new source, attach it to a route, and verify health.
+    capabilities:
+      - Authentication and Token Management
+      - Source Configuration
+      - Health Inspection
+  - name: Multi-Destination Routing
+    description: Configure multiple destinations and route events through pipelines based on filter expressions.
+    capabilities:
+      - Destination Configuration
+      - Pipeline Authoring
+  - name: Automated Onboarding
+    description: Use service accounts to automate end-to-end source, pipeline, and destination provisioning across deployments.
+    capabilities:
+      - Authentication and Token Management
+      - Source Configuration
+      - Pipeline Authoring
+      - Destination Configuration
