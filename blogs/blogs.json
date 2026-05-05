@@ -1,0 +1,13 @@
+{
+  "repo": "cribl",
+  "feeds": [
+    {
+      "source": "https://cribl.io/blog/",
+      "feed_url": "https://cribl.io/feed/",
+      "saved": 10,
+      "title": "Cribl Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:27:04Z"
+}
