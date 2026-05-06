@@ -4,117 +4,80 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Cribl
 providerId: cribl
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Configuration
   - Data Lake
   - Data Pipelines
   - Data Routing
   - Edge Computing
-  - Infrastructure as Code
   - Observability
   - Search
-  - Security Data
   - Stream Processing
   - Telemetry
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the Cribl API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Cribl's APIs (Cloud, Stream, Edge, Search, Lake, As Code) authenticate via OAuth 2.0 client
+  credentials against the Cribl Cloud control plane. Cribl does not publish per-API-key request rate
+  limits on its public documentation; effective throughput is bounded primarily by the platform-tier
+  worker capacity (worker groups, worker processes, search executors) and daily TB/day data-processing
+  ceiling. Hard request-rate throttles, if any, are enforced at the gateway and surfaced via standard
+  HTTP 429 / 503 responses; exact numeric limits are not published.
+sources:
+  - https://docs.cribl.io/api-reference/
+  - https://cribl.io/pricing/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: Daily data processed (Free)
+    scope: account
+    metric: tb_per_day
+    limit: 1
+    timeFrame: day
+    notes: Free tier ceiling for processed data volume. Enforced as a quota, not as a per-second throttle.
+  - name: Daily data processed (Standard)
+    scope: account
+    metric: tb_per_day
+    limit: 5
+    timeFrame: day
+    notes: Standard tier ceiling.
+  - name: Worker processes (Free)
+    scope: account
+    metric: concurrent_workers
     limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Cribl Cloud API
-      - Cribl Stream API
-      - Cribl Edge API
-      - Cribl Search API
-      - Cribl Lake API
-      - Cribl As Code API
-  - tier: free
-    name: Free Tier Monthly Quota
+    notes: Worker process ceiling that bounds concurrent pipeline throughput on the Free tier.
+  - name: Worker processes (Standard)
+    scope: account
+    metric: concurrent_workers
+    limit: 50
+  - name: API request rate
     scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Cribl Cloud API
-      - Cribl Stream API
-      - Cribl Edge API
-      - Cribl Search API
-      - Cribl Lake API
-      - Cribl As Code API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Cribl Cloud API
-      - Cribl Stream API
-      - Cribl Edge API
-      - Cribl Search API
-      - Cribl Lake API
-      - Cribl As Code API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Cribl Cloud API
-      - Cribl Stream API
-      - Cribl Edge API
-      - Cribl Search API
-      - Cribl Lake API
-      - Cribl As Code API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Cribl Cloud API
-      - Cribl Stream API
-      - Cribl Edge API
-      - Cribl Search API
-      - Cribl Lake API
-      - Cribl As Code API
+    metric: varies
+    limit: not publicly documented
+    notes: Cribl Cloud API enforces gateway-level throttling but does not publish per-second numbers.
+      Honor Retry-After when 429 is returned.
 policies:
+  - name: OAuth 2.0 client credentials
+    description: All Cribl Cloud API calls authenticate with OAuth 2.0 client credentials; tokens are
+      short-lived, so clients must cache and refresh access tokens rather than re-authenticating per
+      request.
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: On 429 or 5xx responses, implement exponential backoff with jitter and respect Retry-After
+      headers when present.
+  - name: Capacity, not RPS
+    description: Cribl's effective consumption ceiling is the tier-bound daily TB/day and worker capacity
+      rather than a fixed requests-per-second budget. Scale by upgrading the tier or adding worker
+      groups / processes / executors.
+  - name: Edge fleet scoping
+    description: For Cribl Edge, each edge node enforces its own local processing budget; control-plane
+      API rate limits apply only to the Cloud / Stream / Edge management endpoints, not to the data
+      path on the edge agents.
+notes: Cribl does not publish concrete per-API-key requests-per-second limits in public documentation.
+  This artifact captures the published tier-bound capacity ceilings and standard 429/Retry-After contract;
+  reconciled is false until exact request-rate numbers are published.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
