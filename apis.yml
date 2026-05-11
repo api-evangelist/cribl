@@ -214,6 +214,10 @@ common:
     url: https://cribl.io/privacy-policy/
   - type: TermsOfService
     url: https://cribl.io/terms-of-service/
+  - type: Integrations
+    url: https://cribl.io/integrations/
+integrations:
+  - name: Service Delivery Partners
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
