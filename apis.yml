@@ -1,6 +1,6 @@
 aid: cribl
 name: Cribl
-x-type: company
+kind: company
 description: >-
   Cribl is an observability pipeline company providing a suite of products
   for collecting, processing, routing, searching, and storing telemetry
