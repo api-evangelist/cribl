@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Edge API — Edge Destinations
+  description: 'Cribl Edge API — Edge Destinations. 2 operations. Lead operation: List edge destinations in a fleet. Self-contained
+    Naftiko capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Edge Destinations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: edge-edge-destinations
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Edge API — Edge Destinations business capability. Self-contained, no shared references.
+    resources:
+    - name: m-fleetId-system-outputs
+      path: /m/{fleetId}/system/outputs
+      operations:
+      - name: listedgedestinations
+        method: GET
+        description: List edge destinations in a fleet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createedgedestination
+        method: POST
+        description: Create an edge destination in a fleet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: edge-edge-destinations-rest
+    port: 8080
+    description: REST adapter for Cribl Edge API — Edge Destinations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/m/{fleetid}/system/outputs
+      name: m-fleetid-system-outputs
+      description: REST surface for m-fleetId-system-outputs.
+      operations:
+      - method: GET
+        name: listedgedestinations
+        description: List edge destinations in a fleet
+        call: edge-edge-destinations.listedgedestinations
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createedgedestination
+        description: Create an edge destination in a fleet
+        call: edge-edge-destinations.createedgedestination
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: edge-edge-destinations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Edge API — Edge Destinations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-edge-destinations-fleet
+      description: List edge destinations in a fleet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: edge-edge-destinations.listedgedestinations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-edge-destination-fleet
+      description: Create an edge destination in a fleet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: edge-edge-destinations.createedgedestination
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

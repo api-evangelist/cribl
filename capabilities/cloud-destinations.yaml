@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Destinations
+  description: 'Cribl Cloud API — Destinations. 6 operations. Lead operation: List all destinations. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Destinations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-destinations
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Destinations business capability. Self-contained, no shared references.
+    resources:
+    - name: system-outputs
+      path: /system/outputs
+      operations:
+      - name: listdestinations
+        method: GET
+        description: List all destinations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdestination
+        method: POST
+        description: Create a new destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: system-outputs-id
+      path: /system/outputs/{id}
+      operations:
+      - name: getdestination
+        method: GET
+        description: Get a destination by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatedestination
+        method: PATCH
+        description: Update a destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedestination
+        method: DELETE
+        description: Delete a destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-outputs-id-statuses
+      path: /system/outputs/{id}/statuses
+      operations:
+      - name: getdestinationstatus
+        method: GET
+        description: Get destination status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-destinations-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Destinations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/system/outputs
+      name: system-outputs
+      description: REST surface for system-outputs.
+      operations:
+      - method: GET
+        name: listdestinations
+        description: List all destinations
+        call: cloud-destinations.listdestinations
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdestination
+        description: Create a new destination
+        call: cloud-destinations.createdestination
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/outputs/{id}
+      name: system-outputs-id
+      description: REST surface for system-outputs-id.
+      operations:
+      - method: GET
+        name: getdestination
+        description: Get a destination by ID
+        call: cloud-destinations.getdestination
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatedestination
+        description: Update a destination
+        call: cloud-destinations.updatedestination
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedestination
+        description: Delete a destination
+        call: cloud-destinations.deletedestination
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/outputs/{id}/statuses
+      name: system-outputs-id-statuses
+      description: REST surface for system-outputs-id-statuses.
+      operations:
+      - method: GET
+        name: getdestinationstatus
+        description: Get destination status
+        call: cloud-destinations.getdestinationstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-destinations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Destinations. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-destinations
+      description: List all destinations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-destinations.listdestinations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-destination
+      description: Create a new destination
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-destinations.createdestination
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-destination-id
+      description: Get a destination by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-destinations.getdestination
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-destination
+      description: Update a destination
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-destinations.updatedestination
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-destination
+      description: Delete a destination
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-destinations.deletedestination
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-destination-status
+      description: Get destination status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-destinations.getdestinationstatus
+      outputParameters:
+      - type: object
+        mapping: $.

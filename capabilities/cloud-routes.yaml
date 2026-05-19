@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Routes
+  description: 'Cribl Cloud API — Routes. 5 operations. Lead operation: List all routes. Self-contained Naftiko capability
+    covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Routes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-routes
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Routes business capability. Self-contained, no shared references.
+    resources:
+    - name: routes
+      path: /routes
+      operations:
+      - name: listroutes
+        method: GET
+        description: List all routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createroute
+        method: POST
+        description: Create a new route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes-id
+      path: /routes/{id}
+      operations:
+      - name: getroute
+        method: GET
+        description: Get a route by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateroute
+        method: PATCH
+        description: Update a route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteroute
+        method: DELETE
+        description: Delete a route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-routes-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Routes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/routes
+      name: routes
+      description: REST surface for routes.
+      operations:
+      - method: GET
+        name: listroutes
+        description: List all routes
+        call: cloud-routes.listroutes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createroute
+        description: Create a new route
+        call: cloud-routes.createroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routes/{id}
+      name: routes-id
+      description: REST surface for routes-id.
+      operations:
+      - method: GET
+        name: getroute
+        description: Get a route by ID
+        call: cloud-routes.getroute
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateroute
+        description: Update a route
+        call: cloud-routes.updateroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteroute
+        description: Delete a route
+        call: cloud-routes.deleteroute
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-routes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Routes. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-routes
+      description: List all routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-routes.listroutes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-route
+      description: Create a new route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-routes.createroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-route-id
+      description: Get a route by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-routes.getroute
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-route
+      description: Update a route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-routes.updateroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-route
+      description: Delete a route
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-routes.deleteroute
+      outputParameters:
+      - type: object
+        mapping: $.

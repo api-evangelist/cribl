@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Notifications
+  description: 'Cribl Cloud API — Notifications. 1 operations. Lead operation: List all notification rules. Self-contained
+    Naftiko capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-notifications
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Notifications business capability. Self-contained, no shared references.
+    resources:
+    - name: notifications
+      path: /notifications
+      operations:
+      - name: listnotifications
+        method: GET
+        description: List all notification rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-notifications-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Notifications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/notifications
+      name: notifications
+      description: REST surface for notifications.
+      operations:
+      - method: GET
+        name: listnotifications
+        description: List all notification rules
+        call: cloud-notifications.listnotifications
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Notifications. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-notification-rules
+      description: List all notification rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-notifications.listnotifications
+      outputParameters:
+      - type: object
+        mapping: $.

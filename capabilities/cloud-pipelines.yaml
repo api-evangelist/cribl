@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Pipelines
+  description: 'Cribl Cloud API — Pipelines. 5 operations. Lead operation: List all pipelines. Self-contained Naftiko capability
+    covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Pipelines
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-pipelines
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Pipelines business capability. Self-contained, no shared references.
+    resources:
+    - name: pipelines
+      path: /pipelines
+      operations:
+      - name: listpipelines
+        method: GET
+        description: List all pipelines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createpipeline
+        method: POST
+        description: Create a new pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: pipelines-id
+      path: /pipelines/{id}
+      operations:
+      - name: getpipeline
+        method: GET
+        description: Get a pipeline by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatepipeline
+        method: PATCH
+        description: Update a pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepipeline
+        method: DELETE
+        description: Delete a pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-pipelines-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Pipelines. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/pipelines
+      name: pipelines
+      description: REST surface for pipelines.
+      operations:
+      - method: GET
+        name: listpipelines
+        description: List all pipelines
+        call: cloud-pipelines.listpipelines
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpipeline
+        description: Create a new pipeline
+        call: cloud-pipelines.createpipeline
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pipelines/{id}
+      name: pipelines-id
+      description: REST surface for pipelines-id.
+      operations:
+      - method: GET
+        name: getpipeline
+        description: Get a pipeline by ID
+        call: cloud-pipelines.getpipeline
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatepipeline
+        description: Update a pipeline
+        call: cloud-pipelines.updatepipeline
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepipeline
+        description: Delete a pipeline
+        call: cloud-pipelines.deletepipeline
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-pipelines-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Pipelines. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-pipelines
+      description: List all pipelines
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pipelines.listpipelines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-pipeline
+      description: Create a new pipeline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-pipelines.createpipeline
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pipeline-id
+      description: Get a pipeline by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pipelines.getpipeline
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-pipeline
+      description: Update a pipeline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-pipelines.updatepipeline
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-pipeline
+      description: Delete a pipeline
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-pipelines.deletepipeline
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Stream API — Lookups
+  description: 'Cribl Stream API — Lookups. 1 operations. Lead operation: List all Stream lookups. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Lookups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stream-lookups
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Stream API — Lookups business capability. Self-contained, no shared references.
+    resources:
+    - name: system-lookups
+      path: /system/lookups
+      operations:
+      - name: liststreamlookups
+        method: GET
+        description: List all Stream lookups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: stream-lookups-rest
+    port: 8080
+    description: REST adapter for Cribl Stream API — Lookups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/system/lookups
+      name: system-lookups
+      description: REST surface for system-lookups.
+      operations:
+      - method: GET
+        name: liststreamlookups
+        description: List all Stream lookups
+        call: stream-lookups.liststreamlookups
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stream-lookups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Stream API — Lookups. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-stream-lookups
+      description: List all Stream lookups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stream-lookups.liststreamlookups
+      outputParameters:
+      - type: object
+        mapping: $.

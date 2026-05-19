@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Stream API — Packs
+  description: 'Cribl Stream API — Packs. 2 operations. Lead operation: List all installed Stream packs. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Packs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stream-packs
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Stream API — Packs business capability. Self-contained, no shared references.
+    resources:
+    - name: packs
+      path: /packs
+      operations:
+      - name: liststreampacks
+        method: GET
+        description: List all installed Stream packs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: installstreampack
+        method: POST
+        description: Install a Stream pack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: stream-packs-rest
+    port: 8080
+    description: REST adapter for Cribl Stream API — Packs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/packs
+      name: packs
+      description: REST surface for packs.
+      operations:
+      - method: GET
+        name: liststreampacks
+        description: List all installed Stream packs
+        call: stream-packs.liststreampacks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: installstreampack
+        description: Install a Stream pack
+        call: stream-packs.installstreampack
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stream-packs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Stream API — Packs. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-installed-stream-packs
+      description: List all installed Stream packs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stream-packs.liststreampacks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-stream-pack
+      description: Install a Stream pack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stream-packs.installstreampack
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

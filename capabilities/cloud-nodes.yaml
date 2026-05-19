@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Nodes
+  description: 'Cribl Cloud API — Nodes. 4 operations. Lead operation: List all worker and edge nodes. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Nodes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-nodes
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Nodes business capability. Self-contained, no shared references.
+    resources:
+    - name: master-workers
+      path: /master/workers
+      operations:
+      - name: listnodes
+        method: GET
+        description: List all worker and edge nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: master-workers-count
+      path: /master/workers/count
+      operations:
+      - name: getnodecount
+        method: GET
+        description: Get node count
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: master-workers-id
+      path: /master/workers/{id}
+      operations:
+      - name: getnode
+        method: GET
+        description: Get a node by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: master-workers-id-restart
+      path: /master/workers/{id}/restart
+      operations:
+      - name: restartnode
+        method: POST
+        description: Restart a node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-nodes-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Nodes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/master/workers
+      name: master-workers
+      description: REST surface for master-workers.
+      operations:
+      - method: GET
+        name: listnodes
+        description: List all worker and edge nodes
+        call: cloud-nodes.listnodes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/master/workers/count
+      name: master-workers-count
+      description: REST surface for master-workers-count.
+      operations:
+      - method: GET
+        name: getnodecount
+        description: Get node count
+        call: cloud-nodes.getnodecount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/master/workers/{id}
+      name: master-workers-id
+      description: REST surface for master-workers-id.
+      operations:
+      - method: GET
+        name: getnode
+        description: Get a node by ID
+        call: cloud-nodes.getnode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/master/workers/{id}/restart
+      name: master-workers-id-restart
+      description: REST surface for master-workers-id-restart.
+      operations:
+      - method: POST
+        name: restartnode
+        description: Restart a node
+        call: cloud-nodes.restartnode
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-nodes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Nodes. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-worker-and-edge
+      description: List all worker and edge nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-nodes.listnodes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-node-count
+      description: Get node count
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-nodes.getnodecount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-node-id
+      description: Get a node by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-nodes.getnode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restart-node
+      description: Restart a node
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-nodes.restartnode
+      outputParameters:
+      - type: object
+        mapping: $.

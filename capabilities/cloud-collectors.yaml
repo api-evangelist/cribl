@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Collectors
+  description: 'Cribl Cloud API — Collectors. 5 operations. Lead operation: List all collectors. Self-contained Naftiko capability
+    covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Collectors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-collectors
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Collectors business capability. Self-contained, no shared references.
+    resources:
+    - name: system-collectors
+      path: /system/collectors
+      operations:
+      - name: listcollectors
+        method: GET
+        description: List all collectors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcollector
+        method: POST
+        description: Create a new collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: system-collectors-id
+      path: /system/collectors/{id}
+      operations:
+      - name: getcollector
+        method: GET
+        description: Get a collector by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecollector
+        method: PATCH
+        description: Update a collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecollector
+        method: DELETE
+        description: Delete a collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-collectors-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Collectors. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/system/collectors
+      name: system-collectors
+      description: REST surface for system-collectors.
+      operations:
+      - method: GET
+        name: listcollectors
+        description: List all collectors
+        call: cloud-collectors.listcollectors
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcollector
+        description: Create a new collector
+        call: cloud-collectors.createcollector
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/collectors/{id}
+      name: system-collectors-id
+      description: REST surface for system-collectors-id.
+      operations:
+      - method: GET
+        name: getcollector
+        description: Get a collector by ID
+        call: cloud-collectors.getcollector
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecollector
+        description: Update a collector
+        call: cloud-collectors.updatecollector
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecollector
+        description: Delete a collector
+        call: cloud-collectors.deletecollector
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-collectors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Collectors. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-collectors
+      description: List all collectors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-collectors.listcollectors
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-collector
+      description: Create a new collector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-collectors.createcollector
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-collector-id
+      description: Get a collector by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-collectors.getcollector
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-collector
+      description: Update a collector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-collectors.updatecollector
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-collector
+      description: Delete a collector
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-collectors.deletecollector
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — System
+  description: 'Cribl Cloud API — System. 2 operations. Lead operation: Get Git settings. Self-contained Naftiko capability
+    covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - System
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-system
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — System business capability. Self-contained, no shared references.
+    resources:
+    - name: system-settings-git-settings
+      path: /system/settings/git-settings
+      operations:
+      - name: getgitsettings
+        method: GET
+        description: Get Git settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updategitsettings
+        method: PATCH
+        description: Update Git settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-system-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — System. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/system/settings/git-settings
+      name: system-settings-git-settings
+      description: REST surface for system-settings-git-settings.
+      operations:
+      - method: GET
+        name: getgitsettings
+        description: Get Git settings
+        call: cloud-system.getgitsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updategitsettings
+        description: Update Git settings
+        call: cloud-system.updategitsettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-system-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — System. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-git-settings
+      description: Get Git settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-system.getgitsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-git-settings
+      description: Update Git settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-system.updategitsettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

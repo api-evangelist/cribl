@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Stream API — Pipelines
+  description: 'Cribl Stream API — Pipelines. 5 operations. Lead operation: List Stream pipelines in a worker group. Self-contained
+    Naftiko capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Pipelines
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stream-pipelines
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Stream API — Pipelines business capability. Self-contained, no shared references.
+    resources:
+    - name: m-groupId-pipelines
+      path: /m/{groupId}/pipelines
+      operations:
+      - name: liststreampipelines
+        method: GET
+        description: List Stream pipelines in a worker group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createstreampipeline
+        method: POST
+        description: Create a Stream pipeline in a worker group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: m-groupId-pipelines-id
+      path: /m/{groupId}/pipelines/{id}
+      operations:
+      - name: getstreampipeline
+        method: GET
+        description: Get a Stream pipeline by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatestreampipeline
+        method: PATCH
+        description: Update a Stream pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletestreampipeline
+        method: DELETE
+        description: Delete a Stream pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: stream-pipelines-rest
+    port: 8080
+    description: REST adapter for Cribl Stream API — Pipelines. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/m/{groupid}/pipelines
+      name: m-groupid-pipelines
+      description: REST surface for m-groupId-pipelines.
+      operations:
+      - method: GET
+        name: liststreampipelines
+        description: List Stream pipelines in a worker group
+        call: stream-pipelines.liststreampipelines
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createstreampipeline
+        description: Create a Stream pipeline in a worker group
+        call: stream-pipelines.createstreampipeline
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/m/{groupid}/pipelines/{id}
+      name: m-groupid-pipelines-id
+      description: REST surface for m-groupId-pipelines-id.
+      operations:
+      - method: GET
+        name: getstreampipeline
+        description: Get a Stream pipeline by ID
+        call: stream-pipelines.getstreampipeline
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatestreampipeline
+        description: Update a Stream pipeline
+        call: stream-pipelines.updatestreampipeline
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletestreampipeline
+        description: Delete a Stream pipeline
+        call: stream-pipelines.deletestreampipeline
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stream-pipelines-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Stream API — Pipelines. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-stream-pipelines-worker-group
+      description: List Stream pipelines in a worker group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stream-pipelines.liststreampipelines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-stream-pipeline-worker-group
+      description: Create a Stream pipeline in a worker group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stream-pipelines.createstreampipeline
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-pipeline-id
+      description: Get a Stream pipeline by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stream-pipelines.getstreampipeline
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-stream-pipeline
+      description: Update a Stream pipeline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: stream-pipelines.updatestreampipeline
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-stream-pipeline
+      description: Delete a Stream pipeline
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: stream-pipelines.deletestreampipeline
+      outputParameters:
+      - type: object
+        mapping: $.

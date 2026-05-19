@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Health
+  description: 'Cribl Cloud API — Health. 1 operations. Lead operation: Check server health. Self-contained Naftiko capability
+    covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Health
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-health
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Health business capability. Self-contained, no shared references.
+    resources:
+    - name: health
+      path: /health
+      operations:
+      - name: gethealth
+        method: GET
+        description: Check server health
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-health-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Health. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/health
+      name: health
+      description: REST surface for health.
+      operations:
+      - method: GET
+        name: gethealth
+        description: Check server health
+        call: cloud-health.gethealth
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-health-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Health. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: check-server-health
+      description: Check server health
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-health.gethealth
+      outputParameters:
+      - type: object
+        mapping: $.

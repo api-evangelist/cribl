@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Database Connections
+  description: 'Cribl Cloud API — Database Connections. 5 operations. Lead operation: List all database connections. Self-contained
+    Naftiko capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Database Connections
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-database-connections
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Database Connections business capability. Self-contained, no shared references.
+    resources:
+    - name: system-database-connections
+      path: /system/database-connections
+      operations:
+      - name: listdatabaseconnections
+        method: GET
+        description: List all database connections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdatabaseconnection
+        method: POST
+        description: Create a database connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: system-database-connections-id
+      path: /system/database-connections/{id}
+      operations:
+      - name: getdatabaseconnection
+        method: GET
+        description: Get a database connection by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatedatabaseconnection
+        method: PATCH
+        description: Update a database connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedatabaseconnection
+        method: DELETE
+        description: Delete a database connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-database-connections-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Database Connections. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/system/database-connections
+      name: system-database-connections
+      description: REST surface for system-database-connections.
+      operations:
+      - method: GET
+        name: listdatabaseconnections
+        description: List all database connections
+        call: cloud-database-connections.listdatabaseconnections
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdatabaseconnection
+        description: Create a database connection
+        call: cloud-database-connections.createdatabaseconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/system/database-connections/{id}
+      name: system-database-connections-id
+      description: REST surface for system-database-connections-id.
+      operations:
+      - method: GET
+        name: getdatabaseconnection
+        description: Get a database connection by ID
+        call: cloud-database-connections.getdatabaseconnection
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatedatabaseconnection
+        description: Update a database connection
+        call: cloud-database-connections.updatedatabaseconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedatabaseconnection
+        description: Delete a database connection
+        call: cloud-database-connections.deletedatabaseconnection
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-database-connections-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Database Connections. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-database-connections
+      description: List all database connections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-database-connections.listdatabaseconnections
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-database-connection
+      description: Create a database connection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-database-connections.createdatabaseconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-database-connection-id
+      description: Get a database connection by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-database-connections.getdatabaseconnection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-database-connection
+      description: Update a database connection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-database-connections.updatedatabaseconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-database-connection
+      description: Delete a database connection
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-database-connections.deletedatabaseconnection
+      outputParameters:
+      - type: object
+        mapping: $.

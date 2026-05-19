@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Search API — Search Jobs
+  description: 'Cribl Search API — Search Jobs. 5 operations. Lead operation: List all search jobs. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Search Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: search-search-jobs
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Search API — Search Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: search-jobs
+      path: /search/jobs
+      operations:
+      - name: listsearchjobs
+        method: GET
+        description: List all search jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter jobs by status
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of jobs to return
+      - name: createsearchjob
+        method: POST
+        description: Execute a new search query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: search-jobs-id
+      path: /search/jobs/{id}
+      operations:
+      - name: getsearchjob
+        method: GET
+        description: Get a search job by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancelsearchjob
+        method: DELETE
+        description: Cancel a search job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: search-jobs-id-results
+      path: /search/jobs/{id}/results
+      operations:
+      - name: getsearchjobresults
+        method: GET
+        description: Get search job results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: offset
+          in: query
+          type: integer
+          description: The offset for pagination
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results to return
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: search-search-jobs-rest
+    port: 8080
+    description: REST adapter for Cribl Search API — Search Jobs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/search/jobs
+      name: search-jobs
+      description: REST surface for search-jobs.
+      operations:
+      - method: GET
+        name: listsearchjobs
+        description: List all search jobs
+        call: search-search-jobs.listsearchjobs
+        with:
+          status: rest.status
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsearchjob
+        description: Execute a new search query
+        call: search-search-jobs.createsearchjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search/jobs/{id}
+      name: search-jobs-id
+      description: REST surface for search-jobs-id.
+      operations:
+      - method: GET
+        name: getsearchjob
+        description: Get a search job by ID
+        call: search-search-jobs.getsearchjob
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancelsearchjob
+        description: Cancel a search job
+        call: search-search-jobs.cancelsearchjob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search/jobs/{id}/results
+      name: search-jobs-id-results
+      description: REST surface for search-jobs-id-results.
+      operations:
+      - method: GET
+        name: getsearchjobresults
+        description: Get search job results
+        call: search-search-jobs.getsearchjobresults
+        with:
+          offset: rest.offset
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: search-search-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Search API — Search Jobs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-search-jobs
+      description: List all search jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: search-search-jobs.listsearchjobs
+      with:
+        status: tools.status
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: execute-new-search-query
+      description: Execute a new search query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: search-search-jobs.createsearchjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-search-job-id
+      description: Get a search job by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: search-search-jobs.getsearchjob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-search-job
+      description: Cancel a search job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: search-search-jobs.cancelsearchjob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-search-job-results
+      description: Get search job results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: search-search-jobs.getsearchjobresults
+      with:
+        offset: tools.offset
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

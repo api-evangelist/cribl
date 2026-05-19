@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Cloud API — Groups
+  description: 'Cribl Cloud API — Groups. 6 operations. Lead operation: List all worker groups and fleets. Self-contained
+    Naftiko capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-groups
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Cloud API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: master-groups
+      path: /master/groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: List all worker groups and fleets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: creategroup
+        method: POST
+        description: Create a new worker group or fleet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: master-groups-id
+      path: /master/groups/{id}
+      operations:
+      - name: getgroup
+        method: GET
+        description: Get a group by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updategroup
+        method: PATCH
+        description: Update a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletegroup
+        method: DELETE
+        description: Delete a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: master-groups-id-deploy
+      path: /master/groups/{id}/deploy
+      operations:
+      - name: deploygroup
+        method: POST
+        description: Deploy configuration to a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-groups-rest
+    port: 8080
+    description: REST adapter for Cribl Cloud API — Groups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/master/groups
+      name: master-groups
+      description: REST surface for master-groups.
+      operations:
+      - method: GET
+        name: listgroups
+        description: List all worker groups and fleets
+        call: cloud-groups.listgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroup
+        description: Create a new worker group or fleet
+        call: cloud-groups.creategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/master/groups/{id}
+      name: master-groups-id
+      description: REST surface for master-groups-id.
+      operations:
+      - method: GET
+        name: getgroup
+        description: Get a group by ID
+        call: cloud-groups.getgroup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updategroup
+        description: Update a group
+        call: cloud-groups.updategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroup
+        description: Delete a group
+        call: cloud-groups.deletegroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/master/groups/{id}/deploy
+      name: master-groups-id-deploy
+      description: REST surface for master-groups-id-deploy.
+      operations:
+      - method: POST
+        name: deploygroup
+        description: Deploy configuration to a group
+        call: cloud-groups.deploygroup
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Cloud API — Groups. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-worker-groups-and
+      description: List all worker groups and fleets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-groups.listgroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-worker-group-fleet
+      description: Create a new worker group or fleet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-groups.creategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group-id
+      description: Get a group by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-groups.getgroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-group
+      description: Update a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-groups.updategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group
+      description: Delete a group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-groups.deletegroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-configuration-group
+      description: Deploy configuration to a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-groups.deploygroup
+      outputParameters:
+      - type: object
+        mapping: $.

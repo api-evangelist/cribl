@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Cribl Search API — Saved Searches
+  description: 'Cribl Search API — Saved Searches. 5 operations. Lead operation: List all saved searches. Self-contained Naftiko
+    capability covering one Cribl business surface.'
+  tags:
+  - Cribl
+  - Saved Searches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRIBL_API_KEY: CRIBL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: search-saved-searches
+    baseUri: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+    description: Cribl Search API — Saved Searches business capability. Self-contained, no shared references.
+    resources:
+    - name: search-saved
+      path: /search/saved
+      operations:
+      - name: listsavedsearches
+        method: GET
+        description: List all saved searches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsavedsearch
+        method: POST
+        description: Create a saved search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: search-saved-id
+      path: /search/saved/{id}
+      operations:
+      - name: getsavedsearch
+        method: GET
+        description: Get a saved search by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatesavedsearch
+        method: PATCH
+        description: Update a saved search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletesavedsearch
+        method: DELETE
+        description: Delete a saved search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CRIBL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: search-saved-searches-rest
+    port: 8080
+    description: REST adapter for Cribl Search API — Saved Searches. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/search/saved
+      name: search-saved
+      description: REST surface for search-saved.
+      operations:
+      - method: GET
+        name: listsavedsearches
+        description: List all saved searches
+        call: search-saved-searches.listsavedsearches
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsavedsearch
+        description: Create a saved search
+        call: search-saved-searches.createsavedsearch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search/saved/{id}
+      name: search-saved-id
+      description: REST surface for search-saved-id.
+      operations:
+      - method: GET
+        name: getsavedsearch
+        description: Get a saved search by ID
+        call: search-saved-searches.getsavedsearch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatesavedsearch
+        description: Update a saved search
+        call: search-saved-searches.updatesavedsearch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesavedsearch
+        description: Delete a saved search
+        call: search-saved-searches.deletesavedsearch
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: search-saved-searches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Cribl Search API — Saved Searches. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-saved-searches
+      description: List all saved searches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: search-saved-searches.listsavedsearches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-saved-search
+      description: Create a saved search
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: search-saved-searches.createsavedsearch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-saved-search-id
+      description: Get a saved search by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: search-saved-searches.getsavedsearch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-saved-search
+      description: Update a saved search
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: search-saved-searches.updatesavedsearch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-saved-search
+      description: Delete a saved search
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: search-saved-searches.deletesavedsearch
+      outputParameters:
+      - type: object
+        mapping: $.
