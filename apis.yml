@@ -9,17 +9,17 @@ description: Cribl is an observability pipeline company providing a suite of pro
 url: https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Configuration
-- Data Lake
-- Data Pipelines
-- Data Routing
-- Edge Computing
-- Infrastructure as Code
-- Observability
-- Search
-- Security Data
-- Stream Processing
-- Telemetry
+  - Configuration
+  - Data Lake
+  - Data Pipelines
+  - Data Routing
+  - Edge Computing
+  - Infrastructure as Code
+  - Observability
+  - Search
+  - Security Data
+  - Stream Processing
+  - Telemetry
 created: '2025-03-05'
 modified: '2026-05-19'
 specificationVersion: '0.20'
@@ -27,260 +27,262 @@ type: Index
 access: 3rd-Party
 position: Consuming
 apis:
-- aid: cribl:cribl-cloud-api
-  name: Cribl Cloud API
-  description: The Cribl Cloud API is a RESTful control plane API for programmatically configuring and managing Cribl resources
-    across Stream, Edge, Search, and Lake deployments. It allows developers to retrieve and manage data, automate repetitive
-    manual processes, and integrate with third-party applications. The API uses OAuth 2.0 client credentials and follows a
-    resource-based structure where each endpoint corresponds to a specific Cribl resource or collection.
-  humanURL: https://docs.cribl.io/api-reference/
-  baseURL: https://api.cribl.cloud
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/api-reference/
-  - type: OpenAPI
-    url: openapi/cribl-cloud-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-cloud-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-cloud-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/cloud-authentication.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-collectors.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-database-connections.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-destinations.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-functions.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-groups.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-health.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-jobs.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-lake-datasets.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-lookups.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-nodes.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-notifications.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-packs.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-pipelines.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-routes.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-sources.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-system.yaml
-  - type: NaftikoCapability
-    url: capabilities/cloud-versioning.yaml
-  tags:
-  - Cloud
-  - Configuration
-  - Control Plane
-  - Data Pipelines
-  - Management
-  - Observability
-- aid: cribl:cribl-stream-api
-  name: Cribl Stream API
-  description: The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that
-    processes and routes telemetry data in real time. Through the API, developers can manage pipelines, routes, sources, destinations,
-    and worker groups. It enables automation of data collection, transformation, and routing workflows.
-  humanURL: https://docs.cribl.io/stream/
-  baseURL: https://api.example.com
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/stream/
-  - type: OpenAPI
-    url: openapi/cribl-stream-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-stream-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-stream-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/stream-collectors.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-destinations.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-functions.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-lookups.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-notifications.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-packs.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-pipelines.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-routes.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-sources.yaml
-  - type: NaftikoCapability
-    url: capabilities/stream-worker-groups.yaml
-  tags:
-  - Data Pipelines
-  - Observability
-  - Routing
-  - Stream Processing
-  - Telemetry
-- aid: cribl:cribl-edge-api
-  name: Cribl Edge API
-  description: The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network
-    edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data collection
-    from endpoints, and control data processing closer to the source.
-  humanURL: https://docs.cribl.io/edge/
-  baseURL: https://api.example.com
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/edge/
-  - type: OpenAPI
-    url: openapi/cribl-edge-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-edge-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-edge-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-destinations.yaml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-fleets.yaml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-nodes.yaml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-pipelines.yaml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-routes.yaml
-  - type: NaftikoCapability
-    url: capabilities/edge-edge-sources.yaml
-  tags:
-  - Agents
-  - Data Collection
-  - Edge Computing
-  - Observability
-  - Telemetry
-- aid: cribl:cribl-search-api
-  name: Cribl Search API
-  description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live
-    and stored observability data in real time. Developers can use the API to execute search queries, retrieve results, and
-    integrate search capabilities into their own applications and workflows.
-  humanURL: https://docs.cribl.io/search/
-  baseURL: https://api.example.com
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/search/
-  - type: OpenAPI
-    url: openapi/cribl-search-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-search-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-search-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/search-datasets.yaml
-  - type: NaftikoCapability
-    url: capabilities/search-saved-searches.yaml
-  - type: NaftikoCapability
-    url: capabilities/search-search-jobs.yaml
-  - type: NaftikoCapability
-    url: capabilities/search-search-notifications.yaml
-  tags:
-  - Analytics
-  - Data Exploration
-  - Federated Search
-  - Observability
-  - Querying
-- aid: cribl:cribl-lake-api
-  name: Cribl Lake API
-  description: The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability
-    and security data. The API enables developers to manage data storage, retention policies, and access controls for large
-    volumes of telemetry data in open formats.
-  humanURL: https://docs.cribl.io/lake/
-  baseURL: https://api.example.com
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/lake/
-  - type: OpenAPI
-    url: openapi/cribl-lake-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-lake-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-lake-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/lake-datasets.yaml
-  - type: NaftikoCapability
-    url: capabilities/lake-retention.yaml
-  tags:
-  - Analytics
-  - Data Lake
-  - Data Management
-  - Observability
-  - Storage
-- aid: cribl:cribl-as-code-api
-  name: Cribl As Code API
-  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code
-    principles. It supports exporting and importing configurations across deployments, enabling version control, CI/CD integration,
-    and reproducible infrastructure management. Developers can use the API alongside SDKs for Python, Go, and TypeScript or
-    through Terraform providers.
-  humanURL: https://docs.cribl.io/cribl-as-code/api/
-  baseURL: https://gateway.cribl.cloud
-  properties:
-  - type: Documentation
-    url: https://docs.cribl.io/cribl-as-code/api/
-  - type: OpenAPI
-    url: openapi/cribl-as-code-api-openapi.yml
-  - type: Rules
-    url: rules/cribl-as-code-api-rules.yml
-  - type: Capabilities
-    url: capabilities/cribl-as-code-api-capabilities.yml
-  - type: NaftikoCapability
-    url: capabilities/as-code-api-credentials.yaml
-  - type: NaftikoCapability
-    url: capabilities/as-code-health.yaml
-  - type: NaftikoCapability
-    url: capabilities/as-code-workspaces.yaml
-  tags:
-  - Automation
-  - Configuration
-  - DevOps
-  - Infrastructure as Code
-  - Version Control
+  - aid: cribl:cribl-cloud-api
+    name: Cribl Cloud API
+    description: The Cribl Cloud API is a RESTful control plane API for programmatically configuring and managing Cribl resources
+      across Stream, Edge, Search, and Lake deployments. It allows developers to retrieve and manage data, automate repetitive
+      manual processes, and integrate with third-party applications. The API uses OAuth 2.0 client credentials and follows a
+      resource-based structure where each endpoint corresponds to a specific Cribl resource or collection.
+    humanURL: https://docs.cribl.io/api-reference/
+    baseURL: https://api.cribl.cloud
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/api-reference/
+    - type: OpenAPI
+      url: openapi/cribl-cloud-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-cloud-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-cloud-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/cloud-authentication.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-collectors.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-database-connections.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-destinations.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-functions.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-groups.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-health.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-jobs.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-lake-datasets.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-lookups.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-nodes.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-notifications.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-packs.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-pipelines.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-routes.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-sources.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-system.yaml
+    - type: NaftikoCapability
+      url: capabilities/cloud-versioning.yaml
+    tags:
+    - Cloud
+    - Configuration
+    - Control Plane
+    - Data Pipelines
+    - Management
+    - Observability
+  - aid: cribl:cribl-stream-api
+    name: Cribl Stream API
+    description: The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that
+      processes and routes telemetry data in real time. Through the API, developers can manage pipelines, routes, sources, destinations,
+      and worker groups. It enables automation of data collection, transformation, and routing workflows.
+    humanURL: https://docs.cribl.io/stream/
+    baseURL: https://api.example.com
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/stream/
+    - type: OpenAPI
+      url: openapi/cribl-stream-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-stream-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-stream-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/stream-collectors.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-destinations.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-functions.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-lookups.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-notifications.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-packs.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-pipelines.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-routes.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-sources.yaml
+    - type: NaftikoCapability
+      url: capabilities/stream-worker-groups.yaml
+    tags:
+    - Data Pipelines
+    - Observability
+    - Routing
+    - Stream Processing
+    - Telemetry
+  - aid: cribl:cribl-edge-api
+    name: Cribl Edge API
+    description: The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network
+      edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data collection
+      from endpoints, and control data processing closer to the source.
+    humanURL: https://docs.cribl.io/edge/
+    baseURL: https://api.example.com
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/edge/
+    - type: OpenAPI
+      url: openapi/cribl-edge-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-edge-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-edge-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-destinations.yaml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-fleets.yaml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-nodes.yaml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-pipelines.yaml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-routes.yaml
+    - type: NaftikoCapability
+      url: capabilities/edge-edge-sources.yaml
+    tags:
+    - Agents
+    - Data Collection
+    - Edge Computing
+    - Observability
+    - Telemetry
+  - aid: cribl:cribl-search-api
+    name: Cribl Search API
+    description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live
+      and stored observability data in real time. Developers can use the API to execute search queries, retrieve results, and
+      integrate search capabilities into their own applications and workflows.
+    humanURL: https://docs.cribl.io/search/
+    baseURL: https://api.example.com
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/search/
+    - type: OpenAPI
+      url: openapi/cribl-search-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-search-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-search-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/search-datasets.yaml
+    - type: NaftikoCapability
+      url: capabilities/search-saved-searches.yaml
+    - type: NaftikoCapability
+      url: capabilities/search-search-jobs.yaml
+    - type: NaftikoCapability
+      url: capabilities/search-search-notifications.yaml
+    tags:
+    - Analytics
+    - Data Exploration
+    - Federated Search
+    - Observability
+    - Querying
+  - aid: cribl:cribl-lake-api
+    name: Cribl Lake API
+    description: The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability
+      and security data. The API enables developers to manage data storage, retention policies, and access controls for large
+      volumes of telemetry data in open formats.
+    humanURL: https://docs.cribl.io/lake/
+    baseURL: https://api.example.com
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/lake/
+    - type: OpenAPI
+      url: openapi/cribl-lake-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-lake-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-lake-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/lake-datasets.yaml
+    - type: NaftikoCapability
+      url: capabilities/lake-retention.yaml
+    tags:
+    - Analytics
+    - Data Lake
+    - Data Management
+    - Observability
+    - Storage
+  - aid: cribl:cribl-as-code-api
+    name: Cribl As Code API
+    description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code
+      principles. It supports exporting and importing configurations across deployments, enabling version control, CI/CD integration,
+      and reproducible infrastructure management. Developers can use the API alongside SDKs for Python, Go, and TypeScript or
+      through Terraform providers.
+    humanURL: https://docs.cribl.io/cribl-as-code/api/
+    baseURL: https://gateway.cribl.cloud
+    properties:
+    - type: Documentation
+      url: https://docs.cribl.io/cribl-as-code/api/
+    - type: OpenAPI
+      url: openapi/cribl-as-code-api-openapi.yml
+    - type: Rules
+      url: rules/cribl-as-code-api-rules.yml
+    - type: Capabilities
+      url: capabilities/cribl-as-code-api-capabilities.yml
+    - type: NaftikoCapability
+      url: capabilities/as-code-api-credentials.yaml
+    - type: NaftikoCapability
+      url: capabilities/as-code-health.yaml
+    - type: NaftikoCapability
+      url: capabilities/as-code-workspaces.yaml
+    tags:
+    - Automation
+    - Configuration
+    - DevOps
+    - Infrastructure as Code
+    - Version Control
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/cribl
-- type: JSONLD
-  url: json-ld/cribl-context.jsonld
-- type: JSONSchema
-  url: json-schema/cribl-pipeline-schema.json
-- type: JSONSchema
-  url: json-schema/cribl-route-schema.json
-- type: JSONSchema
-  url: json-schema/cribl-source-schema.json
-- type: JSONSchema
-  url: json-schema/cribl-destination-schema.json
-- type: JSONSchema
-  url: json-schema/cribl-worker-group-schema.json
-- type: Website
-  url: https://cribl.io/
-- type: Documentation
-  url: https://docs.cribl.io/
-- type: Portal
-  url: https://docs.cribl.io/
-- type: Login
-  url: https://login.cribl.cloud/
-- type: Blog
-  url: https://cribl.io/blog/
-- type: PrivacyPolicy
-  url: https://cribl.io/privacy-policy/
-- type: TermsOfService
-  url: https://cribl.io/terms-of-service/
-- type: Integrations
-  url: https://cribl.io/integrations/
+  - type: GitHubOrganization
+    url: https://github.com/criblio
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/cribl
+  - type: JSONLD
+    url: json-ld/cribl-context.jsonld
+  - type: JSONSchema
+    url: json-schema/cribl-pipeline-schema.json
+  - type: JSONSchema
+    url: json-schema/cribl-route-schema.json
+  - type: JSONSchema
+    url: json-schema/cribl-source-schema.json
+  - type: JSONSchema
+    url: json-schema/cribl-destination-schema.json
+  - type: JSONSchema
+    url: json-schema/cribl-worker-group-schema.json
+  - type: Website
+    url: https://cribl.io/
+  - type: Documentation
+    url: https://docs.cribl.io/
+  - type: Portal
+    url: https://docs.cribl.io/
+  - type: Login
+    url: https://login.cribl.cloud/
+  - type: Blog
+    url: https://cribl.io/blog/
+  - type: PrivacyPolicy
+    url: https://cribl.io/privacy-policy/
+  - type: TermsOfService
+    url: https://cribl.io/terms-of-service/
+  - type: Integrations
+    url: https://cribl.io/integrations/
 integrations:
-- name: Service Delivery Partners
+  - name: Service Delivery Partners
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
