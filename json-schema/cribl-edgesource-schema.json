@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgeSource",
+  "title": "EdgeSource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge source"
+    },
+    "type": {
+      "type": "string",
+      "description": "The source type such as file_monitor, windows_event_log, system_metrics, appscope, syslog, or journald"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the source is disabled"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "pipeline": {
+      "type": "string",
+      "description": "The pipeline to process events"
+    },
+    "streamtags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags applied to events from this source"
+    }
+  }
+}

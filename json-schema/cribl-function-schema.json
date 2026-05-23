@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Function",
+  "title": "Function",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the function type"
+    },
+    "category": {
+      "type": "string",
+      "description": "The function category"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the function"
+    },
+    "conf": {
+      "type": "object",
+      "description": "The configuration schema for the function"
+    }
+  }
+}

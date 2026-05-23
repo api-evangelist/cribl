@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Notification",
+  "title": "Notification",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the notification rule"
+    },
+    "type": {
+      "type": "string",
+      "description": "The notification type"
+    },
+    "targets": {
+      "type": "array",
+      "description": "List of notification targets",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The target type such as webhook, pagerduty, or email"
+          },
+          "url": {
+            "type": "string",
+            "description": "The target webhook URL"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    }
+  }
+}

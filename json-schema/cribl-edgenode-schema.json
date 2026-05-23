@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgeNode",
+  "title": "EdgeNode",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge node"
+    },
+    "hostname": {
+      "type": "string",
+      "description": "The endpoint hostname"
+    },
+    "group": {
+      "type": "string",
+      "description": "The fleet the node belongs to"
+    },
+    "version": {
+      "type": "string",
+      "description": "The Cribl Edge agent version"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current node status",
+      "enum": [
+        "online",
+        "offline",
+        "degraded"
+      ]
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system of the endpoint"
+    },
+    "cpuUsage": {
+      "type": "number",
+      "description": "Current CPU utilization percentage",
+      "format": "float"
+    },
+    "memUsage": {
+      "type": "number",
+      "description": "Current memory utilization percentage",
+      "format": "float"
+    },
+    "ip": {
+      "type": "string",
+      "description": "The IP address of the endpoint"
+    }
+  }
+}

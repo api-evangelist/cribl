@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgePipeline",
+  "title": "EdgePipeline",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge pipeline"
+    },
+    "conf": {
+      "type": "object",
+      "description": "Pipeline configuration object",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "description": "Ordered list of processing functions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The function type identifier"
+              },
+              "filter": {
+                "type": "string",
+                "description": "JavaScript expression to filter events"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether this function is disabled"
+              },
+              "conf": {
+                "type": "object",
+                "description": "Function-specific configuration"
+              }
+            }
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description"
+        }
+      }
+    }
+  }
+}

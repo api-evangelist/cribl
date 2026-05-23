@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Workspace",
+  "title": "Workspace",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the workspace"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the workspace"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "organizationId": {
+      "type": "string",
+      "description": "The parent organization identifier"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current workspace status",
+      "enum": [
+        "active",
+        "provisioning",
+        "deprovisioning",
+        "error"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "description": "The cloud region where the workspace is deployed"
+    },
+    "url": {
+      "type": "string",
+      "description": "The workspace access URL",
+      "format": "uri"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Workspace creation timestamp",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "description": "Workspace last update timestamp",
+      "format": "date-time"
+    }
+  }
+}

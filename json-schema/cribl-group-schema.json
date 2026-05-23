@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Group",
+  "title": "Group",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the group"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the group"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "isFleet": {
+      "type": "boolean",
+      "description": "Whether this group is an edge fleet"
+    },
+    "workerCount": {
+      "type": "integer",
+      "description": "Number of connected worker or edge nodes"
+    },
+    "configVersion": {
+      "type": "string",
+      "description": "The current deployed configuration version"
+    },
+    "tags": {
+      "type": "object",
+      "description": "Key-value tags for organizing groups"
+    }
+  }
+}

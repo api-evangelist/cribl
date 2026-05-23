@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/HealthStatus",
+  "title": "HealthStatus",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The health status of the server",
+      "enum": [
+        "healthy",
+        "degraded",
+        "unhealthy"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "description": "The Cribl software version"
+    },
+    "build": {
+      "type": "string",
+      "description": "The build identifier"
+    }
+  }
+}

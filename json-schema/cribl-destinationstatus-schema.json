@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DestinationStatus",
+  "title": "DestinationStatus",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The destination identifier"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current operational status",
+      "enum": [
+        "active",
+        "inactive",
+        "error"
+      ]
+    },
+    "numEvents": {
+      "type": "integer",
+      "description": "Number of events processed"
+    },
+    "numBytes": {
+      "type": "integer",
+      "description": "Number of bytes processed"
+    }
+  }
+}

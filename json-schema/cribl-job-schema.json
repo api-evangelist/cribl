@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Job",
+  "title": "Job",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the job"
+    },
+    "collector": {
+      "type": "string",
+      "description": "The collector ID that initiated this job"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current job status",
+      "enum": [
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "startTime": {
+      "type": "integer",
+      "description": "Job start time as a Unix timestamp"
+    },
+    "endTime": {
+      "type": "integer",
+      "description": "Job end time as a Unix timestamp"
+    },
+    "result": {
+      "type": "object",
+      "description": "Job result details",
+      "properties": {
+        "numEvents": {
+          "type": "integer",
+          "description": "Number of events collected"
+        },
+        "numBytes": {
+          "type": "integer",
+          "description": "Number of bytes collected"
+        },
+        "numErrors": {
+          "type": "integer",
+          "description": "Number of errors encountered"
+        }
+      }
+    }
+  }
+}

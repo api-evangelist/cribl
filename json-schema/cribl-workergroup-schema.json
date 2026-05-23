@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WorkerGroup",
+  "title": "WorkerGroup",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the worker group"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the worker group"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "workerCount": {
+      "type": "integer",
+      "description": "Number of connected worker nodes"
+    },
+    "configVersion": {
+      "type": "string",
+      "description": "The current deployed configuration version"
+    },
+    "tags": {
+      "type": "object",
+      "description": "Key-value tags for organizing groups"
+    }
+  }
+}

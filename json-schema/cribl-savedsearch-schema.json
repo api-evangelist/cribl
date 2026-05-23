@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SavedSearch",
+  "title": "SavedSearch",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the saved search"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the saved search"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "query": {
+      "type": "string",
+      "description": "The search query"
+    },
+    "dataset": {
+      "type": "string",
+      "description": "The default dataset"
+    },
+    "earliest": {
+      "type": "string",
+      "description": "Default earliest time range"
+    },
+    "latest": {
+      "type": "string",
+      "description": "Default latest time range"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The owner of the saved search"
+    }
+  }
+}

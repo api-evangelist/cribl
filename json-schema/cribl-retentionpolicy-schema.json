@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RetentionPolicy",
+  "title": "RetentionPolicy",
+  "type": "object",
+  "properties": {
+    "retentionDays": {
+      "type": "integer",
+      "description": "Number of days to retain data before cleanup",
+      "minimum": 1
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether automatic retention cleanup is enabled"
+    },
+    "cleanupSchedule": {
+      "type": "string",
+      "description": "Cron schedule for running retention cleanup"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+name: Cribl Domain Vocabulary
+provider: Cribl
+providerId: cribl
+description: Tag-derived vocabulary for the Cribl API surface; sourced from openapi/ tags.
+terms:
+- term: Authentication
+  description: Obtain and manage authentication tokens for API access.
+- term: Collectors
+  description: Manage scheduled and on-demand data collection jobs from REST APIs, databases, scripts, and other sources.
+- term: Database Connections
+  description: Configure and manage database connections used by collectors and lookup functions.
+- term: Destinations
+  description: Manage data output destinations where processed events are sent, including Splunk, S3, Elasticsearch, and webhook
+    endpoints.
+- term: Functions
+  description: Retrieve available processing functions that can be used within pipelines for data transformation.
+- term: Groups
+  description: Manage Worker Groups and Edge Fleets, which organize and deploy configurations to sets of worker nodes or edge
+    agents.
+- term: Health
+  description: Check the health status of the Cribl instance.
+- term: Jobs
+  description: Monitor and manage running and completed collection and processing jobs.
+- term: Lake Datasets
+  description: Manage Cribl Lake datasets for storing and organizing observability data in open formats.
+- term: Lookups
+  description: Manage lookup files and tables used for data enrichment in pipelines.
+- term: Nodes
+  description: Monitor and manage individual worker nodes and edge nodes within groups and fleets.
+- term: Notifications
+  description: Configure notification rules and targets for alerting on data flow anomalies and system events.
+- term: Packs
+  description: Install, manage, and distribute reusable configuration packs containing pipelines, routes, and other resources.
+- term: Pipelines
+  description: Manage processing pipelines that contain ordered sequences of functions for transforming, filtering, and enriching
+    events.
+- term: Routes
+  description: Manage routes that filter and direct incoming data across pipelines and destinations using filter expressions.
+- term: Sources
+  description: Manage data input sources that collect events from various systems including Syslog, HTTP, Kafka, Splunk, and
+    other protocols.
+- term: System
+  description: Access system-level settings including Git configuration, licensing, and global preferences.
+- term: Versioning
+  description: Manage configuration versions, commits, and deployment history.

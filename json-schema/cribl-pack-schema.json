@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Pack",
+  "title": "Pack",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the pack"
+    },
+    "source": {
+      "type": "string",
+      "description": "The source URL or registry path of the pack"
+    },
+    "version": {
+      "type": "string",
+      "description": "The installed version of the pack"
+    },
+    "author": {
+      "type": "string",
+      "description": "The pack author"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the pack"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the pack"
+    }
+  }
+}

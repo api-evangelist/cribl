@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgeFleet",
+  "title": "EdgeFleet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge fleet"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the edge fleet"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "isFleet": {
+      "type": "boolean",
+      "description": "Indicates this is an edge fleet"
+    },
+    "workerCount": {
+      "type": "integer",
+      "description": "Number of connected edge nodes"
+    },
+    "configVersion": {
+      "type": "string",
+      "description": "The current deployed configuration version"
+    },
+    "tags": {
+      "type": "object",
+      "description": "Key-value tags for organizing fleets"
+    }
+  }
+}

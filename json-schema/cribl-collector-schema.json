@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Collector",
+  "title": "Collector",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the collector"
+    },
+    "type": {
+      "type": "string",
+      "description": "The collector type such as rest, script, database, or s3"
+    },
+    "schedule": {
+      "type": "object",
+      "description": "The collection schedule configuration",
+      "properties": {
+        "cronSchedule": {
+          "type": "string",
+          "description": "Cron expression for scheduled collection"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the schedule is enabled"
+        }
+      }
+    },
+    "conf": {
+      "type": "object",
+      "description": "Collector-specific configuration"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the collector"
+    }
+  }
+}

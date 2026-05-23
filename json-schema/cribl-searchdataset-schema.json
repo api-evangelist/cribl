@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchDataset",
+  "title": "SearchDataset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the search dataset"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the dataset"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    },
+    "type": {
+      "type": "string",
+      "description": "The data source type",
+      "enum": [
+        "cribl_lake",
+        "splunk",
+        "s3",
+        "elasticsearch",
+        "datadog"
+      ]
+    },
+    "connectionConfig": {
+      "type": "object",
+      "description": "Connection configuration specific to the data source type",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The data source host address"
+        },
+        "port": {
+          "type": "integer",
+          "description": "The data source port"
+        },
+        "index": {
+          "type": "string",
+          "description": "The index or bucket to search"
+        }
+      }
+    }
+  }
+}

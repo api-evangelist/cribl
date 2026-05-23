@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LakeDataset",
+  "title": "LakeDataset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the Lake dataset"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the dataset"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the dataset"
+    },
+    "retentionDays": {
+      "type": "integer",
+      "description": "Number of days to retain data"
+    },
+    "format": {
+      "type": "string",
+      "description": "The storage format for the dataset"
+    }
+  }
+}

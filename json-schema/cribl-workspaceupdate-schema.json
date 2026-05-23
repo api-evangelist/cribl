@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WorkspaceUpdate",
+  "title": "WorkspaceUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated display name",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "description": {
+      "type": "string",
+      "description": "Updated description",
+      "maxLength": 256
+    }
+  }
+}

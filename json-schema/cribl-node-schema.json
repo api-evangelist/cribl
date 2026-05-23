@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Node",
+  "title": "Node",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the worker or edge node"
+    },
+    "hostname": {
+      "type": "string",
+      "description": "The node hostname"
+    },
+    "group": {
+      "type": "string",
+      "description": "The group or fleet the node belongs to"
+    },
+    "version": {
+      "type": "string",
+      "description": "The Cribl software version on the node"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current node status",
+      "enum": [
+        "online",
+        "offline",
+        "degraded"
+      ]
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system of the node"
+    },
+    "cpuUsage": {
+      "type": "number",
+      "description": "Current CPU utilization percentage",
+      "format": "float"
+    },
+    "memUsage": {
+      "type": "number",
+      "description": "Current memory utilization percentage",
+      "format": "float"
+    }
+  }
+}

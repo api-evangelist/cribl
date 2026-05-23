@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WorkspaceCreate",
+  "title": "WorkspaceCreate",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the new workspace",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description",
+      "maxLength": 256
+    },
+    "region": {
+      "type": "string",
+      "description": "The cloud region for the workspace"
+    }
+  }
+}

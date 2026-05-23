@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgeDestination",
+  "title": "EdgeDestination",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge destination"
+    },
+    "type": {
+      "type": "string",
+      "description": "The destination type such as cribl_http, splunk, s3, syslog, or filesystem"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the destination is disabled"
+    },
+    "host": {
+      "type": "string",
+      "description": "The target host address"
+    },
+    "port": {
+      "type": "integer",
+      "description": "The target port number"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    }
+  }
+}

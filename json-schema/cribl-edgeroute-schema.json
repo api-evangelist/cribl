@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EdgeRoute",
+  "title": "EdgeRoute",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the edge route"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the route"
+    },
+    "filter": {
+      "type": "string",
+      "description": "JavaScript filter expression for matching events"
+    },
+    "pipeline": {
+      "type": "string",
+      "description": "The pipeline ID for processing matched events"
+    },
+    "output": {
+      "type": "string",
+      "description": "The destination ID for processed events"
+    },
+    "final": {
+      "type": "boolean",
+      "description": "Whether matched events stop further evaluation"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether this route is disabled"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    }
+  }
+}

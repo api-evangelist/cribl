@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DatabaseConnection",
+  "title": "DatabaseConnection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the database connection"
+    },
+    "connectionString": {
+      "type": "string",
+      "description": "The database connection string"
+    },
+    "driver": {
+      "type": "string",
+      "description": "The database driver type"
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description"
+    }
+  }
+}

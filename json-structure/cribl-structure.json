@@ -1,0 +1,678 @@
+{
+  "provider": "Cribl",
+  "providerId": "cribl",
+  "kind": "json-structure",
+  "description": "Structural overview of the Cribl API surface; extracted from openapi/.",
+  "schemaCount": 18,
+  "operationCount": 62,
+  "schemas": [
+    {
+      "name": "HealthStatus",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Source",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Destination",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "DestinationStatus",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Pipeline",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "PipelineFunction",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Route",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Function",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Group",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Node",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "Collector",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Job",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Pack",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "LakeDataset",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "DatabaseConnection",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Lookup",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Notification",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "GitSettings",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "operationId": "login",
+      "summary": "Authenticate and obtain a bearer token",
+      "tags": [
+        "Authentication"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "operationId": "getHealth",
+      "summary": "Check server health",
+      "tags": [
+        "Health"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/sources",
+      "operationId": "listSources",
+      "summary": "List all sources",
+      "tags": [
+        "Sources"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/system/sources",
+      "operationId": "createSource",
+      "summary": "Create a new source",
+      "tags": [
+        "Sources"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/sources/{id}",
+      "operationId": "getSource",
+      "summary": "Get a source by ID",
+      "tags": [
+        "Sources"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/system/sources/{id}",
+      "operationId": "deleteSource",
+      "summary": "Delete a source",
+      "tags": [
+        "Sources"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/system/sources/{id}",
+      "operationId": "updateSource",
+      "summary": "Update a source",
+      "tags": [
+        "Sources"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/outputs",
+      "operationId": "listDestinations",
+      "summary": "List all destinations",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/system/outputs",
+      "operationId": "createDestination",
+      "summary": "Create a new destination",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/outputs/{id}",
+      "operationId": "getDestination",
+      "summary": "Get a destination by ID",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/system/outputs/{id}",
+      "operationId": "deleteDestination",
+      "summary": "Delete a destination",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/system/outputs/{id}",
+      "operationId": "updateDestination",
+      "summary": "Update a destination",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/outputs/{id}/statuses",
+      "operationId": "getDestinationStatus",
+      "summary": "Get destination status",
+      "tags": [
+        "Destinations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pipelines",
+      "operationId": "listPipelines",
+      "summary": "List all pipelines",
+      "tags": [
+        "Pipelines"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pipelines",
+      "operationId": "createPipeline",
+      "summary": "Create a new pipeline",
+      "tags": [
+        "Pipelines"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pipelines/{id}",
+      "operationId": "getPipeline",
+      "summary": "Get a pipeline by ID",
+      "tags": [
+        "Pipelines"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/pipelines/{id}",
+      "operationId": "deletePipeline",
+      "summary": "Delete a pipeline",
+      "tags": [
+        "Pipelines"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/pipelines/{id}",
+      "operationId": "updatePipeline",
+      "summary": "Update a pipeline",
+      "tags": [
+        "Pipelines"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/routes",
+      "operationId": "listRoutes",
+      "summary": "List all routes",
+      "tags": [
+        "Routes"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/routes",
+      "operationId": "createRoute",
+      "summary": "Create a new route",
+      "tags": [
+        "Routes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/routes/{id}",
+      "operationId": "getRoute",
+      "summary": "Get a route by ID",
+      "tags": [
+        "Routes"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/routes/{id}",
+      "operationId": "deleteRoute",
+      "summary": "Delete a route",
+      "tags": [
+        "Routes"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/routes/{id}",
+      "operationId": "updateRoute",
+      "summary": "Update a route",
+      "tags": [
+        "Routes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/functions",
+      "operationId": "listFunctions",
+      "summary": "List available functions",
+      "tags": [
+        "Functions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/functions/{id}",
+      "operationId": "getFunction",
+      "summary": "Get a function by ID",
+      "tags": [
+        "Functions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/master/groups",
+      "operationId": "listGroups",
+      "summary": "List all worker groups and fleets",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/master/groups",
+      "operationId": "createGroup",
+      "summary": "Create a new worker group or fleet",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/master/groups/{id}",
+      "operationId": "getGroup",
+      "summary": "Get a group by ID",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/master/groups/{id}",
+      "operationId": "deleteGroup",
+      "summary": "Delete a group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/master/groups/{id}",
+      "operationId": "updateGroup",
+      "summary": "Update a group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/master/groups/{id}/deploy",
+      "operationId": "deployGroup",
+      "summary": "Deploy configuration to a group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/master/workers",
+      "operationId": "listNodes",
+      "summary": "List all worker and edge nodes",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/master/workers/{id}",
+      "operationId": "getNode",
+      "summary": "Get a node by ID",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/master/workers/{id}/restart",
+      "operationId": "restartNode",
+      "summary": "Restart a node",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/master/workers/count",
+      "operationId": "getNodeCount",
+      "summary": "Get node count",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/collectors",
+      "operationId": "listCollectors",
+      "summary": "List all collectors",
+      "tags": [
+        "Collectors"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/system/collectors",
+      "operationId": "createCollector",
+      "summary": "Create a new collector",
+      "tags": [
+        "Collectors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/collectors/{id}",
+      "operationId": "getCollector",
+      "summary": "Get a collector by ID",
+      "tags": [
+        "Collectors"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/system/collectors/{id}",
+      "operationId": "deleteCollector",
+      "summary": "Delete a collector",
+      "tags": [
+        "Collectors"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/system/collectors/{id}",
+      "operationId": "updateCollector",
+      "summary": "Update a collector",
+      "tags": [
+        "Collectors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobs",
+      "operationId": "listJobs",
+      "summary": "List all jobs",
+      "tags": [
+        "Jobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{id}",
+      "operationId": "getJob",
+      "summary": "Get a job by ID",
+      "tags": [
+        "Jobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/packs",
+      "operationId": "listPacks",
+      "summary": "List all packs",
+      "tags": [
+        "Packs"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/packs",
+      "operationId": "installPack",
+      "summary": "Install a pack",
+      "tags": [
+        "Packs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/packs/{id}",
+      "operationId": "getPack",
+      "summary": "Get a pack by ID",
+      "tags": [
+        "Packs"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/packs/{id}",
+      "operationId": "deletePack",
+      "summary": "Delete a pack",
+      "tags": [
+        "Packs"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/packs/{id}",
+      "operationId": "updatePack",
+      "summary": "Update a pack",
+      "tags": [
+        "Packs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/lake/datasets",
+      "operationId": "listLakeDatasets",
+      "summary": "List all Lake datasets",
+      "tags": [
+        "Lake Datasets"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/lake/datasets",
+      "operationId": "createLakeDataset",
+      "summary": "Create a Lake dataset",
+      "tags": [
+        "Lake Datasets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/lake/datasets/{id}",
+      "operationId": "getLakeDataset",
+      "summary": "Get a Lake dataset by ID",
+      "tags": [
+        "Lake Datasets"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/lake/datasets/{id}",
+      "operationId": "deleteLakeDataset",
+      "summary": "Delete a Lake dataset",
+      "tags": [
+        "Lake Datasets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/database-connections",
+      "operationId": "listDatabaseConnections",
+      "summary": "List all database connections",
+      "tags": [
+        "Database Connections"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/system/database-connections",
+      "operationId": "createDatabaseConnection",
+      "summary": "Create a database connection",
+      "tags": [
+        "Database Connections"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/database-connections/{id}",
+      "operationId": "getDatabaseConnection",
+      "summary": "Get a database connection by ID",
+      "tags": [
+        "Database Connections"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/system/database-connections/{id}",
+      "operationId": "deleteDatabaseConnection",
+      "summary": "Delete a database connection",
+      "tags": [
+        "Database Connections"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/system/database-connections/{id}",
+      "operationId": "updateDatabaseConnection",
+      "summary": "Update a database connection",
+      "tags": [
+        "Database Connections"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/lookups",
+      "operationId": "listLookups",
+      "summary": "List all lookups",
+      "tags": [
+        "Lookups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/lookups/{id}",
+      "operationId": "getLookup",
+      "summary": "Get a lookup by ID",
+      "tags": [
+        "Lookups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/notifications",
+      "operationId": "listNotifications",
+      "summary": "List all notification rules",
+      "tags": [
+        "Notifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/system/settings/git-settings",
+      "operationId": "getGitSettings",
+      "summary": "Get Git settings",
+      "tags": [
+        "System"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/system/settings/git-settings",
+      "operationId": "updateGitSettings",
+      "summary": "Update Git settings",
+      "tags": [
+        "System"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/version/commit",
+      "operationId": "commitVersion",
+      "summary": "Commit current configuration",
+      "tags": [
+        "Versioning"
+      ]
+    }
+  ]
+}
