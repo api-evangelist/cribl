@@ -281,6 +281,8 @@ common:
     url: https://cribl.io/terms-of-service/
   - type: Integrations
     url: https://cribl.io/integrations/
+  - type: LLMsTxt
+    url: https://docs.cribl.io/llms.txt
 integrations:
   - name: Service Delivery Partners
 maintainers:
