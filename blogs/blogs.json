@@ -2,12 +2,17 @@
   "repo": "cribl",
   "feeds": [
     {
-      "source": "https://cribl.io/blog/",
+      "source": "https://cribl.io/feed/",
       "feed_url": "https://cribl.io/feed/",
-      "title": "Cribl Blog",
-      "saved": 40
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://login.cribl.cloud/",
+      "error": "HTTPError"
     }
   ],
-  "post_count": 56,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 67,
+  "fetched": "2026-06-01T23:35:02Z"
 }
