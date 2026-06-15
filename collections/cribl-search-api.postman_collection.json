@@ -1,0 +1,3925 @@
+{
+  "item": [
+    {
+      "id": "f2c59417-68d4-42df-84b3-315b9164ab6d",
+      "name": "Datasets",
+      "description": {
+        "content": "Manage search datasets that define the data sources available for querying, including Cribl Lake, Splunk, and other connected data stores.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aac3448-2b83-4615-9e53-0bca5508a370",
+          "name": "List all search datasets",
+          "request": {
+            "name": "List all search datasets",
+            "description": {
+              "content": "Retrieves all configured search datasets that define the data sources available for querying including Cribl Lake datasets, Splunk indexes, and other connected data stores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cedeec1c-72a0-4448-9fc4-409fc4795cab",
+              "name": "Successfully retrieved search datasets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"datadog\",\n      \"connectionConfig\": {\n        \"host\": \"string\",\n        \"port\": 1529,\n        \"index\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"s3\",\n      \"connectionConfig\": {\n        \"host\": \"string\",\n        \"port\": 4876,\n        \"index\": \"string\"\n      }\n    }\n  ],\n  \"count\": 1497\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d07c864-5171-476f-9415-a3a1cdcc047b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaeb09df-2389-4bac-a202-360e04c2d47b",
+          "name": "Create a search dataset",
+          "request": {
+            "name": "Create a search dataset",
+            "description": {
+              "content": "Creates a new search dataset that defines a data source available for querying in Cribl Search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efe9d940-7379-451c-919e-4ca1bf001825",
+              "name": "Search dataset created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"cribl_lake\",\n  \"connectionConfig\": {\n    \"host\": \"string\",\n    \"port\": 36,\n    \"index\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5cf9234-8005-44cd-8a88-3acb4e0b42fc",
+              "name": "Invalid dataset configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4b0e85f-e048-4ab3-ad7e-e10f26c0556b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55cff82a-9395-424a-a71b-e5c26fee8529",
+          "name": "Get a search dataset by ID",
+          "request": {
+            "name": "Get a search dataset by ID",
+            "description": {
+              "content": "Retrieves the configuration and metadata of a specific search dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff2469e1-e683-45e8-bf38-0ac2e93f45b2",
+              "name": "Successfully retrieved search dataset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"cribl_lake\",\n  \"connectionConfig\": {\n    \"host\": \"string\",\n    \"port\": 36,\n    \"index\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ba30f38-3fa9-4549-b9f9-06799a7bb00b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7715a9b-f487-4990-a037-7b8c336de0b0",
+              "name": "Search dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f7502b3-8592-4ce0-98e0-ae754bf47e9c",
+          "name": "Update a search dataset",
+          "request": {
+            "name": "Update a search dataset",
+            "description": {
+              "content": "Updates the configuration of an existing search dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3d219cd-f380-43f7-a143-88b2de1ffc3a",
+              "name": "Search dataset updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"cribl_lake\",\n  \"connectionConfig\": {\n    \"host\": \"string\",\n    \"port\": 36,\n    \"index\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcefae10-126b-4f78-a7d3-9b3bf53a7a33",
+              "name": "Invalid dataset configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18192dbe-4ec5-4628-ad16-98cd7c8b7fff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c6dc03a-c452-4027-ac12-2ac7c1809930",
+              "name": "Search dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"connectionConfig\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"index\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d61aaaa-c540-435a-99d5-0725516b7b96",
+          "name": "Delete a search dataset",
+          "request": {
+            "name": "Delete a search dataset",
+            "description": {
+              "content": "Deletes a search dataset by its unique ID. Active search jobs referencing this dataset will not be affected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4122561-774e-4556-8047-dc5c88af61d0",
+              "name": "Search dataset deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54d1085a-4c05-438f-a505-aa13dc6ea20c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "088c8a10-de5f-4e9c-8414-bb48651f251c",
+              "name": "Search dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "983acf55-8069-4018-99f6-746c8bed2fd3",
+      "name": "Saved Searches",
+      "description": {
+        "content": "Create and manage saved search queries for reuse and sharing across teams and workflows.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b63b5cb-2ff6-4e50-8647-b6c83fccc02b",
+          "name": "List all saved searches",
+          "request": {
+            "name": "List all saved searches",
+            "description": {
+              "content": "Retrieves all saved search queries that can be reused and shared across teams.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "saved"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a435a6bc-0061-49fe-9677-2b326aa96ede",
+              "name": "Successfully retrieved saved searches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"query\": \"string\",\n      \"dataset\": \"string\",\n      \"earliest\": \"string\",\n      \"latest\": \"string\",\n      \"owner\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"query\": \"string\",\n      \"dataset\": \"string\",\n      \"earliest\": \"string\",\n      \"latest\": \"string\",\n      \"owner\": \"string\"\n    }\n  ],\n  \"count\": 4839\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de502c64-4180-4790-a028-f22c94a4ed8a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57bec576-de73-4f92-9a6b-a6a744d6fa36",
+          "name": "Create a saved search",
+          "request": {
+            "name": "Create a saved search",
+            "description": {
+              "content": "Creates a new saved search query for reuse and sharing with other team members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "saved"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbc01333-ffd7-4780-b2a7-f795d927d336",
+              "name": "Saved search created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"query\": \"string\",\n  \"dataset\": \"string\",\n  \"earliest\": \"string\",\n  \"latest\": \"string\",\n  \"owner\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5988b560-b0cb-4e24-8d01-e4facb193c7c",
+              "name": "Invalid saved search configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be62b073-70f7-4df4-9842-b57fac6a928c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19494bb7-87b9-43b9-bfea-33db29708fec",
+          "name": "Get a saved search by ID",
+          "request": {
+            "name": "Get a saved search by ID",
+            "description": {
+              "content": "Retrieves the configuration of a specific saved search query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "saved",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6b71391-535c-4c07-bd09-9185e164041e",
+              "name": "Successfully retrieved saved search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"query\": \"string\",\n  \"dataset\": \"string\",\n  \"earliest\": \"string\",\n  \"latest\": \"string\",\n  \"owner\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df07508-ff2e-4a3b-9af0-b7fb6c595d20",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d5c7905-f9e3-4669-8a37-ec24f1245472",
+              "name": "Saved search not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94e694de-2c8d-4216-93ff-fc234c88df58",
+          "name": "Update a saved search",
+          "request": {
+            "name": "Update a saved search",
+            "description": {
+              "content": "Updates the configuration of an existing saved search query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "saved",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12ea47cf-51a2-4192-949e-4ced741b794b",
+              "name": "Saved search updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"query\": \"string\",\n  \"dataset\": \"string\",\n  \"earliest\": \"string\",\n  \"latest\": \"string\",\n  \"owner\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c1471f-d51e-4717-a60e-c822c659993f",
+              "name": "Invalid saved search configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a6dfd68-3178-487e-9173-18162898b056",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b29efeb5-0eed-4c7b-89f2-8ce65fe2ae5a",
+              "name": "Saved search not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a26ad4f-bb4b-4337-b6c3-43e744c6afd5",
+          "name": "Delete a saved search",
+          "request": {
+            "name": "Delete a saved search",
+            "description": {
+              "content": "Deletes a saved search by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "saved",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f0c33a8-f1c3-465f-8d92-348615587bea",
+              "name": "Saved search deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "785457f5-c8f3-4deb-84b8-869eeca492d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d5c410e-2f92-429d-a982-3bb58da4c41f",
+              "name": "Saved search not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "saved",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "21701db8-9634-4b6b-8348-b4bb56b89974",
+      "name": "Search Jobs",
+      "description": {
+        "content": "Execute and manage search queries across live and stored observability data with support for federated search across multiple data sources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a17c6b2b-11c3-4747-a86b-fd8f1e07b439",
+          "name": "List all search jobs",
+          "request": {
+            "name": "List all search jobs",
+            "description": {
+              "content": "Retrieves a list of all running and completed search jobs including their query, status, and result metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter jobs by status"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of jobs to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6bfc6f6-ad15-4ebb-a6df-a1f61a2556bc",
+              "name": "Successfully retrieved search jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"query\": \"string\",\n      \"status\": \"cancelled\",\n      \"dataset\": \"string\",\n      \"startTime\": 373,\n      \"endTime\": 3664,\n      \"numResults\": 686,\n      \"numScanned\": 1577,\n      \"error\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"query\": \"string\",\n      \"status\": \"completed\",\n      \"dataset\": \"string\",\n      \"startTime\": 5501,\n      \"endTime\": 7760,\n      \"numResults\": 5652,\n      \"numScanned\": 8265,\n      \"error\": \"string\"\n    }\n  ],\n  \"count\": 3562\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "788669dc-45f2-41c3-a295-cfd443c7b73d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc498987-1ed5-46a0-b543-2edcbf6dc91a",
+          "name": "Execute a new search query",
+          "request": {
+            "name": "Execute a new search query",
+            "description": {
+              "content": "Creates and executes a new search job with the specified query and parameters. The search runs asynchronously and results can be retrieved when the job completes. Supports Cribl Search query language for filtering, aggregating, and transforming results across federated data sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20cc1e36-8700-4592-9fd5-ba2dc9614183",
+              "name": "Search job created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"query\": \"string\",\n  \"status\": \"failed\",\n  \"dataset\": \"string\",\n  \"startTime\": 6534,\n  \"endTime\": 2144,\n  \"numResults\": 9441,\n  \"numScanned\": 9910,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d51351d-cfdd-480e-a4df-bbad919840fe",
+              "name": "Invalid search query or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07bdbb0e-0496-4ea6-9271-40a4ae9dc9ee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"earliest\": \"<string>\",\n  \"latest\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80446bfa-ec15-4e17-a93d-68d147575174",
+          "name": "Get a search job by ID",
+          "request": {
+            "name": "Get a search job by ID",
+            "description": {
+              "content": "Retrieves the status, progress, and metadata of a specific search job. When the job is complete, includes result summary information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28b2688a-9173-4ddd-9225-fdc5bbf5222f",
+              "name": "Successfully retrieved search job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"query\": \"string\",\n  \"status\": \"failed\",\n  \"dataset\": \"string\",\n  \"startTime\": 6534,\n  \"endTime\": 2144,\n  \"numResults\": 9441,\n  \"numScanned\": 9910,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7d0209e-828b-4579-a432-cdffca66c3cb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84115178-3e05-4517-936a-a09b0b6888d6",
+              "name": "Search job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c59885b-98ed-4f20-a18f-b5f9cc4eddbf",
+          "name": "Cancel a search job",
+          "request": {
+            "name": "Cancel a search job",
+            "description": {
+              "content": "Cancels a running search job. Completed or already cancelled jobs cannot be cancelled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cb3b7dc-b404-4375-a445-66c60b25bc07",
+              "name": "Search job cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa702ea9-8ac1-4b47-805b-6d7498ba5d25",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db1705e3-4cb1-461d-aec6-4eb146436f3e",
+              "name": "Search job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90906b6f-33ed-4abb-9206-800bd68abb7c",
+          "name": "Get search job results",
+          "request": {
+            "name": "Get search job results",
+            "description": {
+              "content": "Retrieves the results of a completed search job. Results are returned as an array of events matching the search query with support for pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "jobs",
+                ":id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81b970a9-eed7-4d61-af7a-ac86db35de94",
+              "name": "Successfully retrieved search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1250\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76d19812-4ccc-49b5-b786-6272c56fb484",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c841355-afd2-48e5-8cb2-99ff1f0a153c",
+              "name": "Search job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "jobs",
+                    ":id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "59c4bd84-aa67-4260-850c-d96c30c35bd7",
+      "name": "Search Notifications",
+      "description": {
+        "content": "Configure notification rules that trigger alerts based on search results using webhook and other notification targets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e7726bd-1a69-44dd-b816-dbee2fcc8c57",
+          "name": "List search notification rules",
+          "request": {
+            "name": "List search notification rules",
+            "description": {
+              "content": "Retrieves all configured notification rules for triggering alerts based on search results and data patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c006d53-ac70-46a6-8f96-88e165cc6112",
+              "name": "Successfully retrieved notification rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"targets\": [\n        {\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"targets\": [\n        {\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"description\": \"string\"\n    }\n  ],\n  \"count\": 8559\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "358c12eb-8c6f-468b-ae73-2bc48132395f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Cribl Cloud workspace",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "default",
+      "key": "workspaceName"
+    },
+    {
+      "description": {
+        "content": "The Cribl Cloud organization identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "org-id",
+      "key": "organizationId"
+    },
+    {
+      "type": "string",
+      "value": "https://{{workspaceName}}-{{organizationId}}.cribl.cloud/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3080e45f-21a5-4a83-92d6-eede2437651b",
+    "name": "Cribl Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time. Developers can use the API to execute search queries, manage datasets, configure search jobs, and integrate federated search capabilities into their own applications and workflows. Cribl Search supports federated search across multiple data sources, enabling organizations to gain insights without needing to move or duplicate data into a single location.\n\nContact Support:\n Name: Cribl Support",
+      "type": "text/plain"
+    }
+  }
+}

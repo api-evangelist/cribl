@@ -1,0 +1,4362 @@
+{
+  "item": [
+    {
+      "id": "56ca6d26-5f8a-4bb8-9898-2217fc70d03d",
+      "name": "Edge Destinations",
+      "description": {
+        "content": "Manage data output destinations for edge nodes including forwarding to Stream workers, cloud storage, and analytics platforms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c46d6df6-a417-4332-a4f6-907dc7dc0121",
+          "name": "List edge destinations in a fleet",
+          "request": {
+            "name": "List edge destinations in a fleet",
+            "description": {
+              "content": "Retrieves all data output destinations configured for an edge fleet for forwarding collected and processed data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "system",
+                "outputs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9d4e2d9-fa26-4d20-b622-baae4e3ea262",
+              "name": "Successfully retrieved edge destinations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"disabled\": false,\n      \"host\": \"string\",\n      \"port\": 1582,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"disabled\": true,\n      \"host\": \"string\",\n      \"port\": 636,\n      \"description\": \"string\"\n    }\n  ],\n  \"count\": 6126\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a118ce0-e94e-40d7-a811-0dcab993c703",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7c7af32-bf6e-41e6-99cf-5a589d7f86f9",
+              "name": "Fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1231328e-1a6a-42b2-838c-81a83fd98a92",
+          "name": "Create an edge destination in a fleet",
+          "request": {
+            "name": "Create an edge destination in a fleet",
+            "description": {
+              "content": "Creates a new data output destination for an edge fleet to forward processed data to centralized systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "system",
+                "outputs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e9cf86e-a59f-4d59-aaf9-149ebcd804ef",
+              "name": "Edge destination created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"disabled\": true,\n  \"host\": \"string\",\n  \"port\": 183,\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06d19ef3-c152-466e-840e-078e306f77d0",
+              "name": "Invalid destination configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4abeea01-6417-4580-94c5-2810f5d44022",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "outputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7d42e4f0-30b0-426c-898c-56445a11e361",
+      "name": "Edge Fleets",
+      "description": {
+        "content": "Manage edge fleets that organize groups of edge nodes deployed on endpoints for local data collection and processing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2667974-af1d-4ce9-8652-34ccaec2ced2",
+          "name": "List all edge fleets",
+          "request": {
+            "name": "List all edge fleets",
+            "description": {
+              "content": "Retrieves all edge fleets configured in the deployment. Edge fleets organize edge nodes and allow deploying shared configurations to groups of endpoint agents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>",
+                  "description": "Filter by product type to show only edge fleets"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d89dd4a-4f65-4ec5-a2ab-2fc46fe629cb",
+              "name": "Successfully retrieved edge fleets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"isFleet\": false,\n      \"workerCount\": 9194,\n      \"configVersion\": \"string\",\n      \"tags\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"isFleet\": true,\n      \"workerCount\": 5028,\n      \"configVersion\": \"string\",\n      \"tags\": {}\n    }\n  ],\n  \"count\": 6902\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d58d5464-0d97-42d7-bc1b-e4fc9760538b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c52d9ff5-4cf2-446e-b1db-f796d40c2ebb",
+          "name": "Create a new edge fleet",
+          "request": {
+            "name": "Create a new edge fleet",
+            "description": {
+              "content": "Creates a new edge fleet for organizing and managing a group of edge nodes deployed on endpoint systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "498c71f5-2131-426c-907a-2a45e37c1d0a",
+              "name": "Edge fleet created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"isFleet\": false,\n  \"workerCount\": 5368,\n  \"configVersion\": \"string\",\n  \"tags\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2ea44b-fc2a-48e2-9fc7-2dc1dcf35eb1",
+              "name": "Invalid fleet configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "335541bd-5c62-42a3-a499-7ec847200395",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfdedb2c-e582-4bfa-a739-cb40aab40217",
+          "name": "Get an edge fleet by ID",
+          "request": {
+            "name": "Get an edge fleet by ID",
+            "description": {
+              "content": "Retrieves the configuration and status of a specific edge fleet including its node count and deployment state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cc87914-7089-452c-8c4b-80aebb67bdf8",
+              "name": "Successfully retrieved edge fleet",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"isFleet\": false,\n  \"workerCount\": 5368,\n  \"configVersion\": \"string\",\n  \"tags\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4d4cc51-cbcc-4d13-8c6c-cd3954096d85",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "902d27ec-7caa-45c2-9ec2-29efc8acd286",
+              "name": "Edge fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44f18182-d6cc-421b-bb29-b2ee278b137d",
+          "name": "Update an edge fleet",
+          "request": {
+            "name": "Update an edge fleet",
+            "description": {
+              "content": "Updates the configuration of an existing edge fleet including its name, description, and deployment settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e8ffcf8-a6d1-4924-95cb-ac1a0d08346c",
+              "name": "Edge fleet updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"isFleet\": false,\n  \"workerCount\": 5368,\n  \"configVersion\": \"string\",\n  \"tags\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4005db4c-e30d-4ae9-a2df-22a1caed4e54",
+              "name": "Invalid fleet configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32e586b5-e938-49ad-b6d2-4464babb6fce",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a3712d8-41cb-46b1-bbe7-9ee179207a0d",
+              "name": "Edge fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isFleet\": \"<boolean>\",\n  \"workerCount\": \"<integer>\",\n  \"configVersion\": \"<string>\",\n  \"tags\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69123546-55b5-48a5-9e58-23cd733df140",
+          "name": "Delete an edge fleet",
+          "request": {
+            "name": "Delete an edge fleet",
+            "description": {
+              "content": "Deletes an edge fleet by its unique ID. Connected edge nodes will be disconnected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdf52697-9ef8-431f-b1d8-9c92410dc87c",
+              "name": "Edge fleet deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "252ce368-f7dc-49d1-a398-a09e7829c9ac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f938437-0e2f-46c1-b94a-e909563077bc",
+              "name": "Edge fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c975d80-364f-4bba-94e5-1c00b8e7e120",
+          "name": "Deploy configuration to an edge fleet",
+          "request": {
+            "name": "Deploy configuration to an edge fleet",
+            "description": {
+              "content": "Deploys the current configuration to all edge nodes in the specified fleet, pushing updated sources, pipelines, and routes to endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "groups",
+                ":id",
+                "deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a4129c8-2782-42c9-9a54-060b44aab4e0",
+              "name": "Deployment initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7ac68d2-c96b-43dc-9e8a-84f1a57ffdaa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1428c7f5-1ae4-4cf9-a8e0-e629a0fccd5d",
+              "name": "Edge fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "groups",
+                    ":id",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4ecf6721-2307-4274-b2f4-692354ff3454",
+      "name": "Edge Nodes",
+      "description": {
+        "content": "Monitor and manage individual edge nodes deployed on endpoints including their status, version, and resource utilization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35bf89b3-1403-4023-b517-045a471789e6",
+          "name": "List all edge nodes",
+          "request": {
+            "name": "List all edge nodes",
+            "description": {
+              "content": "Retrieves all connected edge nodes across all fleets including their status, OS, version, and resource utilization metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "workers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09fd618c-dfb0-4b95-b046-b5df4606132c",
+              "name": "Successfully retrieved edge nodes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"hostname\": \"string\",\n      \"group\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"offline\",\n      \"os\": \"string\",\n      \"cpuUsage\": 1327.1518128505977,\n      \"memUsage\": 1795.8963880736544,\n      \"ip\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"hostname\": \"string\",\n      \"group\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"online\",\n      \"os\": \"string\",\n      \"cpuUsage\": 2601.2728306289237,\n      \"memUsage\": 8951.492819600306,\n      \"ip\": \"string\"\n    }\n  ],\n  \"count\": 7323\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37fdc5a-b78b-4269-88d7-95469e635f7c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7857c29a-1650-4624-939b-c091c244c3aa",
+          "name": "Get an edge node by ID",
+          "request": {
+            "name": "Get an edge node by ID",
+            "description": {
+              "content": "Retrieves the status and details of a specific edge node including its OS, version, fleet membership, and resource utilization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "workers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8f2b7ba-a1b1-473a-a0d0-a28bb076fba4",
+              "name": "Successfully retrieved edge node",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"hostname\": \"string\",\n  \"group\": \"string\",\n  \"version\": \"string\",\n  \"status\": \"online\",\n  \"os\": \"string\",\n  \"cpuUsage\": 8873.863804242314,\n  \"memUsage\": 8802.235377444218,\n  \"ip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0645291b-ce4c-48d8-9d6c-bce9067db49d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1d2db3b-03f4-4989-83c2-b40f28a52fd5",
+              "name": "Edge node not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a66c6fd8-1f54-4d5d-ba9e-0d0b937ff1f8",
+          "name": "Restart an edge node",
+          "request": {
+            "name": "Restart an edge node",
+            "description": {
+              "content": "Initiates a restart of a specific edge node agent on the endpoint system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "master",
+                "workers",
+                ":id",
+                "restart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d06f19d9-8aa0-4534-9a68-2bca111c0321",
+              "name": "Restart initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0bae3d6-2d4f-45a3-9b50-12586e9ed999",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5fd7618c-1d76-4d84-80cb-e77323de2185",
+              "name": "Edge node not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "master",
+                    "workers",
+                    ":id",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c9c9e116-c951-4ace-9243-6691ee2c8a3f",
+      "name": "Edge Pipelines",
+      "description": {
+        "content": "Manage processing pipelines running on edge nodes for local data transformation and filtering before forwarding.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d63d9052-281e-4696-8694-2d5393900930",
+          "name": "List edge pipelines in a fleet",
+          "request": {
+            "name": "List edge pipelines in a fleet",
+            "description": {
+              "content": "Retrieves all processing pipelines configured for an edge fleet for local data transformation on endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c90b2355-24a8-4534-b788-8ecbe9d93a7b",
+              "name": "Successfully retrieved edge pipelines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": false,\n            \"conf\": {}\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {}\n          }\n        ],\n        \"description\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {}\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": false,\n            \"conf\": {}\n          }\n        ],\n        \"description\": \"string\"\n      }\n    }\n  ],\n  \"count\": 3428\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4234d5-65b2-448a-8f56-70b462ef4a62",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd4e78b3-f0be-420b-bc94-f135702743ab",
+              "name": "Fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5bee523-d46c-4634-8adc-28b6eb398bd7",
+          "name": "Create an edge pipeline in a fleet",
+          "request": {
+            "name": "Create an edge pipeline in a fleet",
+            "description": {
+              "content": "Creates a new processing pipeline for an edge fleet to transform data locally on endpoints before forwarding.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ecc1ae3-bc93-442b-b927-9795faf2ccff",
+              "name": "Edge pipeline created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {}\n      }\n    ],\n    \"description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20cc527c-1768-4512-a114-eb8b41785bb9",
+              "name": "Invalid pipeline configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67ebd9cc-acf8-4561-9a8a-e45aa505146b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "155576de-7587-4a55-879c-5ac07dd53ec2",
+      "name": "Edge Routes",
+      "description": {
+        "content": "Manage routes on edge nodes for directing collected data to appropriate pipelines and destinations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0113140-ff25-40b8-989e-71c60ffecc24",
+          "name": "List edge routes in a fleet",
+          "request": {
+            "name": "List edge routes in a fleet",
+            "description": {
+              "content": "Retrieves all routes configured for an edge fleet that direct collected data to pipelines and destinations on edge nodes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "401a41f7-871b-4715-933d-5ae7cd6add9d",
+              "name": "Successfully retrieved edge routes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"filter\": \"string\",\n      \"pipeline\": \"string\",\n      \"output\": \"string\",\n      \"final\": false,\n      \"disabled\": true,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"filter\": \"string\",\n      \"pipeline\": \"string\",\n      \"output\": \"string\",\n      \"final\": true,\n      \"disabled\": true,\n      \"description\": \"string\"\n    }\n  ],\n  \"count\": 4931\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6a2b8a5-1ed8-476d-8fdf-569023b833c6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "389700ee-2372-420e-947d-75b196e7ecc2",
+              "name": "Fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "055ae1ee-6d78-4439-b6ef-52e5792195f0",
+          "name": "Create an edge route in a fleet",
+          "request": {
+            "name": "Create an edge route in a fleet",
+            "description": {
+              "content": "Creates a new route for an edge fleet to filter and direct collected data on endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"output\": \"<string>\",\n  \"final\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e543e79-706a-4e9d-834d-cbf4fd17cdf0",
+              "name": "Edge route created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"output\": \"<string>\",\n  \"final\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"filter\": \"string\",\n  \"pipeline\": \"string\",\n  \"output\": \"string\",\n  \"final\": false,\n  \"disabled\": false,\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33dace65-94be-43f1-a0cf-847cff64280c",
+              "name": "Invalid route configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"output\": \"<string>\",\n  \"final\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f3db895a-1a6f-41a5-8e5a-377b719d01c6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"output\": \"<string>\",\n  \"final\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5dd46663-f1f8-4fe6-8bf2-262c58aadf3d",
+      "name": "Edge Sources",
+      "description": {
+        "content": "Manage data input sources on edge nodes including file monitors, Windows Event Log, system metrics, AppScope, and other local collection methods.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c8edd73-780c-4666-8029-e541356c6d47",
+          "name": "List edge sources in a fleet",
+          "request": {
+            "name": "List edge sources in a fleet",
+            "description": {
+              "content": "Retrieves all data input sources configured for an edge fleet including file monitors, Windows Event Log, system metrics, AppScope, and other local collection sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "system",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5bb0c4af-fe9f-41b9-9d6f-79c90b69e426",
+              "name": "Successfully retrieved edge sources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"disabled\": true,\n      \"description\": \"string\",\n      \"pipeline\": \"string\",\n      \"streamtags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"disabled\": true,\n      \"description\": \"string\",\n      \"pipeline\": \"string\",\n      \"streamtags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"count\": 2746\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1855b8b-d6b1-4151-abd1-4e816dd217fc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75dec902-547d-4a7f-bd56-e4afdf8f210f",
+              "name": "Fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41956d6d-3f77-4c8d-bc5d-b36c105f0372",
+          "name": "Create an edge source in a fleet",
+          "request": {
+            "name": "Create an edge source in a fleet",
+            "description": {
+              "content": "Creates a new data input source for an edge fleet to collect data from endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":fleetId",
+                "system",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) The edge fleet identifier"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"streamtags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62eb2ace-6644-484a-84d2-1c29fb5decf7",
+              "name": "Edge source created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"streamtags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"disabled\": true,\n  \"description\": \"string\",\n  \"pipeline\": \"string\",\n  \"streamtags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8991454-1941-412e-8845-7353961b772d",
+              "name": "Invalid source configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"streamtags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05f85a60-e0de-4f8e-9da8-677cd50f9d68",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":fleetId",
+                    "system",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) The edge fleet identifier"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"pipeline\": \"<string>\",\n  \"streamtags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Cribl Cloud workspace",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "default",
+      "key": "workspaceName"
+    },
+    {
+      "description": {
+        "content": "The Cribl Cloud organization identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "org-id",
+      "key": "organizationId"
+    },
+    {
+      "type": "string",
+      "value": "https://{{workspaceName}}-{{organizationId}}.cribl.cloud/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0af4c3ab-fbe2-4c07-83be-a7a58a89c43a",
+    "name": "Cribl Edge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data collection from endpoints, and control data processing closer to the source. This reduces bandwidth consumption and latency by filtering and transforming data at the point of origin before forwarding it to centralized destinations. Edge API endpoints are accessed through the Cribl Cloud control plane using fleet context paths.\n\nContact Support:\n Name: Cribl Support",
+      "type": "text/plain"
+    }
+  }
+}

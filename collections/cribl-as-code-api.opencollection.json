@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check management plane health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/health"
+          },
+          "docs": "Returns the health status of the Cribl Cloud management plane services including availability and version information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all workspaces for the specified Cribl Cloud organization. Each workspace is an isolated VPC container running an instance of the Cribl Product Suite."
+        },
+        {
+          "info": {
+            "name": "Create a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new workspace within the specified Cribl Cloud organization. The workspace provisions an isolated VPC container with the Cribl Product Suite."
+        },
+        {
+          "info": {
+            "name": "Get a workspace by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific workspace within the organization."
+        },
+        {
+          "info": {
+            "name": "Update a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing workspace within the organization."
+        },
+        {
+          "info": {
+            "name": "Delete a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace and all its contained resources from the organization. This operation is irreversible."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Credentials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/api-credentials",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all API credentials configured for the specified organization. Each credential consists of a client ID and client secret used for OAuth 2.0 client credentials authentication."
+        },
+        {
+          "info": {
+            "name": "Create an API credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/api-credentials",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API credential for the specified organization. The response includes the client secret which is only shown once and must be stored securely."
+        },
+        {
+          "info": {
+            "name": "Get an API credential by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/api-credentials/:credentialId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "credentialId",
+                "value": "",
+                "type": "path",
+                "description": "The API credential identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves the metadata of a specific API credential. The client secret is not included in the response."
+        },
+        {
+          "info": {
+            "name": "Update an API credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/api-credentials/:credentialId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "credentialId",
+                "value": "",
+                "type": "path",
+                "description": "The API credential identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing API credential such as its description or permissions scope."
+        },
+        {
+          "info": {
+            "name": "Delete an API credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/api-credentials/:credentialId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "credentialId",
+                "value": "",
+                "type": "path",
+                "description": "The API credential identifier"
+              }
+            ]
+          },
+          "docs": "Deletes an API credential by its unique ID. Any applications using this credential will lose API access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

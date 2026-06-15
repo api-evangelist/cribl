@@ -1,0 +1,395 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl Edge API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Fleets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all edge fleets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups",
+            "params": [
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product type to show only edge fleets"
+              }
+            ]
+          },
+          "docs": "Retrieves all edge fleets configured in the deployment. Edge fleets organize edge nodes and allow deploying shared configurations to groups of endpoint agents."
+        },
+        {
+          "info": {
+            "name": "Create a new edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new edge fleet for organizing and managing a group of edge nodes deployed on endpoint systems."
+        },
+        {
+          "info": {
+            "name": "Get an edge fleet by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific edge fleet including its node count and deployment state."
+        },
+        {
+          "info": {
+            "name": "Update an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing edge fleet including its name, description, and deployment settings."
+        },
+        {
+          "info": {
+            "name": "Delete an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes an edge fleet by its unique ID. Connected edge nodes will be disconnected."
+        },
+        {
+          "info": {
+            "name": "Deploy configuration to an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id/deploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deploys the current configuration to all edge nodes in the specified fleet, pushing updated sources, pipelines, and routes to endpoints."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edge Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers"
+          },
+          "docs": "Retrieves all connected edge nodes across all fleets including their status, OS, version, and resource utilization metrics."
+        },
+        {
+          "info": {
+            "name": "Get an edge node by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the status and details of a specific edge node including its OS, version, fleet membership, and resource utilization."
+        },
+        {
+          "info": {
+            "name": "Restart an edge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers/:id/restart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Initiates a restart of a specific edge node agent on the endpoint system."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edge Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge sources in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/system/sources",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data input sources configured for an edge fleet including file monitors, Windows Event Log, system metrics, AppScope, and other local collection sources."
+        },
+        {
+          "info": {
+            "name": "Create an edge source in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/system/sources",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source for an edge fleet to collect data from endpoints."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edge Destinations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge destinations in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/system/outputs",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data output destinations configured for an edge fleet for forwarding collected and processed data."
+        },
+        {
+          "info": {
+            "name": "Create an edge destination in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/system/outputs",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data output destination for an edge fleet to forward processed data to centralized systems."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edge Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge pipelines in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/pipelines",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all processing pipelines configured for an edge fleet for local data transformation on endpoints."
+        },
+        {
+          "info": {
+            "name": "Create an edge pipeline in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/pipelines",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new processing pipeline for an edge fleet to transform data locally on endpoints before forwarding."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edge Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge routes in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/routes",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all routes configured for an edge fleet that direct collected data to pipelines and destinations on edge nodes."
+        },
+        {
+          "info": {
+            "name": "Create an edge route in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:fleetId/routes",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route for an edge fleet to filter and direct collected data on endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

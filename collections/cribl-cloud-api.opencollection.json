@@ -1,0 +1,1186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl Cloud API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate and obtain a bearer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates with username and password credentials for on-premises deployments and returns a bearer token for subsequent API requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check server health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/health"
+          },
+          "docs": "Returns the health status of the Cribl instance including version information and operational state."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/sources"
+          },
+          "docs": "Retrieves a list of all configured data input sources in the current context, including their type, status, and configuration details."
+        },
+        {
+          "info": {
+            "name": "Create a new source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source with the specified type and configuration. The source type determines which configuration properties are required."
+        },
+        {
+          "info": {
+            "name": "Get a source by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific data input source identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing data input source. Only provided fields are modified."
+        },
+        {
+          "info": {
+            "name": "Delete a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a data input source by its unique ID. The source must not be actively receiving data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Destinations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all destinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs"
+          },
+          "docs": "Retrieves a list of all configured data output destinations including their type, status, and configuration."
+        },
+        {
+          "info": {
+            "name": "Create a new destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data output destination with the specified type and configuration. The destination type determines which configuration properties are required."
+        },
+        {
+          "info": {
+            "name": "Get a destination by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific data output destination identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing data output destination. Only provided fields are modified."
+        },
+        {
+          "info": {
+            "name": "Delete a destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a data output destination by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Get destination status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/outputs/:id/statuses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the current operational status of a specific destination including throughput metrics and error counts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/pipelines"
+          },
+          "docs": "Retrieves a list of all configured processing pipelines including their functions, configuration, and status."
+        },
+        {
+          "info": {
+            "name": "Create a new pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/pipelines",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new processing pipeline with the specified functions and configuration. Pipelines define ordered sequences of functions for data transformation."
+        },
+        {
+          "info": {
+            "name": "Get a pipeline by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/pipelines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific processing pipeline including its functions and metadata."
+        },
+        {
+          "info": {
+            "name": "Update a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/pipelines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing processing pipeline including its functions and settings."
+        },
+        {
+          "info": {
+            "name": "Delete a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/pipelines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a processing pipeline by its unique ID. The pipeline must not be referenced by any active routes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/routes"
+          },
+          "docs": "Retrieves a list of all configured routes that filter and direct incoming data to the appropriate pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Create a new route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route with filter expressions to direct matching events to specified pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Get a route by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific route including its filter expression, pipeline, and destination assignments."
+        },
+        {
+          "info": {
+            "name": "Update a route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing route including its filter expression and pipeline assignments."
+        },
+        {
+          "info": {
+            "name": "Delete a route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a route by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/functions"
+          },
+          "docs": "Retrieves a list of all available processing functions that can be used within pipelines for data transformation, filtering, enrichment, and routing."
+        },
+        {
+          "info": {
+            "name": "Get a function by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/functions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific processing function including its configuration schema and description."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all worker groups and fleets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups"
+          },
+          "docs": "Retrieves a list of all worker groups and edge fleets configured in the Cribl instance, including their deployment status and node counts."
+        },
+        {
+          "info": {
+            "name": "Create a new worker group or fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new worker group or edge fleet with the specified configuration. Groups organize worker nodes and allow shared configuration deployment."
+        },
+        {
+          "info": {
+            "name": "Get a group by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific worker group or edge fleet including its nodes and deployment state."
+        },
+        {
+          "info": {
+            "name": "Update a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing worker group or edge fleet."
+        },
+        {
+          "info": {
+            "name": "Delete a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a worker group or edge fleet by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Deploy configuration to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id/deploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deploys the current configuration to all worker nodes or edge agents in the specified group or fleet."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all worker and edge nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers"
+          },
+          "docs": "Retrieves a list of all connected worker nodes and edge nodes including their status, version, and resource utilization."
+        },
+        {
+          "info": {
+            "name": "Get a node by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the status and details of a specific worker or edge node identified by its node ID."
+        },
+        {
+          "info": {
+            "name": "Restart a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers/:id/restart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Initiates a restart of the specified worker or edge node."
+        },
+        {
+          "info": {
+            "name": "Get node count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/workers/count"
+          },
+          "docs": "Returns the total count of connected worker and edge nodes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Collectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all collectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors"
+          },
+          "docs": "Retrieves a list of all configured data collectors including REST API collectors, database collectors, and script collectors."
+        },
+        {
+          "info": {
+            "name": "Create a new collector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data collector with the specified type, schedule, and configuration for automated data collection."
+        },
+        {
+          "info": {
+            "name": "Get a collector by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific data collector identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a collector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing data collector."
+        },
+        {
+          "info": {
+            "name": "Delete a collector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a data collector by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/jobs"
+          },
+          "docs": "Retrieves a list of all running and completed collection and processing jobs including their status and results."
+        },
+        {
+          "info": {
+            "name": "Get a job by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the status and details of a specific job including its progress, results, and any errors encountered."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Packs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs"
+          },
+          "docs": "Retrieves a list of all installed configuration packs including their version, author, and contained resources."
+        },
+        {
+          "info": {
+            "name": "Install a pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Installs a new configuration pack from a pack source URL or uploads a pack archive."
+        },
+        {
+          "info": {
+            "name": "Get a pack by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the details and contents of a specific configuration pack identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration or version of an existing pack."
+        },
+        {
+          "info": {
+            "name": "Delete a pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Uninstalls and removes a configuration pack by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lake Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Lake datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets"
+          },
+          "docs": "Retrieves a list of all Cribl Lake datasets configured for storing observability and security data. Available on Cribl Cloud only."
+        },
+        {
+          "info": {
+            "name": "Create a Lake dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Cribl Lake dataset for storing observability data in open formats. Available on Cribl Cloud only."
+        },
+        {
+          "info": {
+            "name": "Get a Lake dataset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and metadata of a specific Cribl Lake dataset."
+        },
+        {
+          "info": {
+            "name": "Delete a Lake dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a Cribl Lake dataset by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Database Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all database connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/database-connections"
+          },
+          "docs": "Retrieves a list of all configured database connections used by collectors and lookup functions."
+        },
+        {
+          "info": {
+            "name": "Create a database connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/database-connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new database connection with the specified driver, connection string, and credentials."
+        },
+        {
+          "info": {
+            "name": "Get a database connection by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/database-connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific database connection."
+        },
+        {
+          "info": {
+            "name": "Update a database connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/database-connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing database connection."
+        },
+        {
+          "info": {
+            "name": "Delete a database connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/database-connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a database connection by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all lookups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/lookups"
+          },
+          "docs": "Retrieves a list of all configured lookup files and tables used for data enrichment within pipelines."
+        },
+        {
+          "info": {
+            "name": "Get a lookup by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/lookups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and metadata of a specific lookup file or table."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all notification rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/notifications"
+          },
+          "docs": "Retrieves a list of all configured notification rules and targets for alerting on data flow anomalies and system events."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Git settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/settings/git-settings"
+          },
+          "docs": "Retrieves the current Git integration settings including repository URL, branch, and sync configuration."
+        },
+        {
+          "info": {
+            "name": "Update Git settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/settings/git-settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the Git integration settings for version-controlled configuration management."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Versioning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Commit current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/version/commit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new configuration version commit capturing the current state of all resources for version tracking and rollback."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

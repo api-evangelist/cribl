@@ -1,0 +1,3073 @@
+{
+  "item": [
+    {
+      "id": "30027ef8-90d3-4f55-808f-79bf851e3bb0",
+      "name": "API Credentials",
+      "description": {
+        "content": "Manage API credentials used for OAuth 2.0 client credentials authentication. Credentials consist of a client ID and client secret used to obtain bearer tokens for API access.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b642b154-f3b0-41ef-8d39-f6a22f5ab80b",
+          "name": "List API credentials",
+          "request": {
+            "name": "List API credentials",
+            "description": {
+              "content": "Retrieves all API credentials configured for the specified organization. Each credential consists of a client ID and client secret used for OAuth 2.0 client credentials authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "api-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aee5c987-5645-4f8f-a330-4703e1d304a3",
+              "name": "Successfully retrieved API credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"clientId\": \"string\",\n      \"description\": \"string\",\n      \"organizationId\": \"string\",\n      \"createdAt\": \"1970-08-15T23:39:34.959Z\",\n      \"updatedAt\": \"2025-09-01T17:54:40.649Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"clientId\": \"string\",\n      \"description\": \"string\",\n      \"organizationId\": \"string\",\n      \"createdAt\": \"1994-05-02T01:47:57.631Z\",\n      \"updatedAt\": \"2011-08-12T21:11:20.140Z\"\n    }\n  ],\n  \"count\": 1053\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d6d1758-0ade-4926-a98a-202494a04956",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c19b710-1780-47ce-8df5-5746a12729bf",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f428dd88-fc0e-415d-b43f-a4f086246972",
+          "name": "Create an API credential",
+          "request": {
+            "name": "Create an API credential",
+            "description": {
+              "content": "Creates a new API credential for the specified organization. The response includes the client secret which is only shown once and must be stored securely.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "api-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85890736-d76f-42eb-aa49-e5ee510403aa",
+              "name": "API credential created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"clientId\": \"string\",\n  \"clientSecret\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"createdAt\": \"1988-11-15T07:10:58.446Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b34cad05-0b8b-45a4-a886-d39e8baf2b15",
+              "name": "Invalid credential configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "909cc7f1-a5d3-4ed0-b1dd-0e14624c9f2e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3583779a-5c76-48cb-9bee-b8aa4bef8e33",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb72f722-174d-4606-b35f-f75afd344d77",
+          "name": "Get an API credential by ID",
+          "request": {
+            "name": "Get an API credential by ID",
+            "description": {
+              "content": "Retrieves the metadata of a specific API credential. The client secret is not included in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "api-credentials",
+                ":credentialId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "credentialId",
+                  "description": "(Required) The API credential identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d7a1ace-8b97-4622-a2d2-45b1b2fa27de",
+              "name": "Successfully retrieved API credential",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"clientId\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"createdAt\": \"1989-07-22T16:25:17.507Z\",\n  \"updatedAt\": \"1971-01-17T12:33:29.810Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77a7860e-078d-4049-9b90-41486ff1f737",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2923de31-ddd2-48a1-abcc-b9babcc04ebf",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee480f2b-eab2-4cb5-941f-928d580561e1",
+              "name": "API credential not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28bdf648-d76e-4e08-9605-6f94bc85786e",
+          "name": "Update an API credential",
+          "request": {
+            "name": "Update an API credential",
+            "description": {
+              "content": "Updates the metadata of an existing API credential such as its description or permissions scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "api-credentials",
+                ":credentialId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "credentialId",
+                  "description": "(Required) The API credential identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d031532-813c-440a-b0f1-12ee9c1a5db5",
+              "name": "API credential updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"clientId\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"createdAt\": \"1989-07-22T16:25:17.507Z\",\n  \"updatedAt\": \"1971-01-17T12:33:29.810Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82cd9be8-4eeb-4490-9e67-9ac0488ee61a",
+              "name": "Invalid credential configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddf243a4-5f39-4b03-8795-85d5e617db65",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f53d632-1cc4-4a73-88a3-3693d201beff",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a9d6001-ece4-47fc-88d2-71f106efe8b8",
+              "name": "API credential not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cac9a80-6b8f-4250-908b-4c5645665bb8",
+          "name": "Delete an API credential",
+          "request": {
+            "name": "Delete an API credential",
+            "description": {
+              "content": "Deletes an API credential by its unique ID. Any applications using this credential will lose API access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "api-credentials",
+                ":credentialId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "credentialId",
+                  "description": "(Required) The API credential identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1356dc34-3eb1-451c-992c-250247abc16f",
+              "name": "API credential deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1952ce91-6cf7-47d6-b21c-c4d487ad880e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e9394f7-c499-45b0-82e1-cc70e7a2768b",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be7a2b6c-ba05-4c1c-ba21-5d92b6f584de",
+              "name": "API credential not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "api-credentials",
+                    ":credentialId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "credentialId",
+                      "description": "(Required) The API credential identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "59b44ee0-122c-4ec4-bb0f-1325b366d34b",
+      "name": "Health",
+      "description": {
+        "content": "Check the health and availability of the Cribl Cloud management plane services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a40e923b-9e7e-4e5b-9e7a-474647eb9d34",
+          "name": "Check management plane health",
+          "request": {
+            "name": "Check management plane health",
+            "description": {
+              "content": "Returns the health status of the Cribl Cloud management plane services including availability and version information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c56f4aab-9f22-4d6a-b66a-7e1cc3879c6c",
+              "name": "Management plane is healthy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unhealthy\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5f3630c5-02cf-4a2f-8b91-8d7a24c0ac0c",
+      "name": "Workspaces",
+      "description": {
+        "content": "Manage Cribl Cloud workspaces which are unique VPC containers each isolating an instance of the Cribl Product Suite including Stream, Edge, Search, and Lake.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61fa6dce-5690-4205-87dd-fd944b7fc84d",
+          "name": "List all workspaces",
+          "request": {
+            "name": "List all workspaces",
+            "description": {
+              "content": "Retrieves all workspaces for the specified Cribl Cloud organization. Each workspace is an isolated VPC container running an instance of the Cribl Product Suite.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "workspaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "893124e4-e489-4c9e-8984-cb808da6b26a",
+              "name": "Successfully retrieved workspaces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"organizationId\": \"string\",\n      \"status\": \"deprovisioning\",\n      \"region\": \"string\",\n      \"url\": \"http://unoxZuqKiLVsUeCEbt.rmsmdfTiNvaC-ZutbhVDeX30qBshyjy35grczHSCYGqndbwRxvUTl-wpi93FdP\",\n      \"createdAt\": \"1996-06-12T05:47:16.269Z\",\n      \"updatedAt\": \"1984-08-28T13:37:04.763Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"organizationId\": \"string\",\n      \"status\": \"deprovisioning\",\n      \"region\": \"string\",\n      \"url\": \"http://dmnvRDPeipxnQG.fsaSw8tjh4tcOMrh0qhDW6CMm-mGgbcimSXJC0r8Tl9NVLqr.-jiTt\",\n      \"createdAt\": \"2006-05-16T17:47:19.647Z\",\n      \"updatedAt\": \"1969-06-08T20:49:08.122Z\"\n    }\n  ],\n  \"count\": 5691\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1baffece-a264-44f3-9b8d-9fa30c59cb36",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05766d32-1397-4a4f-8b36-24e255415dbf",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c36b6ad-3d05-4a1b-ad82-945719322c10",
+          "name": "Create a workspace",
+          "request": {
+            "name": "Create a workspace",
+            "description": {
+              "content": "Creates a new workspace within the specified Cribl Cloud organization. The workspace provisions an isolated VPC container with the Cribl Product Suite.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "workspaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea29e38c-4ae6-49c7-9837-a411154cd04f",
+              "name": "Workspace created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"status\": \"error\",\n  \"region\": \"string\",\n  \"url\": \"https://jCFUcCoruE.aiouRlDarY8bvHAZI0PW7KV4CHkG\",\n  \"createdAt\": \"1953-01-04T04:52:55.299Z\",\n  \"updatedAt\": \"2022-02-15T00:31:27.231Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66120544-13a1-4a21-9e55-e423f83c43b5",
+              "name": "Invalid workspace configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78dbea13-62b5-4783-ba15-45f7fa3276d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b67130d-e32c-4af5-91f6-2512a758c7ae",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a71ebdf2-416e-49c0-958a-feb84e7b4a62",
+          "name": "Get a workspace by ID",
+          "request": {
+            "name": "Get a workspace by ID",
+            "description": {
+              "content": "Retrieves the configuration and status of a specific workspace within the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "workspaces",
+                ":workspaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) The workspace identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d30bd4e0-bf29-4942-9171-fe7f908d7480",
+              "name": "Successfully retrieved workspace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"status\": \"error\",\n  \"region\": \"string\",\n  \"url\": \"https://jCFUcCoruE.aiouRlDarY8bvHAZI0PW7KV4CHkG\",\n  \"createdAt\": \"1953-01-04T04:52:55.299Z\",\n  \"updatedAt\": \"2022-02-15T00:31:27.231Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8ca83a0-e315-4e82-9f95-78c3fc7d3b40",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ae31275-1e2a-4ed5-9c9b-3a1a8c8942fa",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6148503-bdef-438b-9042-535a60b75529",
+              "name": "Workspace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "246c3819-17ce-42c3-b6ba-284a9fefe918",
+          "name": "Update a workspace",
+          "request": {
+            "name": "Update a workspace",
+            "description": {
+              "content": "Updates the configuration of an existing workspace within the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "workspaces",
+                ":workspaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) The workspace identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66d5308c-2dac-4e0e-b664-f834154e1d28",
+              "name": "Workspace updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"organizationId\": \"string\",\n  \"status\": \"error\",\n  \"region\": \"string\",\n  \"url\": \"https://jCFUcCoruE.aiouRlDarY8bvHAZI0PW7KV4CHkG\",\n  \"createdAt\": \"1953-01-04T04:52:55.299Z\",\n  \"updatedAt\": \"2022-02-15T00:31:27.231Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6de5303-7d83-49a2-920d-a9e189d3ca76",
+              "name": "Invalid workspace configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38fe1845-8f55-44e0-aa5e-715f3c3883aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09666216-d79c-4e6c-b19c-3a7821c8f626",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c371c4db-7ee8-418a-9d7a-91c338959581",
+              "name": "Workspace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82d0e1a5-bc56-456d-9d78-e787d5f44406",
+          "name": "Delete a workspace",
+          "request": {
+            "name": "Delete a workspace",
+            "description": {
+              "content": "Deletes a workspace and all its contained resources from the organization. This operation is irreversible.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organizations",
+                ":organizationId",
+                "workspaces",
+                ":workspaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) The Cribl Cloud organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) The workspace identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84a59377-5f31-4222-894b-e2c96c09b85f",
+              "name": "Workspace deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f46da468-a1fd-461f-8c8a-bf54ebc08bfc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7983a134-d1c6-4a93-a96d-a0ea1041ccc9",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84ead6c4-485f-4e2f-84d2-bbc9dfd4bb25",
+              "name": "Workspace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organizations",
+                    ":organizationId",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) The Cribl Cloud organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The workspace identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.cribl.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "328e25ac-3904-47d2-81b5-96e9ec52ac2f",
+    "name": "Cribl As Code API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.\n\nContact Support:\n Name: Cribl Support",
+      "type": "text/plain"
+    }
+  }
+}

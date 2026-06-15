@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl Lake API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Lake datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets"
+          },
+          "docs": "Retrieves a list of all Cribl Lake datasets including their storage configuration, retention policies, and data volume metrics. Available on Cribl Cloud only."
+        },
+        {
+          "info": {
+            "name": "Create a Lake dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Cribl Lake dataset for storing observability data in open formats. Configure storage format, retention period, and access permissions."
+        },
+        {
+          "info": {
+            "name": "Get a Lake dataset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration, retention policy, and storage metadata of a specific Cribl Lake dataset."
+        },
+        {
+          "info": {
+            "name": "Update a Lake dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing Lake dataset including its retention policy and access settings."
+        },
+        {
+          "info": {
+            "name": "Delete a Lake dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a Cribl Lake dataset and its associated data by its unique ID. This operation is irreversible and will permanently remove all stored data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Retention",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dataset retention policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id/retention",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the retention policy for a specific Lake dataset including the retention period and cleanup schedule."
+        },
+        {
+          "info": {
+            "name": "Update dataset retention policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/lake/datasets/:id/retention",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the retention policy for a Lake dataset controlling how long data is stored before automatic cleanup."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

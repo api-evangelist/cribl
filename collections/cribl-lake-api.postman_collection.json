@@ -1,0 +1,1909 @@
+{
+  "item": [
+    {
+      "id": "a9de9a33-47bc-45dd-a999-a780040f35b1",
+      "name": "Datasets",
+      "description": {
+        "content": "Manage Cribl Lake datasets that define storage buckets for observability and security data in open formats.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91347957-d4c8-4217-b1e8-432520e9cdca",
+          "name": "List all Lake datasets",
+          "request": {
+            "name": "List all Lake datasets",
+            "description": {
+              "content": "Retrieves a list of all Cribl Lake datasets including their storage configuration, retention policies, and data volume metrics. Available on Cribl Cloud only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10f93b27-a1b4-4705-8335-189bd702120a",
+              "name": "Successfully retrieved Lake datasets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"retentionDays\": 6349,\n      \"format\": \"parquet\",\n      \"totalSize\": 5631,\n      \"eventCount\": 4289,\n      \"createdAt\": \"2000-06-29T13:51:17.856Z\",\n      \"updatedAt\": \"2023-05-07T18:20:15.280Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"retentionDays\": 1287,\n      \"format\": \"json\",\n      \"totalSize\": 1261,\n      \"eventCount\": 8342,\n      \"createdAt\": \"1954-01-08T19:34:49.026Z\",\n      \"updatedAt\": \"2018-01-01T20:01:48.258Z\"\n    }\n  ],\n  \"count\": 3763\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df9d4d81-36e8-4b11-ae7c-5ed477dfd88b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddaba81b-98c2-4f21-8f8b-f8ae1cf37c9c",
+          "name": "Create a Lake dataset",
+          "request": {
+            "name": "Create a Lake dataset",
+            "description": {
+              "content": "Creates a new Cribl Lake dataset for storing observability data in open formats. Configure storage format, retention period, and access permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be3f3abd-86b1-4c31-92d3-56067b27e48f",
+              "name": "Lake dataset created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"retentionDays\": 7183,\n  \"format\": \"parquet\",\n  \"totalSize\": 5118,\n  \"eventCount\": 1653,\n  \"createdAt\": \"1967-01-29T01:14:47.890Z\",\n  \"updatedAt\": \"1966-02-19T02:57:15.715Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af959031-cca8-4ef8-856e-4aea1e3d168c",
+              "name": "Invalid dataset configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "155249e8-12e6-441b-9ad1-d9b13e9d66dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83edef2c-dbbf-4fd3-b9ba-ff2fd425753e",
+          "name": "Get a Lake dataset by ID",
+          "request": {
+            "name": "Get a Lake dataset by ID",
+            "description": {
+              "content": "Retrieves the configuration, retention policy, and storage metadata of a specific Cribl Lake dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45afabd6-6995-43ec-a918-9d9469235951",
+              "name": "Successfully retrieved Lake dataset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"retentionDays\": 7183,\n  \"format\": \"parquet\",\n  \"totalSize\": 5118,\n  \"eventCount\": 1653,\n  \"createdAt\": \"1967-01-29T01:14:47.890Z\",\n  \"updatedAt\": \"1966-02-19T02:57:15.715Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe28d1b1-286f-4d4f-ab22-fd0fefb5bb63",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b9e4b2d-b5d2-4233-81b5-96cf8262957a",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2cac47c-decf-4097-959d-bcf4ded52f6a",
+          "name": "Update a Lake dataset",
+          "request": {
+            "name": "Update a Lake dataset",
+            "description": {
+              "content": "Updates the configuration of an existing Lake dataset including its retention policy and access settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "199211bb-19f1-45f5-842f-8c6362537029",
+              "name": "Lake dataset updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"retentionDays\": 7183,\n  \"format\": \"parquet\",\n  \"totalSize\": 5118,\n  \"eventCount\": 1653,\n  \"createdAt\": \"1967-01-29T01:14:47.890Z\",\n  \"updatedAt\": \"1966-02-19T02:57:15.715Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a023692c-d6e1-45a9-8759-689e8a13ded0",
+              "name": "Invalid dataset configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7d48f60-4c85-45d4-aaf2-eb82deecd012",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94a40675-eabc-4f62-bbf3-b1d7e22e4e98",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"retentionDays\": \"<integer>\",\n  \"format\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"eventCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4d59977-19c7-430d-b7a5-5e6110116950",
+          "name": "Delete a Lake dataset",
+          "request": {
+            "name": "Delete a Lake dataset",
+            "description": {
+              "content": "Deletes a Cribl Lake dataset and its associated data by its unique ID. This operation is irreversible and will permanently remove all stored data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f02d3132-6e02-453d-8edb-d19d709717f6",
+              "name": "Dataset deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3745d0b-ac8c-43a6-99d9-1060807dbd9f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d070cfd-060d-4f75-afab-e0962b562a91",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "324d023c-9eaf-41a3-be2e-889d5545ae25",
+      "name": "Retention",
+      "description": {
+        "content": "Configure data retention policies that control how long data is stored in Lake datasets before automatic cleanup.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a782a4db-b362-4864-a8f7-5346405de1f9",
+          "name": "Get dataset retention policy",
+          "request": {
+            "name": "Get dataset retention policy",
+            "description": {
+              "content": "Retrieves the retention policy for a specific Lake dataset including the retention period and cleanup schedule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets",
+                ":id",
+                "retention"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5c99784-61b8-41f1-823c-585ba936a42f",
+              "name": "Successfully retrieved retention policy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"retentionDays\": 9094,\n  \"enabled\": true,\n  \"cleanupSchedule\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "160b7007-204b-4c8a-8c07-096eacd1f4ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bbce3704-bcb6-4d32-85c3-8fadb10e3e6b",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3299c3c5-9802-4322-92f6-04c54866b4ad",
+          "name": "Update dataset retention policy",
+          "request": {
+            "name": "Update dataset retention policy",
+            "description": {
+              "content": "Updates the retention policy for a Lake dataset controlling how long data is stored before automatic cleanup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lake",
+                "datasets",
+                ":id",
+                "retention"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                },
+                {
+                  "description": "The name of the Cribl Cloud workspace",
+                  "type": "any",
+                  "value": "{{workspaceName}}",
+                  "key": "workspaceName"
+                },
+                {
+                  "description": "The Cribl Cloud organization identifier",
+                  "type": "any",
+                  "value": "{{organizationId}}",
+                  "key": "organizationId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"retentionDays\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"cleanupSchedule\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f9f3831-43bb-4d8f-99a5-f74b5b3f6416",
+              "name": "Retention policy updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retentionDays\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"cleanupSchedule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"retentionDays\": 9094,\n  \"enabled\": true,\n  \"cleanupSchedule\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e848decc-e665-4012-8be4-8a56d43dcd30",
+              "name": "Invalid retention policy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retentionDays\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"cleanupSchedule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fe0bdcf-709a-49cd-b90c-5808166794e2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retentionDays\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"cleanupSchedule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0d28481-2c69-4835-9b9c-884fe7f3a177",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lake",
+                    "datasets",
+                    ":id",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    },
+                    {
+                      "description": "The name of the Cribl Cloud workspace",
+                      "type": "any",
+                      "value": "{{workspaceName}}",
+                      "key": "workspaceName"
+                    },
+                    {
+                      "description": "The Cribl Cloud organization identifier",
+                      "type": "any",
+                      "value": "{{organizationId}}",
+                      "key": "organizationId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retentionDays\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"cleanupSchedule\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Cribl Cloud workspace",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "default",
+      "key": "workspaceName"
+    },
+    {
+      "description": {
+        "content": "The Cribl Cloud organization identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "org-id",
+      "key": "organizationId"
+    },
+    {
+      "type": "string",
+      "value": "https://{{workspaceName}}-{{organizationId}}.cribl.cloud/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b2887c2-a0d0-4567-b181-dd8cd908c3b5",
+    "name": "Cribl Lake API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability and security data. The API enables developers to manage data storage, retention policies, and access controls for large volumes of telemetry data. Cribl Lake stores data in open formats, making it accessible to any analytics tool, and provides cost-effective long-term storage that keeps data usable and valuable to the teams and tools that need it. Lake API endpoints are accessible through the Cribl Cloud control plane.\n\nContact Support:\n Name: Cribl Support",
+      "type": "text/plain"
+    }
+  }
+}

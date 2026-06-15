@@ -1,0 +1,458 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl Stream API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stream pipelines in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/pipelines",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all processing pipelines configured within a specific worker group context, including their function chains and settings."
+        },
+        {
+          "info": {
+            "name": "Create a Stream pipeline in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/pipelines",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new processing pipeline within a specific worker group with the specified functions and configuration for real-time data transformation."
+        },
+        {
+          "info": {
+            "name": "Get a Stream pipeline by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/pipelines/:id",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific Stream pipeline within a worker group context."
+        },
+        {
+          "info": {
+            "name": "Update a Stream pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/pipelines/:id",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing Stream pipeline within a worker group context."
+        },
+        {
+          "info": {
+            "name": "Delete a Stream pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/pipelines/:id",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a processing pipeline from a worker group by its unique ID. The pipeline must not be referenced by active routes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stream routes in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/routes",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all routes configured within a worker group context that filter and direct incoming data to pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Create a Stream route in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/routes",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route within a worker group to filter and direct incoming events to specified pipelines and destinations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stream sources in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/system/sources",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data input sources configured within a specific worker group including Syslog, HTTP, Kafka, and other sources."
+        },
+        {
+          "info": {
+            "name": "Create a Stream source in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/system/sources",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source within a worker group with the specified type and configuration for data collection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Destinations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stream destinations in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/system/outputs",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data output destinations configured within a specific worker group context."
+        },
+        {
+          "info": {
+            "name": "Create a Stream destination in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/m/:groupId/system/outputs",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data output destination within a worker group with the specified type and configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available Stream functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/functions"
+          },
+          "docs": "Retrieves all available processing functions that can be used in Stream pipelines including eval, regex extract, rename, mask, aggregate, publish metrics, and others."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Worker Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Stream worker groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups"
+          },
+          "docs": "Retrieves all worker groups configured for Stream deployments including their node counts and configuration versions."
+        },
+        {
+          "info": {
+            "name": "Create a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Stream worker group for organizing and deploying configurations to a set of worker nodes."
+        },
+        {
+          "info": {
+            "name": "Deploy configuration to a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/master/groups/:id/deploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deploys the current configuration to all worker nodes in the specified group, making configuration changes effective."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Collectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Stream collectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/collectors"
+          },
+          "docs": "Retrieves all configured data collection tasks for batch ingestion from REST APIs, databases, scripts, and cloud storage."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Packs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all installed Stream packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs"
+          },
+          "docs": "Retrieves all installed configuration packs containing bundled pipelines, routes, and other Stream resources."
+        },
+        {
+          "info": {
+            "name": "Install a Stream pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/packs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Installs a configuration pack from a source URL or uploads a pack archive containing bundled Stream resources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Stream lookups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/system/lookups"
+          },
+          "docs": "Retrieves all configured lookup files and tables used for enriching events during Stream pipeline processing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stream notification rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/notifications"
+          },
+          "docs": "Retrieves all configured notification rules for monitoring Stream data flow rates and triggering alerts via webhook or PagerDuty targets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

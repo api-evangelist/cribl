@@ -1,0 +1,342 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl Search API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all search jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/jobs",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of jobs to return"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all running and completed search jobs including their query, status, and result metrics."
+        },
+        {
+          "info": {
+            "name": "Execute a new search query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and executes a new search job with the specified query and parameters. The search runs asynchronously and results can be retrieved when the job completes. Supports Cribl Search query language for filtering, aggregating, and transforming results across federated data sources."
+        },
+        {
+          "info": {
+            "name": "Get a search job by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the status, progress, and metadata of a specific search job. When the job is complete, includes result summary information."
+        },
+        {
+          "info": {
+            "name": "Cancel a search job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Cancels a running search job. Completed or already cancelled jobs cannot be cancelled."
+        },
+        {
+          "info": {
+            "name": "Get search job results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/jobs/:id/results",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieves the results of a completed search job. Results are returned as an array of events matching the search query with support for pagination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all search datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/datasets"
+          },
+          "docs": "Retrieves all configured search datasets that define the data sources available for querying including Cribl Lake datasets, Splunk indexes, and other connected data stores."
+        },
+        {
+          "info": {
+            "name": "Create a search dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new search dataset that defines a data source available for querying in Cribl Search."
+        },
+        {
+          "info": {
+            "name": "Get a search dataset by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and metadata of a specific search dataset."
+        },
+        {
+          "info": {
+            "name": "Update a search dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing search dataset."
+        },
+        {
+          "info": {
+            "name": "Delete a search dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/datasets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a search dataset by its unique ID. Active search jobs referencing this dataset will not be affected."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Saved Searches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all saved searches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/saved"
+          },
+          "docs": "Retrieves all saved search queries that can be reused and shared across teams."
+        },
+        {
+          "info": {
+            "name": "Create a saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/saved",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new saved search query for reuse and sharing with other team members."
+        },
+        {
+          "info": {
+            "name": "Get a saved search by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/saved/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific saved search query."
+        },
+        {
+          "info": {
+            "name": "Update a saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/saved/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing saved search query."
+        },
+        {
+          "info": {
+            "name": "Delete a saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/search/saved/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a saved search by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List search notification rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1/notifications"
+          },
+          "docs": "Retrieves all configured notification rules for triggering alerts based on search results and data patterns."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
