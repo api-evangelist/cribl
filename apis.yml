@@ -8,7 +8,7 @@ description: >-
   search jobs, lake datasets, and infrastructure-as-code configuration management. The Cribl Cloud API acts as a
   centrally managed control plane across all deployments and authenticates with OAuth 2.0 client credentials.
 url: https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Configuration
   - Data Lake
