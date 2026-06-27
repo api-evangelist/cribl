@@ -5,14 +5,17 @@
       "source": "https://cribl.io/feed/",
       "feed_url": "https://cribl.io/feed/",
       "title": "",
-      "saved": 3,
+      "saved": 5,
       "method": "feed"
     },
     {
       "source": "https://login.cribl.cloud/",
-      "error": "HTTPError"
+      "feed_url": "https://login.cribl.cloud/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 72,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 82,
+  "fetched": "2026-06-27T12:03:07Z"
 }
