@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cribl-as-code-api-openapi.yml, openapi/cribl-cloud-api-openapi.yml, openapi/cribl-edge-api-openapi.yml,
+  openapi/cribl-lake-api-openapi.yml, openapi/cribl-search-api-openapi.yml, openapi/cribl-stream-api-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token.
+    Tokens expire after 24 hours (86400 seconds).
+  sources:
+  - openapi/cribl-as-code-api-openapi.yml
+  - openapi/cribl-cloud-api-openapi.yml
+  - openapi/cribl-edge-api-openapi.yml
+  - openapi/cribl-lake-api-openapi.yml
+  - openapi/cribl-search-api-openapi.yml
+  - openapi/cribl-stream-api-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://login.cribl.cloud/oauth/token
+    scopes: 0
+  description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+  sources:
+  - openapi/cribl-as-code-api-openapi.yml
+  - openapi/cribl-cloud-api-openapi.yml

@@ -172,6 +172,12 @@ apis:
       - Infrastructure as Code
       - Version Control
 common:
+  - type: VulnerabilityDisclosure
+    url: security/cribl-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/cribl-domain-security.yml
+  - type: Authentication
+    url: authentication/cribl-authentication.yml
   - type: OAuthScopes
     url: scopes/cribl-scopes.yml
   - type: GitHubOrganization
