@@ -1,0 +1,52 @@
+generated: '2026-07-11'
+method: searched
+docs: https://docs.cribl.io/cribl-as-code/api-auth/
+note: Cribl uses the OAuth 2.0 client credentials flow only; clients do not request
+  scopes. The scope attribute of the Bearer token reflects the IAM Permissions assigned
+  to the API Credential (Organization Admin/Owner/User plus per-Workspace product
+  permissions), and Cribl publishes only example scope strings rather than a complete
+  scopes catalog (https://docs.cribl.io/cribl-as-code/api-auth/, https://docs.cribl.io/iam/permissions/).
+source: openapi/cribl-as-code-api-openapi.yml, openapi/cribl-cloud-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/cribl-as-code-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://login.cribl.cloud/oauth/token
+  description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+- name: oauth2
+  source: openapi/cribl-cloud-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://login.cribl.cloud/oauth/token
+  description: OAuth 2.0 client credentials flow for Cribl Cloud authentication. Tokens expire
+    after 24 hours.
+scopes:
+- scope: user:read:workergroups
+  description: Read Worker Group data in the Workspaces the API Credential's permissions
+    cover.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/
+- scope: user:update:workergroups
+  description: Modify Worker Group configurations in the Workspaces the API Credential's
+    permissions cover.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/
+- scope: user:read:connections
+  description: Read connection information in the Workspaces the API Credential's
+    permissions cover.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/
+- scope: user:update:connections
+  description: Modify connection settings in the Workspaces the API Credential's
+    permissions cover.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/
+- scope: user:read:workspaces
+  description: View Workspace data in the Cribl.Cloud Organization.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/
+- scope: user:update:workspaces
+  description: Change Workspace configurations in the Cribl.Cloud Organization.
+  sources:
+  - https://docs.cribl.io/cribl-as-code/api-auth/

@@ -172,6 +172,8 @@ apis:
       - Infrastructure as Code
       - Version Control
 common:
+  - type: OAuthScopes
+    url: scopes/cribl-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/criblio
   - type: LinkedIn
