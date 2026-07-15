@@ -172,6 +172,8 @@ apis:
       - Infrastructure as Code
       - Version Control
 common:
+  - type: AgenticAccess
+    url: agentic-access/cribl-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/cribl-vulnerability-disclosure.yml
   - type: DomainSecurity
