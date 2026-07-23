@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Sources API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Sources
+  description: Manage data input sources that collect events from various systems including Syslog, HTTP, Kafka, Splunk, and other protocols.
+paths:
+  /system/sources:
+    get:
+      operationId: listSources
+      summary: List all sources
+      description: Retrieves a list of all configured data input sources in the current context, including their type, status, and configuration details.
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: Successfully retrieved sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Source'
+                  count:
+                    type: integer
+                    description: Total number of sources
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createSource
+      summary: Create a new source
+      description: Creates a new data input source with the specified type and configuration. The source type determines which configuration properties are required.
+      tags:
+      - Sources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '200':
+          description: Source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+  /system/sources/{id}:
+    get:
+      operationId: getSource
+      summary: Get a source by ID
+      description: Retrieves the configuration and status of a specific data input source identified by its unique ID.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+    patch:
+      operationId: updateSource
+      summary: Update a source
+      description: Updates the configuration of an existing data input source. Only provided fields are modified.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '200':
+          description: Source updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+    delete:
+      operationId: deleteSource
+      summary: Delete a source
+      description: Deletes a data input source by its unique ID. The source must not be actively receiving data.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Source deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Source not found
+  /m/{groupId}/system/sources:
+    get:
+      operationId: listStreamSources
+      summary: List Stream sources in a worker group
+      description: Retrieves all data input sources configured within a specific worker group including Syslog, HTTP, Kafka, and other sources.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Source_2'
+                  count:
+                    type: integer
+                    description: Total number of sources
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamSource
+      summary: Create a Stream source in a worker group
+      description: Creates a new data input source within a worker group with the specified type and configuration for data collection.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source_2'
+      responses:
+        '200':
+          description: Source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source_2'
+        '400':
+          description: Invalid source configuration
+        '401':
+          description: Unauthorized
+components:
+  parameters:
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  schemas:
+    Source_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the source
+        type:
+          type: string
+          description: The source type such as syslog, http, kafka, splunk_tcp, tcp_json, file_monitor, or others
+        disabled:
+          type: boolean
+          description: Whether the source is disabled
+        host:
+          type: string
+          description: The host or address to listen on
+        port:
+          type: integer
+          description: The port number to listen on
+        pipeline:
+          type: string
+          description: The pipeline to process events from this source
+        description:
+          type: string
+          description: A human-readable description
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to events from this source
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the source
+        type:
+          type: string
+          description: The source type such as syslog, http, kafka, splunk_tcp, tcp_json, file_monitor, or others
+        disabled:
+          type: boolean
+          description: Whether the source is disabled
+        host:
+          type: string
+          description: The host or address to listen on
+        port:
+          type: integer
+          description: The port number to listen on
+        description:
+          type: string
+          description: A human-readable description of the source
+        pipeline:
+          type: string
+          description: The pipeline to send events to
+        environment:
+          type: string
+          description: The environment context
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags applied to events from this source
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

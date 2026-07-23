@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Jobs API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Jobs
+  description: Monitor and manage running and completed collection and processing jobs.
+paths:
+  /jobs:
+    get:
+      operationId: listJobs
+      summary: List all jobs
+      description: Retrieves a list of all running and completed collection and processing jobs including their status and results.
+      tags:
+      - Jobs
+      responses:
+        '200':
+          description: Successfully retrieved jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+                  count:
+                    type: integer
+                    description: Total number of jobs
+        '401':
+          description: Unauthorized
+  /jobs/{id}:
+    get:
+      operationId: getJob
+      summary: Get a job by ID
+      description: Retrieves the status and details of a specific job including its progress, results, and any errors encountered.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Job not found
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the job
+        collector:
+          type: string
+          description: The collector ID that initiated this job
+        status:
+          type: string
+          description: The current job status
+          enum:
+          - running
+          - completed
+          - failed
+          - cancelled
+        startTime:
+          type: integer
+          description: Job start time as a Unix timestamp
+        endTime:
+          type: integer
+          description: Job end time as a Unix timestamp
+        result:
+          type: object
+          description: Job result details
+          properties:
+            numEvents:
+              type: integer
+              description: Number of events collected
+            numBytes:
+              type: integer
+              description: Number of bytes collected
+            numErrors:
+              type: integer
+              description: Number of errors encountered
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

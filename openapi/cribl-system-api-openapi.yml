@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials System API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: System
+  description: Access system-level settings including Git configuration, licensing, and global preferences.
+paths:
+  /system/settings/git-settings:
+    get:
+      operationId: getGitSettings
+      summary: Get Git settings
+      description: Retrieves the current Git integration settings including repository URL, branch, and sync configuration.
+      tags:
+      - System
+      responses:
+        '200':
+          description: Successfully retrieved Git settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitSettings'
+        '401':
+          description: Unauthorized
+    patch:
+      operationId: updateGitSettings
+      summary: Update Git settings
+      description: Updates the Git integration settings for version-controlled configuration management.
+      tags:
+      - System
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitSettings'
+      responses:
+        '200':
+          description: Git settings updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitSettings'
+        '400':
+          description: Invalid Git settings
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    GitSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Git integration is enabled
+        repoUrl:
+          type: string
+          description: The Git repository URL
+        branch:
+          type: string
+          description: The Git branch to use
+        authType:
+          type: string
+          description: The authentication method for Git
+          enum:
+          - none
+          - token
+          - ssh
+        autoSync:
+          type: boolean
+          description: Whether to automatically sync with Git
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

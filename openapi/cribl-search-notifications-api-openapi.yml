@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Search Notifications API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Search Notifications
+  description: Configure notification rules that trigger alerts based on search results using webhook and other notification targets.
+paths:
+  /notifications:
+    get:
+      operationId: listSearchNotifications
+      summary: List search notification rules
+      description: Retrieves all configured notification rules for triggering alerts based on search results and data patterns.
+      tags:
+      - Search Notifications
+      responses:
+        '200':
+          description: Successfully retrieved notification rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  count:
+                    type: integer
+                    description: Total number of notification rules
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the notification rule
+        type:
+          type: string
+          description: The notification type
+        targets:
+          type: array
+          description: List of notification targets
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Target type such as webhook or pagerduty
+              url:
+                type: string
+                description: The target webhook URL
+        description:
+          type: string
+          description: A human-readable description
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

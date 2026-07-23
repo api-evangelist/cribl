@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Saved Searches API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Saved Searches
+  description: Create and manage saved search queries for reuse and sharing across teams and workflows.
+paths:
+  /search/saved:
+    get:
+      operationId: listSavedSearches
+      summary: List all saved searches
+      description: Retrieves all saved search queries that can be reused and shared across teams.
+      tags:
+      - Saved Searches
+      responses:
+        '200':
+          description: Successfully retrieved saved searches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SavedSearch'
+                  count:
+                    type: integer
+                    description: Total number of saved searches
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createSavedSearch
+      summary: Create a saved search
+      description: Creates a new saved search query for reuse and sharing with other team members.
+      tags:
+      - Saved Searches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedSearch'
+      responses:
+        '200':
+          description: Saved search created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '400':
+          description: Invalid saved search configuration
+        '401':
+          description: Unauthorized
+  /search/saved/{id}:
+    get:
+      operationId: getSavedSearch
+      summary: Get a saved search by ID
+      description: Retrieves the configuration of a specific saved search query.
+      tags:
+      - Saved Searches
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved saved search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Saved search not found
+    patch:
+      operationId: updateSavedSearch
+      summary: Update a saved search
+      description: Updates the configuration of an existing saved search query.
+      tags:
+      - Saved Searches
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedSearch'
+      responses:
+        '200':
+          description: Saved search updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '400':
+          description: Invalid saved search configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Saved search not found
+    delete:
+      operationId: deleteSavedSearch
+      summary: Delete a saved search
+      description: Deletes a saved search by its unique ID.
+      tags:
+      - Saved Searches
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Saved search deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Saved search not found
+components:
+  schemas:
+    SavedSearch:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the saved search
+        name:
+          type: string
+          description: Display name of the saved search
+        description:
+          type: string
+          description: A human-readable description
+        query:
+          type: string
+          description: The search query
+        dataset:
+          type: string
+          description: The default dataset
+        earliest:
+          type: string
+          description: Default earliest time range
+        latest:
+          type: string
+          description: Default latest time range
+        owner:
+          type: string
+          description: The owner of the saved search
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Packs API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Packs
+  description: Install, manage, and distribute reusable configuration packs containing pipelines, routes, and other resources.
+paths:
+  /packs:
+    get:
+      operationId: listPacks
+      summary: List all packs
+      description: Retrieves a list of all installed configuration packs including their version, author, and contained resources.
+      tags:
+      - Packs
+      responses:
+        '200':
+          description: Successfully retrieved packs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pack'
+                  count:
+                    type: integer
+                    description: Total number of packs
+        '401':
+          description: Unauthorized
+    post:
+      operationId: installPack
+      summary: Install a pack
+      description: Installs a new configuration pack from a pack source URL or uploads a pack archive.
+      tags:
+      - Packs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pack'
+      responses:
+        '200':
+          description: Pack installed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '400':
+          description: Invalid pack configuration
+        '401':
+          description: Unauthorized
+  /packs/{id}:
+    get:
+      operationId: getPack
+      summary: Get a pack by ID
+      description: Retrieves the details and contents of a specific configuration pack identified by its unique ID.
+      tags:
+      - Packs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved pack
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+    patch:
+      operationId: updatePack
+      summary: Update a pack
+      description: Updates the configuration or version of an existing pack.
+      tags:
+      - Packs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pack'
+      responses:
+        '200':
+          description: Pack updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pack'
+        '400':
+          description: Invalid pack configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+    delete:
+      operationId: deletePack
+      summary: Delete a pack
+      description: Uninstalls and removes a configuration pack by its unique ID.
+      tags:
+      - Packs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Pack deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Pack not found
+components:
+  schemas:
+    Pack:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the pack
+        source:
+          type: string
+          description: The source URL or registry path of the pack
+        version:
+          type: string
+          description: The installed version of the pack
+        author:
+          type: string
+          description: The pack author
+        description:
+          type: string
+          description: A human-readable description of the pack
+        displayName:
+          type: string
+          description: The display name of the pack
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Search Jobs API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Search Jobs
+  description: Execute and manage search queries across live and stored observability data with support for federated search across multiple data sources.
+paths:
+  /search/jobs:
+    get:
+      operationId: listSearchJobs
+      summary: List all search jobs
+      description: Retrieves a list of all running and completed search jobs including their query, status, and result metrics.
+      tags:
+      - Search Jobs
+      parameters:
+      - name: status
+        in: query
+        description: Filter jobs by status
+        schema:
+          type: string
+          enum:
+          - running
+          - completed
+          - failed
+          - cancelled
+      - name: limit
+        in: query
+        description: Maximum number of jobs to return
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: Successfully retrieved search jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchJob'
+                  count:
+                    type: integer
+                    description: Total number of search jobs
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createSearchJob
+      summary: Execute a new search query
+      description: Creates and executes a new search job with the specified query and parameters. The search runs asynchronously and results can be retrieved when the job completes. Supports Cribl Search query language for filtering, aggregating, and transforming results across federated data sources.
+      tags:
+      - Search Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchJobRequest'
+      responses:
+        '200':
+          description: Search job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchJob'
+        '400':
+          description: Invalid search query or parameters
+        '401':
+          description: Unauthorized
+  /search/jobs/{id}:
+    get:
+      operationId: getSearchJob
+      summary: Get a search job by ID
+      description: Retrieves the status, progress, and metadata of a specific search job. When the job is complete, includes result summary information.
+      tags:
+      - Search Jobs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved search job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Search job not found
+    delete:
+      operationId: cancelSearchJob
+      summary: Cancel a search job
+      description: Cancels a running search job. Completed or already cancelled jobs cannot be cancelled.
+      tags:
+      - Search Jobs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Search job cancelled successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Search job not found
+  /search/jobs/{id}/results:
+    get:
+      operationId: getSearchJobResults
+      summary: Get search job results
+      description: Retrieves the results of a completed search job. Results are returned as an array of events matching the search query with support for pagination.
+      tags:
+      - Search Jobs
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      - name: offset
+        in: query
+        description: The offset for pagination
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: Maximum number of results to return
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Successfully retrieved search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      description: A search result event
+                  count:
+                    type: integer
+                    description: Total number of matching events
+        '401':
+          description: Unauthorized
+        '404':
+          description: Search job not found
+components:
+  schemas:
+    SearchJob:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the search job
+        query:
+          type: string
+          description: The search query that was executed
+        status:
+          type: string
+          description: The current job status
+          enum:
+          - running
+          - completed
+          - failed
+          - cancelled
+        dataset:
+          type: string
+          description: The dataset being searched
+        startTime:
+          type: integer
+          description: Job start time as a Unix timestamp
+        endTime:
+          type: integer
+          description: Job end time as a Unix timestamp
+        numResults:
+          type: integer
+          description: Number of results found
+        numScanned:
+          type: integer
+          description: Number of events scanned
+        error:
+          type: string
+          description: Error message if the job failed
+    SearchJobRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The search query in Cribl Search query language
+        dataset:
+          type: string
+          description: The dataset to search against
+        earliest:
+          type: string
+          description: The earliest time for the search range in relative or absolute format
+        latest:
+          type: string
+          description: The latest time for the search range in relative or absolute format
+        timezone:
+          type: string
+          description: The timezone for time range interpretation
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

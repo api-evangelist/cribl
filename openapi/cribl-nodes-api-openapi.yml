@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Nodes API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Nodes
+  description: Monitor and manage individual worker nodes and edge nodes within groups and fleets.
+paths:
+  /master/workers:
+    get:
+      operationId: listNodes
+      summary: List all worker and edge nodes
+      description: Retrieves a list of all connected worker nodes and edge nodes including their status, version, and resource utilization.
+      tags:
+      - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved nodes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Node'
+                  count:
+                    type: integer
+                    description: Total number of nodes
+        '401':
+          description: Unauthorized
+  /master/workers/{id}:
+    get:
+      operationId: getNode
+      summary: Get a node by ID
+      description: Retrieves the status and details of a specific worker or edge node identified by its node ID.
+      tags:
+      - Nodes
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Node not found
+  /master/workers/{id}/restart:
+    post:
+      operationId: restartNode
+      summary: Restart a node
+      description: Initiates a restart of the specified worker or edge node.
+      tags:
+      - Nodes
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Restart initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Node not found
+  /master/workers/count:
+    get:
+      operationId: getNodeCount
+      summary: Get node count
+      description: Returns the total count of connected worker and edge nodes.
+      tags:
+      - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved node count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of connected nodes
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Node:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the worker or edge node
+        hostname:
+          type: string
+          description: The node hostname
+        group:
+          type: string
+          description: The group or fleet the node belongs to
+        version:
+          type: string
+          description: The Cribl software version on the node
+        status:
+          type: string
+          description: The current node status
+          enum:
+          - online
+          - offline
+          - degraded
+        os:
+          type: string
+          description: The operating system of the node
+        cpuUsage:
+          type: number
+          description: Current CPU utilization percentage
+          format: float
+        memUsage:
+          type: number
+          description: Current memory utilization percentage
+          format: float
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

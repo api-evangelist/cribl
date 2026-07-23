@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Database Connections API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Database Connections
+  description: Configure and manage database connections used by collectors and lookup functions.
+paths:
+  /system/database-connections:
+    get:
+      operationId: listDatabaseConnections
+      summary: List all database connections
+      description: Retrieves a list of all configured database connections used by collectors and lookup functions.
+      tags:
+      - Database Connections
+      responses:
+        '200':
+          description: Successfully retrieved database connections
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatabaseConnection'
+                  count:
+                    type: integer
+                    description: Total number of database connections
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createDatabaseConnection
+      summary: Create a database connection
+      description: Creates a new database connection with the specified driver, connection string, and credentials.
+      tags:
+      - Database Connections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseConnection'
+      responses:
+        '200':
+          description: Database connection created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '400':
+          description: Invalid connection configuration
+        '401':
+          description: Unauthorized
+  /system/database-connections/{id}:
+    get:
+      operationId: getDatabaseConnection
+      summary: Get a database connection by ID
+      description: Retrieves the configuration of a specific database connection.
+      tags:
+      - Database Connections
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved database connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+    patch:
+      operationId: updateDatabaseConnection
+      summary: Update a database connection
+      description: Updates the configuration of an existing database connection.
+      tags:
+      - Database Connections
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseConnection'
+      responses:
+        '200':
+          description: Database connection updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnection'
+        '400':
+          description: Invalid connection configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+    delete:
+      operationId: deleteDatabaseConnection
+      summary: Delete a database connection
+      description: Deletes a database connection by its unique ID.
+      tags:
+      - Database Connections
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Database connection deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database connection not found
+components:
+  schemas:
+    DatabaseConnection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the database connection
+        connectionString:
+          type: string
+          description: The database connection string
+        driver:
+          type: string
+          description: The database driver type
+        description:
+          type: string
+          description: A human-readable description
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

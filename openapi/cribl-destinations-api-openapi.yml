@@ -1,0 +1,307 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Destinations API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Destinations
+  description: Manage data output destinations where processed events are sent, including Splunk, S3, Elasticsearch, and webhook endpoints.
+paths:
+  /system/outputs:
+    get:
+      operationId: listDestinations
+      summary: List all destinations
+      description: Retrieves a list of all configured data output destinations including their type, status, and configuration.
+      tags:
+      - Destinations
+      responses:
+        '200':
+          description: Successfully retrieved destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Destination'
+                  count:
+                    type: integer
+                    description: Total number of destinations
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createDestination
+      summary: Create a new destination
+      description: Creates a new data output destination with the specified type and configuration. The destination type determines which configuration properties are required.
+      tags:
+      - Destinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+      responses:
+        '200':
+          description: Destination created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+  /system/outputs/{id}:
+    get:
+      operationId: getDestination
+      summary: Get a destination by ID
+      description: Retrieves the configuration and status of a specific data output destination identified by its unique ID.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved destination
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+    patch:
+      operationId: updateDestination
+      summary: Update a destination
+      description: Updates the configuration of an existing data output destination. Only provided fields are modified.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+      responses:
+        '200':
+          description: Destination updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+    delete:
+      operationId: deleteDestination
+      summary: Delete a destination
+      description: Deletes a data output destination by its unique ID.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Destination deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+  /system/outputs/{id}/statuses:
+    get:
+      operationId: getDestinationStatus
+      summary: Get destination status
+      description: Retrieves the current operational status of a specific destination including throughput metrics and error counts.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved destination status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DestinationStatus'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Destination not found
+  /m/{groupId}/system/outputs:
+    get:
+      operationId: listStreamDestinations
+      summary: List Stream destinations in a worker group
+      description: Retrieves all data output destinations configured within a specific worker group context.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Successfully retrieved destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Destination_2'
+                  count:
+                    type: integer
+                    description: Total number of destinations
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+    post:
+      operationId: createStreamDestination
+      summary: Create a Stream destination in a worker group
+      description: Creates a new data output destination within a worker group with the specified type and configuration.
+      tags:
+      - Destinations
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination_2'
+      responses:
+        '200':
+          description: Destination created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination_2'
+        '400':
+          description: Invalid destination configuration
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    DestinationStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The destination identifier
+        status:
+          type: string
+          description: The current operational status
+          enum:
+          - active
+          - inactive
+          - error
+        numEvents:
+          type: integer
+          description: Number of events processed
+        numBytes:
+          type: integer
+          description: Number of bytes processed
+    Destination_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the destination
+        type:
+          type: string
+          description: The destination type such as splunk, s3, elasticsearch, webhook, syslog, kafka, or others
+        disabled:
+          type: boolean
+          description: Whether the destination is disabled
+        host:
+          type: string
+          description: The target host address
+        port:
+          type: integer
+          description: The target port number
+        description:
+          type: string
+          description: A human-readable description
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags for filtering events
+    Destination:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the destination
+        type:
+          type: string
+          description: The destination type such as splunk, s3, elasticsearch, webhook, syslog, kafka, or others
+        disabled:
+          type: boolean
+          description: Whether the destination is disabled
+        host:
+          type: string
+          description: The target host address
+        port:
+          type: integer
+          description: The target port number
+        description:
+          type: string
+          description: A human-readable description of the destination
+        environment:
+          type: string
+          description: The environment context
+        streamtags:
+          type: array
+          items:
+            type: string
+          description: Tags for filtering events to this destination
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

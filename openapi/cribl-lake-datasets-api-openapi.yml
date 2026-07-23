@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Lake Datasets API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Lake Datasets
+  description: Manage Cribl Lake datasets for storing and organizing observability data in open formats.
+paths:
+  /lake/datasets:
+    get:
+      operationId: listLakeDatasets
+      summary: List all Lake datasets
+      description: Retrieves a list of all Cribl Lake datasets configured for storing observability and security data. Available on Cribl Cloud only.
+      tags:
+      - Lake Datasets
+      responses:
+        '200':
+          description: Successfully retrieved Lake datasets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LakeDataset'
+                  count:
+                    type: integer
+                    description: Total number of datasets
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createLakeDataset
+      summary: Create a Lake dataset
+      description: Creates a new Cribl Lake dataset for storing observability data in open formats. Available on Cribl Cloud only.
+      tags:
+      - Lake Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LakeDataset'
+      responses:
+        '200':
+          description: Lake dataset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '400':
+          description: Invalid dataset configuration
+        '401':
+          description: Unauthorized
+  /lake/datasets/{id}:
+    get:
+      operationId: getLakeDataset
+      summary: Get a Lake dataset by ID
+      description: Retrieves the configuration and metadata of a specific Cribl Lake dataset.
+      tags:
+      - Lake Datasets
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved Lake dataset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LakeDataset'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+    delete:
+      operationId: deleteLakeDataset
+      summary: Delete a Lake dataset
+      description: Deletes a Cribl Lake dataset by its unique ID.
+      tags:
+      - Lake Datasets
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Dataset deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+components:
+  schemas:
+    LakeDataset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the Lake dataset
+        name:
+          type: string
+          description: Display name of the dataset
+        description:
+          type: string
+          description: A human-readable description of the dataset
+        retentionDays:
+          type: integer
+          description: Number of days to retain data
+        format:
+          type: string
+          description: The storage format for the dataset
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

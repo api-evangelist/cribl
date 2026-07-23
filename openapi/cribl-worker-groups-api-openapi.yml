@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Worker Groups API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Worker Groups
+  description: Manage Stream worker groups that organize worker nodes and deploy shared pipeline configurations across clusters.
+paths:
+  /master/groups:
+    get:
+      operationId: listWorkerGroups
+      summary: List all Stream worker groups
+      description: Retrieves all worker groups configured for Stream deployments including their node counts and configuration versions.
+      tags:
+      - Worker Groups
+      responses:
+        '200':
+          description: Successfully retrieved worker groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkerGroup'
+                  count:
+                    type: integer
+                    description: Total number of worker groups
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createWorkerGroup
+      summary: Create a worker group
+      description: Creates a new Stream worker group for organizing and deploying configurations to a set of worker nodes.
+      tags:
+      - Worker Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkerGroup'
+      responses:
+        '200':
+          description: Worker group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkerGroup'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+  /master/groups/{id}/deploy:
+    post:
+      operationId: deployWorkerGroup
+      summary: Deploy configuration to a worker group
+      description: Deploys the current configuration to all worker nodes in the specified group, making configuration changes effective.
+      tags:
+      - Worker Groups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Worker group not found
+components:
+  schemas:
+    WorkerGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the worker group
+        name:
+          type: string
+          description: Display name for the worker group
+        description:
+          type: string
+          description: A human-readable description
+        workerCount:
+          type: integer
+          description: Number of connected worker nodes
+        configVersion:
+          type: string
+          description: The current deployed configuration version
+        tags:
+          type: object
+          description: Key-value tags for organizing groups
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

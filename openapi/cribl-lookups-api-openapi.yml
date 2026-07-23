@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Lookups API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Lookups
+  description: Manage lookup files and tables used for data enrichment in pipelines.
+paths:
+  /system/lookups:
+    get:
+      operationId: listLookups
+      summary: List all lookups
+      description: Retrieves a list of all configured lookup files and tables used for data enrichment within pipelines.
+      tags:
+      - Lookups
+      responses:
+        '200':
+          description: Successfully retrieved lookups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lookup'
+                  count:
+                    type: integer
+                    description: Total number of lookups
+        '401':
+          description: Unauthorized
+  /system/lookups/{id}:
+    get:
+      operationId: getLookup
+      summary: Get a lookup by ID
+      description: Retrieves the configuration and metadata of a specific lookup file or table.
+      tags:
+      - Lookups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved lookup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lookup'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Lookup not found
+components:
+  schemas:
+    Lookup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the lookup
+        type:
+          type: string
+          description: The lookup type such as file or database
+        fileInfo:
+          type: object
+          description: File-based lookup metadata
+          properties:
+            filename:
+              type: string
+              description: The lookup filename
+            size:
+              type: integer
+              description: The file size in bytes
+        description:
+          type: string
+          description: A human-readable description of the lookup
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

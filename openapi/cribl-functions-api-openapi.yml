@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Functions API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Functions
+  description: Retrieve available processing functions that can be used within pipelines for data transformation.
+paths:
+  /system/functions:
+    get:
+      operationId: listFunctions
+      summary: List available functions
+      description: Retrieves a list of all available processing functions that can be used within pipelines for data transformation, filtering, enrichment, and routing.
+      tags:
+      - Functions
+      responses:
+        '200':
+          description: Successfully retrieved functions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Function'
+                  count:
+                    type: integer
+                    description: Total number of functions
+        '401':
+          description: Unauthorized
+  /system/functions/{id}:
+    get:
+      operationId: getFunction
+      summary: Get a function by ID
+      description: Retrieves the details of a specific processing function including its configuration schema and description.
+      tags:
+      - Functions
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved function
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Function not found
+components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  schemas:
+    Function:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the function type
+        category:
+          type: string
+          description: The function category
+        description:
+          type: string
+          description: A human-readable description of the function
+        conf:
+          type: object
+          description: The configuration schema for the function
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

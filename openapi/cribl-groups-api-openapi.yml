@@ -1,0 +1,193 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Groups API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Groups
+  description: Manage Worker Groups and Edge Fleets, which organize and deploy configurations to sets of worker nodes or edge agents.
+paths:
+  /master/groups:
+    get:
+      operationId: listGroups
+      summary: List all worker groups and fleets
+      description: Retrieves a list of all worker groups and edge fleets configured in the Cribl instance, including their deployment status and node counts.
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: Successfully retrieved groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+                  count:
+                    type: integer
+                    description: Total number of groups
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createGroup
+      summary: Create a new worker group or fleet
+      description: Creates a new worker group or edge fleet with the specified configuration. Groups organize worker nodes and allow shared configuration deployment.
+      tags:
+      - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+  /master/groups/{id}:
+    get:
+      operationId: getGroup
+      summary: Get a group by ID
+      description: Retrieves the configuration and status of a specific worker group or edge fleet including its nodes and deployment state.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    patch:
+      operationId: updateGroup
+      summary: Update a group
+      description: Updates the configuration of an existing worker group or edge fleet.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: Group updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid group configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    delete:
+      operationId: deleteGroup
+      summary: Delete a group
+      description: Deletes a worker group or edge fleet by its unique ID.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Group deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+  /master/groups/{id}/deploy:
+    post:
+      operationId: deployGroup
+      summary: Deploy configuration to a group
+      description: Deploys the current configuration to all worker nodes or edge agents in the specified group or fleet.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+components:
+  schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the group
+        name:
+          type: string
+          description: Display name for the group
+        description:
+          type: string
+          description: A human-readable description
+        isFleet:
+          type: boolean
+          description: Whether this group is an edge fleet
+        workerCount:
+          type: integer
+          description: Number of connected worker or edge nodes
+        configVersion:
+          type: string
+          description: The current deployed configuration version
+        tags:
+          type: object
+          description: Key-value tags for organizing groups
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Edge Routes API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Edge Routes
+  description: Manage routes on edge nodes for directing collected data to appropriate pipelines and destinations.
+paths:
+  /m/{fleetId}/routes:
+    get:
+      operationId: listEdgeRoutes
+      summary: List edge routes in a fleet
+      description: Retrieves all routes configured for an edge fleet that direct collected data to pipelines and destinations on edge nodes.
+      tags:
+      - Edge Routes
+      parameters:
+      - $ref: '#/components/parameters/fleetId'
+      responses:
+        '200':
+          description: Successfully retrieved edge routes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EdgeRoute'
+                  count:
+                    type: integer
+                    description: Total number of routes
+        '401':
+          description: Unauthorized
+        '404':
+          description: Fleet not found
+    post:
+      operationId: createEdgeRoute
+      summary: Create an edge route in a fleet
+      description: Creates a new route for an edge fleet to filter and direct collected data on endpoints.
+      tags:
+      - Edge Routes
+      parameters:
+      - $ref: '#/components/parameters/fleetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgeRoute'
+      responses:
+        '200':
+          description: Edge route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeRoute'
+        '400':
+          description: Invalid route configuration
+        '401':
+          description: Unauthorized
+components:
+  parameters:
+    fleetId:
+      name: fleetId
+      in: path
+      required: true
+      description: The edge fleet identifier
+      schema:
+        type: string
+  schemas:
+    EdgeRoute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the edge route
+        name:
+          type: string
+          description: Display name for the route
+        filter:
+          type: string
+          description: JavaScript filter expression for matching events
+        pipeline:
+          type: string
+          description: The pipeline ID for processing matched events
+        output:
+          type: string
+          description: The destination ID for processed events
+        final:
+          type: boolean
+          description: Whether matched events stop further evaluation
+        disabled:
+          type: boolean
+          description: Whether this route is disabled
+        description:
+          type: string
+          description: A human-readable description
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/

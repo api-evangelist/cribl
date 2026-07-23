@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Cribl As Code API Credentials Collectors API
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  version: '1.0'
+  contact:
+    name: Cribl Support
+    url: https://cribl.io/support/
+  termsOfService: https://cribl.io/terms-of-service/
+servers:
+- url: https://gateway.cribl.cloud
+  description: Cribl Cloud Management Plane
+security:
+- bearerAuth: []
+tags:
+- name: Collectors
+  description: Manage scheduled and on-demand data collection jobs from REST APIs, databases, scripts, and other sources.
+paths:
+  /system/collectors:
+    get:
+      operationId: listCollectors
+      summary: List all collectors
+      description: Retrieves a list of all configured data collectors including REST API collectors, database collectors, and script collectors.
+      tags:
+      - Collectors
+      responses:
+        '200':
+          description: Successfully retrieved collectors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Collector'
+                  count:
+                    type: integer
+                    description: Total number of collectors
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createCollector
+      summary: Create a new collector
+      description: Creates a new data collector with the specified type, schedule, and configuration for automated data collection.
+      tags:
+      - Collectors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collector'
+      responses:
+        '200':
+          description: Collector created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '400':
+          description: Invalid collector configuration
+        '401':
+          description: Unauthorized
+  /system/collectors/{id}:
+    get:
+      operationId: getCollector
+      summary: Get a collector by ID
+      description: Retrieves the configuration and status of a specific data collector identified by its unique ID.
+      tags:
+      - Collectors
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Successfully retrieved collector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+    patch:
+      operationId: updateCollector
+      summary: Update a collector
+      description: Updates the configuration of an existing data collector.
+      tags:
+      - Collectors
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collector'
+      responses:
+        '200':
+          description: Collector updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collector'
+        '400':
+          description: Invalid collector configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+    delete:
+      operationId: deleteCollector
+      summary: Delete a collector
+      description: Deletes a data collector by its unique ID.
+      tags:
+      - Collectors
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Collector deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Collector not found
+components:
+  schemas:
+    Collector:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the collector
+        type:
+          type: string
+          description: The collector type such as rest, script, database, or s3
+        schedule:
+          type: object
+          description: The collection schedule configuration
+          properties:
+            cronSchedule:
+              type: string
+              description: Cron expression for scheduled collection
+            enabled:
+              type: boolean
+              description: Whether the schedule is enabled
+        conf:
+          type: object
+          description: Collector-specific configuration
+        description:
+          type: string
+          description: A human-readable description of the collector
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.cribl.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: Cribl As Code Documentation
+  url: https://docs.cribl.io/cribl-as-code/api/
