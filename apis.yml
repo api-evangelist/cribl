@@ -8,7 +8,20 @@ description: >-
   search jobs, lake datasets, and infrastructure-as-code configuration management. The Cribl Cloud API acts as a
   centrally managed control plane across all deployments and authenticates with OAuth 2.0 client credentials.
 url: https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cribl.png
 tags:
   - Configuration
   - Data Lake
@@ -28,149 +41,1521 @@ type: Index
 access: 3rd-Party
 position: Consuming
 apis:
-  - aid: cribl:cribl-cloud-api
-    name: Cribl Cloud API
-    description: >-
-      The Cribl Cloud API is a RESTful control plane API for programmatically configuring and managing Cribl resources
-      across Stream, Edge, Search, and Lake deployments. It allows developers to retrieve and manage data, automate
-      repetitive manual processes, and integrate with third-party applications. The API uses OAuth 2.0 client
-      credentials and follows a resource-based structure where each endpoint corresponds to a specific Cribl resource or
-      collection.
-    humanURL: https://docs.cribl.io/api-reference/
-    baseURL: https://api.cribl.cloud
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/api-reference/
-      - type: OpenAPI
-        url: openapi/cribl-cloud-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-cloud-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-cloud-api-capabilities.yml
-    tags:
-      - Cloud
-      - Configuration
-      - Control Plane
-      - Data Pipelines
-      - Management
-      - Observability
-  - aid: cribl:cribl-stream-api
-    name: Cribl Stream API
-    description: >-
-      The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that
-      processes and routes telemetry data in real time. Through the API, developers can manage pipelines, routes,
-      sources, destinations, and worker groups. It enables automation of data collection, transformation, and routing
-      workflows.
-    humanURL: https://docs.cribl.io/stream/
-    baseURL: https://api.example.com
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/stream/
-      - type: OpenAPI
-        url: openapi/cribl-stream-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-stream-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-stream-api-capabilities.yml
-    tags:
-      - Data Pipelines
-      - Observability
-      - Routing
-      - Stream Processing
-      - Telemetry
-  - aid: cribl:cribl-edge-api
-    name: Cribl Edge API
-    description: >-
-      The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network
-      edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data
-      collection from endpoints, and control data processing closer to the source.
-    humanURL: https://docs.cribl.io/edge/
-    baseURL: https://api.example.com
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/edge/
-      - type: OpenAPI
-        url: openapi/cribl-edge-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-edge-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-edge-api-capabilities.yml
-    tags:
-      - Agents
-      - Data Collection
-      - Edge Computing
-      - Observability
-      - Telemetry
-  - aid: cribl:cribl-search-api
-    name: Cribl Search API
-    description: >-
-      The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and
-      stored observability data in real time. Developers can use the API to execute search queries, retrieve results,
-      and integrate search capabilities into their own applications and workflows.
-    humanURL: https://docs.cribl.io/search/
-    baseURL: https://api.example.com
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/search/
-      - type: OpenAPI
-        url: openapi/cribl-search-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-search-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-search-api-capabilities.yml
-    tags:
-      - Analytics
-      - Data Exploration
-      - Federated Search
-      - Observability
-      - Querying
-  - aid: cribl:cribl-lake-api
-    name: Cribl Lake API
-    description: >-
-      The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for
-      observability and security data. The API enables developers to manage data storage, retention policies, and access
-      controls for large volumes of telemetry data in open formats.
-    humanURL: https://docs.cribl.io/lake/
-    baseURL: https://api.example.com
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/lake/
-      - type: OpenAPI
-        url: openapi/cribl-lake-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-lake-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-lake-api-capabilities.yml
-    tags:
-      - Analytics
-      - Data Lake
-      - Data Management
-      - Observability
-      - Storage
-  - aid: cribl:cribl-as-code-api
-    name: Cribl As Code API
-    description: >-
-      The Cribl As Code API enables developers to manage Cribl configurations programmatically using
-      infrastructure-as-code principles. It supports exporting and importing configurations across deployments, enabling
-      version control, CI/CD integration, and reproducible infrastructure management. Developers can use the API
-      alongside SDKs for Python, Go, and TypeScript or through Terraform providers.
-    humanURL: https://docs.cribl.io/cribl-as-code/api/
-    baseURL: https://gateway.cribl.cloud
-    properties:
-      - type: Documentation
-        url: https://docs.cribl.io/cribl-as-code/api/
-      - type: OpenAPI
-        url: openapi/cribl-as-code-api-openapi.yml
-      - type: Rules
-        url: rules/cribl-as-code-api-rules.yml
-      - type: Capabilities
-        url: capabilities/cribl-as-code-api-capabilities.yml
-    tags:
-      - Automation
-      - Configuration
-      - DevOps
-      - Infrastructure as Code
-      - Version Control
+- aid: cribl:cribl-api-credentials-api
+  name: Cribl API Credentials API
+  description: >-
+    Manage API credentials used for OAuth 2.0 client credentials authentication. Credentials consist of
+    a client ID and client secret used to obtain bearer tokens for API access.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - API Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-api-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-authentication-api
+  name: Cribl Authentication API
+  description: Obtain and manage authentication tokens for API access.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-collectors-api
+  name: Cribl Collectors API
+  description: >-
+    Manage scheduled and on-demand data collection jobs from REST APIs, databases, scripts, and other
+    sources.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Collectors
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-collectors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-database-connections-api
+  name: Cribl Database Connections API
+  description: Configure and manage database connections used by collectors and lookup functions.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Database Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-database-connections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-datasets-api
+  name: Cribl Datasets API
+  description: >-
+    Manage Cribl Lake datasets that define storage buckets for observability and security data in open
+    formats.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-destinations-api
+  name: Cribl Destinations API
+  description: >-
+    Manage data output destinations where processed events are sent, including Splunk, S3, Elasticsearch,
+    and webhook endpoints.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Destinations
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-destinations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-destinations-api
+  name: Cribl Edge Destinations API
+  description: >-
+    Manage data output destinations for edge nodes including forwarding to Stream workers, cloud storage,
+    and analytics platforms.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Destinations
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-destinations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-fleets-api
+  name: Cribl Edge Fleets API
+  description: >-
+    Manage edge fleets that organize groups of edge nodes deployed on endpoints for local data collection
+    and processing.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Fleets
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-fleets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-nodes-api
+  name: Cribl Edge Nodes API
+  description: >-
+    Monitor and manage individual edge nodes deployed on endpoints including their status, version, and
+    resource utilization.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-pipelines-api
+  name: Cribl Edge Pipelines API
+  description: >-
+    Manage processing pipelines running on edge nodes for local data transformation and filtering before
+    forwarding.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-routes-api
+  name: Cribl Edge Routes API
+  description: >-
+    Manage routes on edge nodes for directing collected data to appropriate pipelines and destinations.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-routes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-edge-sources-api
+  name: Cribl Edge Sources API
+  description: >-
+    Manage data input sources on edge nodes including file monitors, Windows Event Log, system metrics,
+    AppScope, and other local collection methods.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Edge Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-edge-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-functions-api
+  name: Cribl Functions API
+  description: >-
+    Retrieve available processing functions that can be used within pipelines for data transformation.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Functions
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-functions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-groups-api
+  name: Cribl Groups API
+  description: >-
+    Manage Worker Groups and Edge Fleets, which organize and deploy configurations to sets of worker nodes
+    or edge agents.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-health-api
+  name: Cribl Health API
+  description: Check the health and availability of the Cribl Cloud management plane services.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-jobs-api
+  name: Cribl Jobs API
+  description: Monitor and manage running and completed collection and processing jobs.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-lake-datasets-api
+  name: Cribl Lake Datasets API
+  description: >-
+    Manage Cribl Lake datasets for storing and organizing observability data in open formats.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Lake Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-lake-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-lookups-api
+  name: Cribl Lookups API
+  description: Manage lookup files and tables used for data enrichment in pipelines.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-lookups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-nodes-api
+  name: Cribl Nodes API
+  description: Monitor and manage individual worker nodes and edge nodes within groups and fleets.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-notifications-api
+  name: Cribl Notifications API
+  description: >-
+    Configure notification rules and targets for alerting on data flow anomalies and system events.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-packs-api
+  name: Cribl Packs API
+  description: >-
+    Install, manage, and distribute reusable configuration packs containing pipelines, routes, and other
+    resources.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Packs
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-packs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-pipelines-api
+  name: Cribl Pipelines API
+  description: >-
+    Manage processing pipelines that contain ordered sequences of functions for transforming, filtering,
+    and enriching events.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-retention-api
+  name: Cribl Retention API
+  description: >-
+    Configure data retention policies that control how long data is stored in Lake datasets before automatic
+    cleanup.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Retention
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-retention-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-routes-api
+  name: Cribl Routes API
+  description: >-
+    Manage routes that filter and direct incoming data across pipelines and destinations using filter
+    expressions.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-routes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-saved-searches-api
+  name: Cribl Saved Searches API
+  description: Create and manage saved search queries for reuse and sharing across teams and workflows.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Saved Searches
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-saved-searches-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-search-jobs-api
+  name: Cribl Search Jobs API
+  description: >-
+    Execute and manage search queries across live and stored observability data with support for federated
+    search across multiple data sources.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Search Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-search-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-search-notifications-api
+  name: Cribl Search Notifications API
+  description: >-
+    Configure notification rules that trigger alerts based on search results using webhook and other notification
+    targets.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Search Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-search-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-sources-api
+  name: Cribl Sources API
+  description: >-
+    Manage data input sources that collect events from various systems including Syslog, HTTP, Kafka,
+    Splunk, and other protocols.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-system-api
+  name: Cribl System API
+  description: >-
+    Access system-level settings including Git configuration, licensing, and global preferences.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-system-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-versioning-api
+  name: Cribl Versioning API
+  description: Manage configuration versions, commits, and deployment history.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Versioning
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-versioning-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-worker-groups-api
+  name: Cribl Worker Groups API
+  description: >-
+    Manage Stream worker groups that organize worker nodes and deploy shared pipeline configurations across
+    clusters.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Worker Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-worker-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
+- aid: cribl:cribl-workspaces-api
+  name: Cribl Workspaces API
+  description: >-
+    Manage Cribl Cloud workspaces which are unique VPC containers each isolating an instance of the Cribl
+    Product Suite including Stream, Edge, Search, and Lake.
+  humanURL: https://docs.cribl.io/api-reference/
+  baseURL: https://api.cribl.cloud
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/cribl-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cribl.io/api-reference/
+  - type: Rules
+    url: rules/cribl-cloud-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-cloud-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/stream/
+  - type: Rules
+    url: rules/cribl-stream-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-stream-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/edge/
+  - type: Rules
+    url: rules/cribl-edge-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-edge-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/search/
+  - type: Rules
+    url: rules/cribl-search-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-search-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/lake/
+  - type: Rules
+    url: rules/cribl-lake-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-lake-api-capabilities.yml
+  - type: Documentation
+    url: https://docs.cribl.io/cribl-as-code/api/
+  - type: Rules
+    url: rules/cribl-as-code-api-rules.yml
+  - type: Capabilities
+    url: capabilities/cribl-as-code-api-capabilities.yml
 common:
   - type: AgenticAccess
     url: agentic-access/cribl-agentic-access.yml
