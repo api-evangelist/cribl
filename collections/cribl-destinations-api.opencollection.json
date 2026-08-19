@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Destinations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Destinations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all destinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/outputs"
+          },
+          "docs": "Retrieves a list of all configured data output destinations including their type, status, and configuration."
+        },
+        {
+          "info": {
+            "name": "Create a new destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/system/outputs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data output destination with the specified type and configuration. The destination type determines which configuration properties are required."
+        },
+        {
+          "info": {
+            "name": "Get a destination by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific data output destination identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing data output destination. Only provided fields are modified."
+        },
+        {
+          "info": {
+            "name": "Delete a destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/system/outputs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a data output destination by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Get destination status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/outputs/:id/statuses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the current operational status of a specific destination including throughput metrics and error counts."
+        },
+        {
+          "info": {
+            "name": "List Stream destinations in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/m/:groupId/system/outputs",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data output destinations configured within a specific worker group context."
+        },
+        {
+          "info": {
+            "name": "Create a Stream destination in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/m/:groupId/system/outputs",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data output destination within a worker group with the specified type and configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

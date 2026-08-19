@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Sources API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/sources"
+          },
+          "docs": "Retrieves a list of all configured data input sources in the current context, including their type, status, and configuration details."
+        },
+        {
+          "info": {
+            "name": "Create a new source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/system/sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source with the specified type and configuration. The source type determines which configuration properties are required."
+        },
+        {
+          "info": {
+            "name": "Get a source by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific data input source identified by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing data input source. Only provided fields are modified."
+        },
+        {
+          "info": {
+            "name": "Delete a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/system/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a data input source by its unique ID. The source must not be actively receiving data."
+        },
+        {
+          "info": {
+            "name": "List Stream sources in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/m/:groupId/system/sources",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data input sources configured within a specific worker group including Syslog, HTTP, Kafka, and other sources."
+        },
+        {
+          "info": {
+            "name": "Create a Stream source in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/m/:groupId/system/sources",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source within a worker group with the specified type and configuration for data collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

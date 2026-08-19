@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Lookups API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all lookups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/lookups"
+          },
+          "docs": "Retrieves a list of all configured lookup files and tables used for data enrichment within pipelines."
+        },
+        {
+          "info": {
+            "name": "Get a lookup by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/system/lookups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and metadata of a specific lookup file or table."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

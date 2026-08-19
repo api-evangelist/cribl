@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Edge Fleets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Fleets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all edge fleets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/master/groups",
+            "params": [
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product type to show only edge fleets"
+              }
+            ]
+          },
+          "docs": "Retrieves all edge fleets configured in the deployment. Edge fleets organize edge nodes and allow deploying shared configurations to groups of endpoint agents."
+        },
+        {
+          "info": {
+            "name": "Create a new edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/master/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new edge fleet for organizing and managing a group of edge nodes deployed on endpoint systems."
+        },
+        {
+          "info": {
+            "name": "Get an edge fleet by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific edge fleet including its node count and deployment state."
+        },
+        {
+          "info": {
+            "name": "Update an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing edge fleet including its name, description, and deployment settings."
+        },
+        {
+          "info": {
+            "name": "Delete an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/master/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes an edge fleet by its unique ID. Connected edge nodes will be disconnected."
+        },
+        {
+          "info": {
+            "name": "Deploy configuration to an edge fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/master/groups/:id/deploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deploys the current configuration to all edge nodes in the specified fleet, pushing updated sources, pipelines, and routes to endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

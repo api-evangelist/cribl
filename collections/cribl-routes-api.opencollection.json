@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Routes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/routes"
+          },
+          "docs": "Retrieves a list of all configured routes that filter and direct incoming data to the appropriate pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Create a new route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route with filter expressions to direct matching events to specified pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Get a route by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration of a specific route including its filter expression, pipeline, and destination assignments."
+        },
+        {
+          "info": {
+            "name": "Update a route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing route including its filter expression and pipeline assignments."
+        },
+        {
+          "info": {
+            "name": "Delete a route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a route by its unique ID."
+        },
+        {
+          "info": {
+            "name": "List Stream routes in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/m/:groupId/routes",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all routes configured within a worker group context that filter and direct incoming data to pipelines and destinations."
+        },
+        {
+          "info": {
+            "name": "Create a Stream route in a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/m/:groupId/routes",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The worker group or fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route within a worker group to filter and direct incoming events to specified pipelines and destinations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

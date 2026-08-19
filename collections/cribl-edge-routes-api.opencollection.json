@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Edge Routes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge routes in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/m/:fleetId/routes",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all routes configured for an edge fleet that direct collected data to pipelines and destinations on edge nodes."
+        },
+        {
+          "info": {
+            "name": "Create an edge route in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/m/:fleetId/routes",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route for an edge fleet to filter and direct collected data on endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

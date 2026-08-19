@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Worker Groups API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Worker Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Stream worker groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/master/groups"
+          },
+          "docs": "Retrieves all worker groups configured for Stream deployments including their node counts and configuration versions."
+        },
+        {
+          "info": {
+            "name": "Create a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/master/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Stream worker group for organizing and deploying configurations to a set of worker nodes."
+        },
+        {
+          "info": {
+            "name": "Deploy configuration to a worker group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/master/groups/:id/deploy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deploys the current configuration to all worker nodes in the specified group, making configuration changes effective."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

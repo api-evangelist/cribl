@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Versioning API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versioning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Commit current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/version/commit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new configuration version commit capturing the current state of all resources for version tracking and rollback."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

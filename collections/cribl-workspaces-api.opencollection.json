@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Workspaces API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all workspaces for the specified Cribl Cloud organization. Each workspace is an isolated VPC container running an instance of the Cribl Product Suite."
+        },
+        {
+          "info": {
+            "name": "Create a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new workspace within the specified Cribl Cloud organization. The workspace provisions an isolated VPC container with the Cribl Product Suite."
+        },
+        {
+          "info": {
+            "name": "Get a workspace by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration and status of a specific workspace within the organization."
+        },
+        {
+          "info": {
+            "name": "Update a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing workspace within the organization."
+        },
+        {
+          "info": {
+            "name": "Delete a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.cribl.cloud/v1/organizations/:organizationId/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The Cribl Cloud organization identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The workspace identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace and all its contained resources from the organization. This operation is irreversible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Edge Sources API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List edge sources in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/m/:fleetId/system/sources",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves all data input sources configured for an edge fleet including file monitors, Windows Event Log, system metrics, AppScope, and other local collection sources."
+        },
+        {
+          "info": {
+            "name": "Create an edge source in a fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.cribl.cloud/m/:fleetId/system/sources",
+            "params": [
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path",
+                "description": "The edge fleet identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data input source for an edge fleet to collect data from endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

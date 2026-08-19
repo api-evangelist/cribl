@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cribl As Code API Credentials Retention API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retention",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dataset retention policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.cribl.cloud/lake/datasets/:id/retention",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieves the retention policy for a specific Lake dataset including the retention period and cleanup schedule."
+        },
+        {
+          "info": {
+            "name": "Update dataset retention policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.cribl.cloud/lake/datasets/:id/retention",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the retention policy for a Lake dataset controlling how long data is stored before automatic cleanup."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

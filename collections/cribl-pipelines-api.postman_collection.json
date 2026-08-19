@@ -1,0 +1,2215 @@
+{
+  "item": [
+    {
+      "id": "e73ae69a-2b06-4a3b-83e4-f01bc6796d20",
+      "name": "Pipelines",
+      "description": {
+        "content": "Manage processing pipelines that contain ordered sequences of functions for transforming, filtering, and enriching events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b00303cb-4705-4537-ae8b-29471703fce5",
+          "name": "List all pipelines",
+          "request": {
+            "name": "List all pipelines",
+            "description": {
+              "content": "Retrieves a list of all configured processing pipelines including their functions, configuration, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cba5e4cb-e667-4d6c-8d07-72f9d556577b",
+              "name": "Successfully retrieved pipelines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": false,\n            \"conf\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"description\": \"string\",\n        \"asyncFuncTimeout\": 5962,\n        \"output\": \"string\",\n        \"streamtags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"groups\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": false,\n            \"conf\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"description\": \"string\",\n        \"asyncFuncTimeout\": 1659,\n        \"output\": \"string\",\n        \"streamtags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"groups\": {}\n      }\n    }\n  ],\n  \"count\": 952\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adc23a6e-e1f1-42f2-95c1-7a8a6d7f3614",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cc71e58-67b2-495d-89e2-93c783d313b1",
+          "name": "Create a new pipeline",
+          "request": {
+            "name": "Create a new pipeline",
+            "description": {
+              "content": "Creates a new processing pipeline with the specified functions and configuration. Pipelines define ordered sequences of functions for data transformation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45cee3bf-966b-4b1b-9c5d-e3bc5b2acb0e",
+              "name": "Pipeline created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 4037,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"groups\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e1f3e5-03b2-4882-846d-345ef3b6fd4b",
+              "name": "Invalid pipeline configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77fc51c1-1eb4-46df-85d0-e7b7345be817",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5ad3ba5-e6b0-459c-8bce-6dcce7b6e1af",
+          "name": "Get a pipeline by ID",
+          "request": {
+            "name": "Get a pipeline by ID",
+            "description": {
+              "content": "Retrieves the configuration of a specific processing pipeline including its functions and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c33a8e06-d44f-4807-8a32-b9b8c6323022",
+              "name": "Successfully retrieved pipeline",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 4037,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"groups\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92263fda-83ae-474f-9af7-c18815aced05",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ede483c3-c761-4d7b-8db9-9beedaa22dd9",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4688fb09-55b3-4185-9711-794e2e0dcec6",
+          "name": "Update a pipeline",
+          "request": {
+            "name": "Update a pipeline",
+            "description": {
+              "content": "Updates the configuration of an existing processing pipeline including its functions and settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60804e0d-bed3-46c3-85b9-875c6e19e997",
+              "name": "Pipeline updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 4037,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"groups\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c2d1ff-cb5b-48fd-8c65-b70cbe021c05",
+              "name": "Invalid pipeline configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d670b02-b915-4c04-a90f-143145e42cfa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d388e365-9929-4f74-80ea-d7b9146055a1",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5771b3d7-a868-487e-a292-6c0e3f71f4ca",
+          "name": "Delete a pipeline",
+          "request": {
+            "name": "Delete a pipeline",
+            "description": {
+              "content": "Deletes a processing pipeline by its unique ID. The pipeline must not be referenced by any active routes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c798e630-405d-4263-80bb-fa0cc5569662",
+              "name": "Pipeline deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4757f967-5792-438e-b517-a58189ff7101",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "361a9ff0-00f5-4d69-838e-a3771c77611a",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4369077d-2273-41bf-b461-2afbbf06d23f",
+          "name": "List Stream pipelines in a worker group",
+          "request": {
+            "name": "List Stream pipelines in a worker group",
+            "description": {
+              "content": "Retrieves all processing pipelines configured within a specific worker group context, including their function chains and settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":groupId",
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The worker group or fleet identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e09a511-128d-44b8-8257-fc67f7b5539f",
+              "name": "Successfully retrieved pipelines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"description\": \"string\",\n        \"asyncFuncTimeout\": 1023,\n        \"output\": \"string\",\n        \"streamtags\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"conf\": {\n        \"functions\": [\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": true,\n            \"conf\": {},\n            \"description\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"filter\": \"string\",\n            \"disabled\": false,\n            \"conf\": {},\n            \"description\": \"string\"\n          }\n        ],\n        \"description\": \"string\",\n        \"asyncFuncTimeout\": 181,\n        \"output\": \"string\",\n        \"streamtags\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"count\": 9476\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cf0afc6-ea5b-4c6e-aa2c-4c2a549a6f34",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7cbb002-414a-40fc-a01c-4f9b0ee2ca82",
+              "name": "Worker group not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab80c047-d8a2-40d5-bafa-56638737efb2",
+          "name": "Create a Stream pipeline in a worker group",
+          "request": {
+            "name": "Create a Stream pipeline in a worker group",
+            "description": {
+              "content": "Creates a new processing pipeline within a specific worker group with the specified functions and configuration for real-time data transformation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":groupId",
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The worker group or fleet identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56d85391-6205-4402-89b0-c52cdd8d32da",
+              "name": "Pipeline created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 3715,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29b35da2-025e-49f4-b367-b555a141636e",
+              "name": "Invalid pipeline configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55ede0b8-4b3a-4bf8-bdf4-9806873d8ff2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06af1d6a-51b5-4162-8d8e-83bcf75f579d",
+          "name": "Get a Stream pipeline by ID",
+          "request": {
+            "name": "Get a Stream pipeline by ID",
+            "description": {
+              "content": "Retrieves the configuration of a specific Stream pipeline within a worker group context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":groupId",
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The worker group or fleet identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21b43072-e1e9-4c06-b0e7-b0403dadcb00",
+              "name": "Successfully retrieved pipeline",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 3715,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c062282-ce93-4516-84b7-132f13a8de7d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f199b240-518c-409e-b48a-12add2d5ad7b",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ec120a9-8d88-48f7-a45f-65e92520dd00",
+          "name": "Update a Stream pipeline",
+          "request": {
+            "name": "Update a Stream pipeline",
+            "description": {
+              "content": "Updates the configuration of an existing Stream pipeline within a worker group context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":groupId",
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The worker group or fleet identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"filter\": \"<string>\",\n        \"disabled\": \"<boolean>\",\n        \"conf\": \"<object>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67dc481e-37d4-4cc0-b269-86b6477cbbdd",
+              "name": "Pipeline updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": false,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"asyncFuncTimeout\": 3715,\n    \"output\": \"string\",\n    \"streamtags\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00eec118-c8bb-494a-bf0a-2323f96a9a04",
+              "name": "Invalid pipeline configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36082969-30ec-4282-9703-ab6678e286f9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a2db1ef-e8d5-439b-8a7d-48008945ba23",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"conf\": {\n    \"functions\": [\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"filter\": \"string\",\n        \"disabled\": true,\n        \"conf\": {},\n        \"description\": \"string\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"asyncFuncTimeout\": \"<integer>\",\n    \"output\": \"<string>\",\n    \"streamtags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3368a813-2cd0-4df8-852e-32efc8661af1",
+          "name": "Delete a Stream pipeline",
+          "request": {
+            "name": "Delete a Stream pipeline",
+            "description": {
+              "content": "Deletes a processing pipeline from a worker group by its unique ID. The pipeline must not be referenced by active routes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m",
+                ":groupId",
+                "pipelines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The worker group or fleet identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dff0faf-7ed5-49e9-babc-47e4eb95fdaf",
+              "name": "Pipeline deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6abc9f2-4de5-44a4-8ce6-3e25a2a7b916",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9ac8670-a780-4de4-bb1b-71b256bf3323",
+              "name": "Pipeline not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m",
+                    ":groupId",
+                    "pipelines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The worker group or fleet identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.cribl.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "874b705b-63d0-44bf-8066-97150e2c1b75",
+    "name": "Cribl As Code API Credentials Pipelines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.\n\nContact Support:\n Name: Cribl Support",
+      "type": "text/plain"
+    }
+  }
+}
