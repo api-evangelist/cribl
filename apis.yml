@@ -36,7 +36,7 @@ tags:
   - Telemetry
 created: '2025-03-05'
 modified: '2026-05-19'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 type: Index
 access: 3rd-Party
 position: Consuming
