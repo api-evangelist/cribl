@@ -25,6 +25,18 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cribl.png
 tags:
   - Configuration
   - Data Lake
+  - Data Pipeline
+  - Data Routing
+  - Edge Computing
+  - Infrastructure as Code
+  - Observability
+  - Search
+  - Security Data
+  - Stream Processing
+  - Telemetry
+tags_raw:
+  - Configuration
+  - Data Lake
   - Data Pipelines
   - Data Routing
   - Edge Computing
@@ -511,6 +523,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -579,6 +593,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -717,6 +733,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
