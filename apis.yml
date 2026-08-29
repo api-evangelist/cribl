@@ -1203,6 +1203,9 @@ apis:
   - type: Rules
     url: rules/cribl-as-code-api-rules.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/cribl-capability-edges.yml
+    name: Cribl Business Capability Map
   - type: AgenticAccess
     url: agentic-access/cribl-agentic-access.yml
   - type: VulnerabilityDisclosure

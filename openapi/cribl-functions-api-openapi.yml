@@ -1,15 +1,31 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Cribl As Code API Credentials Functions API
-  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  title: Cribl Functions API
   version: '1.0'
   contact:
     name: Cribl Support
     url: https://cribl.io/support/
   termsOfService: https://cribl.io/terms-of-service/
+  description: 'Operations tagged Functions across 2 of this provider''s published API definitions: cribl-cloud-api-openapi.yml, cribl-stream-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://gateway.cribl.cloud
-  description: Cribl Cloud Management Plane
+- url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+  description: Cribl Cloud
+  variables:
+    workspaceName:
+      default: default
+      description: The name of the Cribl Cloud workspace
+    organizationId:
+      default: org-id
+      description: The Cribl Cloud organization identifier
+- url: https://{hostname}:{port}/api/v1
+  description: On-Premises Deployment
+  variables:
+    hostname:
+      default: localhost
+      description: The hostname of the Cribl instance
+    port:
+      default: '9000'
+      description: The port of the Cribl instance
 security:
 - bearerAuth: []
 tags:
@@ -40,6 +56,25 @@ paths:
                     description: Total number of functions
         '401':
           description: Unauthorized
+    servers:
+    - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+      description: Cribl Cloud
+      variables:
+        workspaceName:
+          default: default
+          description: The name of the Cribl Cloud workspace
+        organizationId:
+          default: org-id
+          description: The Cribl Cloud organization identifier
+    - url: https://{hostname}:{port}/api/v1
+      description: On-Premises Deployment
+      variables:
+        hostname:
+          default: localhost
+          description: The hostname of the Cribl instance
+        port:
+          default: '9000'
+          description: The port of the Cribl instance
   /system/functions/{id}:
     get:
       operationId: getFunction
@@ -60,15 +95,26 @@ paths:
           description: Unauthorized
         '404':
           description: Function not found
+    servers:
+    - url: https://{workspaceName}-{organizationId}.cribl.cloud/api/v1
+      description: Cribl Cloud
+      variables:
+        workspaceName:
+          default: default
+          description: The name of the Cribl Cloud workspace
+        organizationId:
+          default: org-id
+          description: The Cribl Cloud organization identifier
+    - url: https://{hostname}:{port}/api/v1
+      description: On-Premises Deployment
+      variables:
+        hostname:
+          default: localhost
+          description: The hostname of the Cribl instance
+        port:
+          default: '9000'
+          description: The port of the Cribl instance
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   schemas:
     Function:
       type: object
@@ -85,19 +131,39 @@ components:
         conf:
           type: object
           description: The configuration schema for the function
+    Function_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the function type
+        category:
+          type: string
+          description: The function category
+        description:
+          type: string
+          description: A human-readable description
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Bearer token obtained via OAuth 2.0 client credentials grant from https://login.cribl.cloud/oauth/token. Tokens expire after 24 hours (86400 seconds).
+      description: Bearer token obtained via OAuth 2.0 client credentials grant (Cribl Cloud) or the /auth/login endpoint (on-premises).
     oauth2:
       type: oauth2
-      description: OAuth 2.0 client credentials flow for Cribl Cloud management plane authentication.
+      description: OAuth 2.0 client credentials flow for Cribl Cloud authentication. Tokens expire after 24 hours.
       flows:
         clientCredentials:
           tokenUrl: https://login.cribl.cloud/oauth/token
           scopes: {}
-externalDocs:
-  description: Cribl As Code Documentation
-  url: https://docs.cribl.io/cribl-as-code/api/
+x-refined-from:
+- cribl-cloud-api-openapi.yml
+- cribl-stream-api-openapi.yml
