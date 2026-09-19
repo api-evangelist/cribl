@@ -249,6 +249,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Destination
+  tags_raw:
   - Destinations
   properties:
   - type: OpenAPI
@@ -710,6 +712,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
@@ -1174,6 +1178,8 @@ apis:
   humanURL: https://docs.cribl.io/api-reference/
   baseURL: https://api.cribl.cloud
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
