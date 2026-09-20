@@ -1,232 +1,39 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Cribl
-providerId: cribl
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Configuration
-  - Data Lake
-  - Data Pipelines
-  - Data Routing
-  - Edge Computing
-  - Infrastructure as Code
-  - Observability
-  - Search
-  - Security Data
-  - Stream Processing
-  - Telemetry
-description: Cribl is sold as a consumption-based observability platform with three published tiers
-  (Free / Standard / Enterprise) gated on daily processed-data volume (TB/day), worker capacity, and
-  enterprise features. Specific per-GB or per-TB dollar rates are not published on the public pricing
-  page; commercial pricing is quoted by Cribl sales. The Cribl APIs (Cloud, Stream, Edge, Search, Lake,
-  As Code) ship with the platform - access is gated by the platform tier rather than priced as standalone
-  API products.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://cribl.io/pricing/plan/
 sources:
-  - https://cribl.io/pricing/
+- https://cribl.io/pricing/plan/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+published: false
+note: No numeric price is published on the pricing page; Plan/feature comparison page with tier names
+  and capacity limits but no monetary prices; directs to 'See pricing guide' and 'Contact sales'. Mentions
+  consumption-based Cribl Credits without rates.
+plan_count: 3
 plans:
-  - id: cribl-free
-    name: Free
-    type: freemium
-    description: Free tier for evaluation and small production deployments. Up to 1TB/day of data processing
-      with community support.
-    entries:
-      - label: Daily data processing
-        name: data_processed
-        type: quota
-        metric: tb
-        limit: 1
-        timeFrame: day
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Worker groups
-        name: worker_groups
-        type: quota
-        metric: worker_group
-        limit: 1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Worker processes
-        name: worker_processes
-        type: quota
-        metric: worker_process
-        limit: 10
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Lake capacity
-        name: lake_capacity
-        type: quota
-        metric: gb
-        limit: 50
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Search executors
-        name: search_executors
-        type: quota
-        metric: executor
-        limit: 10
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Universal Sources
-      - name: Unlimited Pipelines & Routes
-      - name: Community Support
-      - name: Cribl Cloud API
-      - name: Cribl Stream API
-      - name: Cribl Edge API
-      - name: Cribl Search API
-      - name: Cribl Lake API
-      - name: Cribl As Code API
-  - id: cribl-standard
-    name: Standard
-    type: subscription
-    description: Mid-tier plan for production workloads up to 5TB/day. Adds Git backup, notifications,
-      8x5 support, and unlimited Lake capacity. Contact Cribl sales for pricing.
-    entries:
-      - label: Daily data processing
-        name: data_processed
-        type: quota
-        metric: tb
-        limit: 5
-        timeFrame: day
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Worker groups
-        name: worker_groups
-        type: quota
-        metric: worker_group
-        limit: 1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Worker processes
-        name: worker_processes
-        type: quota
-        metric: worker_process
-        limit: 50
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Lake capacity
-        name: lake_capacity
-        type: quota
-        metric: gb
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Search executors
-        name: search_executors
-        type: quota
-        metric: executor
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Everything in Free
-      - name: Git backup
-      - name: Notifications
-      - name: 8x5 Support (business hours)
-      - name: Unlimited Lake Capacity
-      - name: Unlimited Search Executors
-      - name: Cribl Cloud API
-      - name: Cribl Stream API
-      - name: Cribl Edge API
-      - name: Cribl Search API
-      - name: Cribl Lake API
-      - name: Cribl As Code API
-  - id: cribl-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom enterprise plan with unlimited TB/day, multiple workspaces, federated auth,
-      RBAC, and dedicated 24x7 support. Pricing is consumption-based and quoted by Cribl sales.
-    entries:
-      - label: Daily data processing
-        name: data_processed
-        type: tiered
-        metric: tb
-        limit: -1
-        timeFrame: day
-        geo: configurable
-        unit: 1
-        price: custom (consumption-based)
-        userMultiplied: false
-      - label: Worker groups
-        name: worker_groups
-        type: quota
-        metric: worker_group
-        limit: -1
-        timeFrame: usage
-        geo: configurable
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Worker processes
-        name: worker_processes
-        type: quota
-        metric: worker_process
-        limit: -1
-        timeFrame: usage
-        geo: configurable
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Edge nodes
-        name: edge_nodes
-        type: quota
-        metric: edge_node
-        limit: -1
-        timeFrame: usage
-        geo: configurable
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Everything in Standard
-      - name: Multiple Workspaces
-      - name: Connected Environments
-      - name: RBAC and Federated Auth
-      - name: Dedicated 24x7 Support
-      - name: Unlimited Worker Groups, Processes, Fleets, Edge Nodes
-      - name: Cribl Cloud API
-      - name: Cribl Stream API
-      - name: Cribl Edge API
-      - name: Cribl Search API
-      - name: Cribl Lake API
-      - name: Cribl As Code API
-notes: Cribl publishes tier feature limits (TB/day, worker counts, Lake capacity) but does not publish
-  per-GB or per-TB dollar rates on the public pricing page. Commercial pricing for Standard and Enterprise
-  is quoted by Cribl sales under a consumption-based licensing model.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Free
+  price_text: Free
+  period: none
+  included_quota: Up to 1TB/day, Universal Sources, Unlimited Pipelines, Unlimited Routes, Community Support
+- name: Standard
+  price_text: Contact sales
+  period: none
+  included_quota: 'Everything in Free plus: Up to 5TB/day*, Git backup, Notifications, 8×5 Support'
+- name: Enterprise
+  price_text: Contact sales
+  period: none
+  included_quota: 'Everything in Standard plus: Unlimited TB/day*, Multiple Workspaces, Connected Environments,
+    RBAC & Federated Auth, Dedicated 24×7 Support Team'
+rate_limit_statements:
+- Up to 1TB/day
+- Up to 5TB/day*
+- Unlimited TB/day*
+- Edge Node Limits 100
+- Search Executors 10
+- Lake Capacity 50 GB
+- Max Worker Processes 10
