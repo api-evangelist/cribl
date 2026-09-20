@@ -10,6 +10,13 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: negotiated
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-09-20'
+  evidence: Software License
+  free_edition: Free
+  managed_tier: Standard
 published: false
 note: No numeric price is published on the pricing page; Plan/feature comparison page with tier names
   and capacity limits but no monetary prices; directs to 'See pricing guide' and 'Contact sales'. Mentions
