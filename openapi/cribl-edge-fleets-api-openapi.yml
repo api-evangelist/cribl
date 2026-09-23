@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Edge Edge Fleets API
-  description: The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data collection from endpoints, and control data processing closer to the source. This reduces bandwidth consumption and latency by filtering and transforming data at the point of origin before forwarding it to centralized destinations. Edge API endpoints are accessed through the Cribl Cloud control plane using fleet context paths.
+  description: The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network edge by deploying lightweight agents on endpoints.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -166,6 +166,14 @@ paths:
         '404':
           description: Edge fleet not found
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     EdgeFleet:
       type: object
@@ -191,14 +199,6 @@ components:
         tags:
           type: object
           description: Key-value tags for organizing fleets
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

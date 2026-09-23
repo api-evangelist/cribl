@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Stream Worker Groups API
-  description: The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that processes and routes telemetry data in real time. Through the API, developers can manage pipelines, routes, sources, destinations, and worker groups. It enables automation of data collection, transformation, and routing workflows, allowing organizations to control how observability data flows between sources and analytics tools without vendor lock-in. Stream API endpoints are accessed through the Cribl Cloud control plane or directly on on-premises deployments.
+  description: The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that processes and routes telemetry data in real time.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -96,6 +96,14 @@ paths:
         '404':
           description: Worker group not found
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     WorkerGroup:
       type: object
@@ -118,14 +126,6 @@ components:
         tags:
           type: object
           description: Key-value tags for organizing groups
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

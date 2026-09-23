@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Search Search Notifications API
-  description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time. Developers can use the API to execute search queries, manage datasets, configure search jobs, and integrate federated search capabilities into their own applications and workflows. Cribl Search supports federated search across multiple data sources, enabling organizations to gain insights without needing to move or duplicate data into a single location.
+  description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time.
   version: '1.0'
   contact:
     name: Cribl Support

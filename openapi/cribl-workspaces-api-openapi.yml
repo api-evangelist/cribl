@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl As Code Workspaces API
-  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. The management plane API provides endpoints for administrative tasks in Cribl Cloud including managing organizations, workspaces, and API credentials. Developers can use this API alongside SDKs for Python, Go, and TypeScript, or through Terraform providers, to onboard sources, build and maintain pipelines, and standardize workflows at scale. The management plane supports creating and configuring Cribl Cloud workspaces, managing API credentials, and controlling access to organizational resources.
+  description: The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -143,6 +143,21 @@ paths:
         '404':
           description: Workspace not found
 components:
+  parameters:
+    workspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: The workspace identifier
+      schema:
+        type: string
+    organizationId:
+      name: organizationId
+      in: path
+      required: true
+      description: The Cribl Cloud organization identifier
+      schema:
+        type: string
   schemas:
     WorkspaceUpdate:
       type: object
@@ -156,6 +171,23 @@ components:
           type: string
           description: Updated description
           maxLength: 256
+    WorkspaceCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Display name for the new workspace
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          description: A human-readable description
+          maxLength: 256
+        region:
+          type: string
+          description: The cloud region for the workspace
     Workspace:
       type: object
       properties:
@@ -194,38 +226,6 @@ components:
           type: string
           description: Workspace last update timestamp
           format: date-time
-    WorkspaceCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Display name for the new workspace
-          minLength: 1
-          maxLength: 64
-        description:
-          type: string
-          description: A human-readable description
-          maxLength: 256
-        region:
-          type: string
-          description: The cloud region for the workspace
-  parameters:
-    organizationId:
-      name: organizationId
-      in: path
-      required: true
-      description: The Cribl Cloud organization identifier
-      schema:
-        type: string
-    workspaceId:
-      name: workspaceId
-      in: path
-      required: true
-      description: The workspace identifier
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

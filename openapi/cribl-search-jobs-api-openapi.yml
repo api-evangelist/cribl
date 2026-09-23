@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Search Search Jobs API
-  description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time. Developers can use the API to execute search queries, manage datasets, configure search jobs, and integrate federated search capabilities into their own applications and workflows. Cribl Search supports federated search across multiple data sources, enabling organizations to gain insights without needing to move or duplicate data into a single location.
+  description: The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -182,26 +182,6 @@ components:
       schema:
         type: string
   schemas:
-    SearchJobRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The search query in Cribl Search query language
-        dataset:
-          type: string
-          description: The dataset to search against
-        earliest:
-          type: string
-          description: The earliest time for the search range in relative or absolute format
-        latest:
-          type: string
-          description: The latest time for the search range in relative or absolute format
-        timezone:
-          type: string
-          description: The timezone for time range interpretation
     SearchJob:
       type: object
       properties:
@@ -237,6 +217,26 @@ components:
         error:
           type: string
           description: Error message if the job failed
+    SearchJobRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The search query in Cribl Search query language
+        dataset:
+          type: string
+          description: The dataset to search against
+        earliest:
+          type: string
+          description: The earliest time for the search range in relative or absolute format
+        latest:
+          type: string
+          description: The latest time for the search range in relative or absolute format
+        timezone:
+          type: string
+          description: The timezone for time range interpretation
   securitySchemes:
     bearerAuth:
       type: http

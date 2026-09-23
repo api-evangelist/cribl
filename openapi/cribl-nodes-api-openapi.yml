@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Cloud Nodes API
-  description: The Cribl Cloud API is a RESTful API that provides a centrally managed control plane for programmatically configuring and managing Cribl resources across Stream, Edge, Search, and Lake deployments. It allows developers to retrieve and manage data, automate repetitive manual processes, and integrate with third-party applications. The API uses OAuth 2.0 authentication via client credentials and follows a resource-based structure where each endpoint corresponds to a specific Cribl resource or collection of resources. The size limit for requests is 5 MB.
+  description: The Cribl Cloud API is a RESTful API that provides a centrally managed control plane for programmatically configuring and managing Cribl resources across Stream, Edge, Search, and Lake deployments.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -113,6 +113,14 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     Node:
       type: object
@@ -147,14 +155,6 @@ components:
           type: number
           description: Current memory utilization percentage
           format: float
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

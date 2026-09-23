@@ -63,7 +63,8 @@
     "tag 'Pipelines' spans 2 source specs (cribl-cloud-api-openapi.yml, cribl-stream-api-openapi.yml): per-path servers applied",
     "tag 'Routes' spans 2 source specs (cribl-cloud-api-openapi.yml, cribl-stream-api-openapi.yml): per-path servers applied",
     "tag 'Sources' spans 2 source specs (cribl-cloud-api-openapi.yml, cribl-stream-api-openapi.yml): per-path servers applied",
-    "tag 'Datasets' spans 2 source specs (cribl-lake-api-openapi.yml, cribl-search-api-openapi.yml): per-path servers applied"
+    "tag 'Datasets' spans 2 source specs (cribl-lake-api-openapi.yml, cribl-search-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "cribl-api-credentials-api-openapi.yml: previously refined output, superseded by openapi/_original/",

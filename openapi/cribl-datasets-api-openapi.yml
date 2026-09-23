@@ -309,6 +309,14 @@ paths:
           default: '9000'
           description: The port of the Cribl instance
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     LakeDataset:
       type: object
@@ -380,14 +388,6 @@ components:
             index:
               type: string
               description: The index or bucket to search
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

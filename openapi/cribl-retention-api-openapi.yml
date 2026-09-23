@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Cribl Lake Retention API
-  description: The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability and security data. The API enables developers to manage data storage, retention policies, and access controls for large volumes of telemetry data. Cribl Lake stores data in open formats, making it accessible to any analytics tool, and provides cost-effective long-term storage that keeps data usable and valuable to the teams and tools that need it. Lake API endpoints are accessible through the Cribl Cloud control plane.
+  description: The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability and security data.
   version: '1.0'
   contact:
     name: Cribl Support
@@ -71,14 +71,6 @@ paths:
         '404':
           description: Dataset not found
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   schemas:
     RetentionPolicy:
       type: object
@@ -93,6 +85,14 @@ components:
         cleanupSchedule:
           type: string
           description: Cron schedule for running retention cleanup
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
