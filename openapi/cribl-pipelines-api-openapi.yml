@@ -336,6 +336,21 @@ paths:
           default: '9000'
           description: The port of the Cribl instance
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
   schemas:
     Pipeline:
       type: object
@@ -434,21 +449,6 @@ components:
         description:
           type: string
           description: A human-readable description
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
-    groupId:
-      name: groupId
-      in: path
-      required: true
-      description: The worker group or fleet identifier
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -144,13 +144,6 @@ paths:
           description: Workspace not found
 components:
   parameters:
-    workspaceId:
-      name: workspaceId
-      in: path
-      required: true
-      description: The workspace identifier
-      schema:
-        type: string
     organizationId:
       name: organizationId
       in: path
@@ -158,36 +151,14 @@ components:
       description: The Cribl Cloud organization identifier
       schema:
         type: string
+    workspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: The workspace identifier
+      schema:
+        type: string
   schemas:
-    WorkspaceUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated display name
-          minLength: 1
-          maxLength: 64
-        description:
-          type: string
-          description: Updated description
-          maxLength: 256
-    WorkspaceCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Display name for the new workspace
-          minLength: 1
-          maxLength: 64
-        description:
-          type: string
-          description: A human-readable description
-          maxLength: 256
-        region:
-          type: string
-          description: The cloud region for the workspace
     Workspace:
       type: object
       properties:
@@ -226,6 +197,35 @@ components:
           type: string
           description: Workspace last update timestamp
           format: date-time
+    WorkspaceCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Display name for the new workspace
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          description: A human-readable description
+          maxLength: 256
+        region:
+          type: string
+          description: The cloud region for the workspace
+    WorkspaceUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated display name
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          description: Updated description
+          maxLength: 256
   securitySchemes:
     bearerAuth:
       type: http
