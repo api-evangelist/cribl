@@ -86,6 +86,14 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    fleetId:
+      name: fleetId
+      in: path
+      required: true
+      description: The edge fleet identifier
+      schema:
+        type: string
   schemas:
     EdgePipeline:
       type: object
@@ -118,14 +126,6 @@ components:
             description:
               type: string
               description: A human-readable description
-  parameters:
-    fleetId:
-      name: fleetId
-      in: path
-      required: true
-      description: The edge fleet identifier
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

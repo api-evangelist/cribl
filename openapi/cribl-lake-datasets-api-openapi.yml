@@ -115,6 +115,14 @@ paths:
         '404':
           description: Dataset not found
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     LakeDataset:
       type: object
@@ -134,14 +142,6 @@ components:
         format:
           type: string
           description: The storage format for the dataset
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

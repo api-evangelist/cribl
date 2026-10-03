@@ -182,6 +182,26 @@ components:
       schema:
         type: string
   schemas:
+    SearchJobRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The search query in Cribl Search query language
+        dataset:
+          type: string
+          description: The dataset to search against
+        earliest:
+          type: string
+          description: The earliest time for the search range in relative or absolute format
+        latest:
+          type: string
+          description: The latest time for the search range in relative or absolute format
+        timezone:
+          type: string
+          description: The timezone for time range interpretation
     SearchJob:
       type: object
       properties:
@@ -217,26 +237,6 @@ components:
         error:
           type: string
           description: Error message if the job failed
-    SearchJobRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The search query in Cribl Search query language
-        dataset:
-          type: string
-          description: The dataset to search against
-        earliest:
-          type: string
-          description: The earliest time for the search range in relative or absolute format
-        latest:
-          type: string
-          description: The latest time for the search range in relative or absolute format
-        timezone:
-          type: string
-          description: The timezone for time range interpretation
   securitySchemes:
     bearerAuth:
       type: http

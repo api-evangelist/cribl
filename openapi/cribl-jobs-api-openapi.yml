@@ -77,6 +77,14 @@ paths:
         '404':
           description: Job not found
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     Job:
       type: object
@@ -114,14 +122,6 @@ components:
             numErrors:
               type: integer
               description: Number of errors encountered
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

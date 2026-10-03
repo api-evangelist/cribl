@@ -144,18 +144,18 @@ paths:
           description: Workspace not found
 components:
   parameters:
-    organizationId:
-      name: organizationId
-      in: path
-      required: true
-      description: The Cribl Cloud organization identifier
-      schema:
-        type: string
     workspaceId:
       name: workspaceId
       in: path
       required: true
       description: The workspace identifier
+      schema:
+        type: string
+    organizationId:
+      name: organizationId
+      in: path
+      required: true
+      description: The Cribl Cloud organization identifier
       schema:
         type: string
   schemas:
