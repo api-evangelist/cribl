@@ -158,14 +158,6 @@ paths:
         '404':
           description: Group not found
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   schemas:
     Group:
       type: object
@@ -191,6 +183,14 @@ components:
         tags:
           type: object
           description: Key-value tags for organizing groups
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -336,22 +336,25 @@ paths:
           default: '9000'
           description: The port of the Cribl instance
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
-    groupId:
-      name: groupId
-      in: path
-      required: true
-      description: The worker group or fleet identifier
-      schema:
-        type: string
   schemas:
+    PipelineFunction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The function type identifier
+        filter:
+          type: string
+          description: JavaScript expression to filter which events this function processes
+        disabled:
+          type: boolean
+          description: Whether this function is disabled
+        conf:
+          type: object
+          description: Function-specific configuration
+        description:
+          type: string
+          description: A human-readable description
     Pipeline:
       type: object
       properties:
@@ -384,7 +387,7 @@ components:
             groups:
               type: object
               description: Group-specific configuration overrides
-    PipelineFunction:
+    PipelineFunction_2:
       type: object
       properties:
         id:
@@ -392,7 +395,7 @@ components:
           description: The function type identifier
         filter:
           type: string
-          description: JavaScript expression to filter which events this function processes
+          description: JavaScript expression to filter events
         disabled:
           type: boolean
           description: Whether this function is disabled
@@ -431,24 +434,21 @@ components:
               items:
                 type: string
               description: Tags applied to events in this pipeline
-    PipelineFunction_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The function type identifier
-        filter:
-          type: string
-          description: JavaScript expression to filter events
-        disabled:
-          type: boolean
-          description: Whether this function is disabled
-        conf:
-          type: object
-          description: Function-specific configuration
-        description:
-          type: string
-          description: A human-readable description
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -180,14 +180,6 @@ paths:
           default: '9000'
           description: The port of the Cribl instance
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   schemas:
     Pack:
       type: object
@@ -231,6 +223,14 @@ components:
         displayName:
           type: string
           description: The display name
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

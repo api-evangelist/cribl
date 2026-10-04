@@ -291,22 +291,26 @@ paths:
           default: '9000'
           description: The port of the Cribl instance
 components:
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
-    groupId:
-      name: groupId
-      in: path
-      required: true
-      description: The worker group or fleet identifier
-      schema:
-        type: string
   schemas:
+    DestinationStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The destination identifier
+        status:
+          type: string
+          description: The current operational status
+          enum:
+          - active
+          - inactive
+          - error
+        numEvents:
+          type: integer
+          description: Number of events processed
+        numBytes:
+          type: integer
+          description: Number of bytes processed
     Destination:
       type: object
       properties:
@@ -336,25 +340,6 @@ components:
           items:
             type: string
           description: Tags for filtering events to this destination
-    DestinationStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The destination identifier
-        status:
-          type: string
-          description: The current operational status
-          enum:
-          - active
-          - inactive
-          - error
-        numEvents:
-          type: integer
-          description: Number of events processed
-        numBytes:
-          type: integer
-          description: Number of bytes processed
     Destination_2:
       type: object
       properties:
@@ -381,6 +366,21 @@ components:
           items:
             type: string
           description: Tags for filtering events
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      description: The worker group or fleet identifier
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
