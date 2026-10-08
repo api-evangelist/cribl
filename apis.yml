@@ -1209,6 +1209,10 @@ apis:
   - type: Rules
     url: rules/cribl-as-code-api-rules.yml
 common:
+  - type: RateLimits
+    url: rate-limits/cribl-rate-limits.yml
+  - type: FinOps
+    url: finops/cribl-finops.yml
   - type: Pricing
     url: https://cribl.io/pricing/plan/
   - type: Plans
