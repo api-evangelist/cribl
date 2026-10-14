@@ -51,3 +51,54 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: cribl-crowdstrike-own
+  label: CrowdStrike (own)
+  partner: crowdstrike
+  partner_name: CrowdStrike (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.crowdstrike.com/listings/cribl-data-connector/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cribl-datadog-own
+  label: Datadog (own)
+  partner: datadog
+  partner_name: Datadog (own)
+  category: AWS
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/DataDog/integrations-extras/tree/master/cribl_stream
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cribl-microsoft-sentinel-own
+  label: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_name: Microsoft Sentinel (own)
+  category: Security - Others
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Cribl
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cribl-new-relic-own
+  label: New Relic (own)
+  partner: new-relic
+  partner_name: New Relic (own)
+  category: Verified
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://newrelic.com/instant-observability/cribl-logstream
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
