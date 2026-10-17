@@ -86,6 +86,14 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    fleetId:
+      name: fleetId
+      in: path
+      required: true
+      description: The edge fleet identifier
+      schema:
+        type: string
   schemas:
     EdgeSource:
       type: object
@@ -110,14 +118,6 @@ components:
           items:
             type: string
           description: Tags applied to events from this source
-  parameters:
-    fleetId:
-      name: fleetId
-      in: path
-      required: true
-      description: The edge fleet identifier
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

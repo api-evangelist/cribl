@@ -337,24 +337,6 @@ paths:
           description: The port of the Cribl instance
 components:
   schemas:
-    PipelineFunction:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The function type identifier
-        filter:
-          type: string
-          description: JavaScript expression to filter which events this function processes
-        disabled:
-          type: boolean
-          description: Whether this function is disabled
-        conf:
-          type: object
-          description: Function-specific configuration
-        description:
-          type: string
-          description: A human-readable description
     Pipeline:
       type: object
       properties:
@@ -387,7 +369,7 @@ components:
             groups:
               type: object
               description: Group-specific configuration overrides
-    PipelineFunction_2:
+    PipelineFunction:
       type: object
       properties:
         id:
@@ -395,7 +377,7 @@ components:
           description: The function type identifier
         filter:
           type: string
-          description: JavaScript expression to filter events
+          description: JavaScript expression to filter which events this function processes
         disabled:
           type: boolean
           description: Whether this function is disabled
@@ -434,6 +416,24 @@ components:
               items:
                 type: string
               description: Tags applied to events in this pipeline
+    PipelineFunction_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The function type identifier
+        filter:
+          type: string
+          description: JavaScript expression to filter events
+        disabled:
+          type: boolean
+          description: Whether this function is disabled
+        conf:
+          type: object
+          description: Function-specific configuration
+        description:
+          type: string
+          description: A human-readable description
   parameters:
     resourceId:
       name: id

@@ -71,6 +71,14 @@ paths:
         '404':
           description: Dataset not found
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     RetentionPolicy:
       type: object
@@ -85,14 +93,6 @@ components:
         cleanupSchedule:
           type: string
           description: Cron schedule for running retention cleanup
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
