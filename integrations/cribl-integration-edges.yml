@@ -9,6 +9,8 @@ checked:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 - new-relic/integrations/new-relic-integration-edges.yml
+- opentofu/integrations/opentofu-integration-edges.yml
+- terraform/integrations/terraform-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: OpenTelemetry
@@ -138,6 +140,42 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Verified
+- partner_name: OpenTofu (opentofu-registry)
+  partner: opentofu
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: opentofu-registry
+  evidence: https://search.opentofu.org/provider/criblio/criblio
+  mirror_of: opentofu/integrations/opentofu-integration-edges.yml
+  apps:
+  - criblio/criblio
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: infrastructure-as-code provider registry listing
+- partner_name: Terraform (terraform-registry)
+  partner: terraform
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: terraform-registry
+  evidence: https://registry.terraform.io/providers/criblio/criblio
+  mirror_of: terraform/integrations/terraform-integration-edges.yml
+  apps:
+  - criblio/criblio
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: infrastructure-as-code provider registry listing
+  badges:
+  - Verified publisher (Terraform partner tier)
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
