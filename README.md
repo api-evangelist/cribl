@@ -1,4 +1,4 @@
-# Cribl (cribl)
+# Cribl
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,201 +66,244 @@
 
 Cribl is an observability pipeline company providing a suite of products for collecting, processing, routing, searching, and storing telemetry data at scale. Cribl's developer platform offers REST APIs across Stream, Edge, Search, Lake, and the As Code product line, exposing programmatic control over data pipelines, edge agents, federated search jobs, lake datasets, and infrastructure-as-code configuration management. The Cribl Cloud API acts as a centrally managed control plane across all deployments and authenticates with OAuth 2.0 client credentials.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/cribl/refs/heads/main/apis.yml)
+**Areas:** Configuration · Data Lake · Data Pipeline · Data Routing · Edge Computing · Infrastructure as Code · Observability · Search · Security Data · Stream Processing · Telemetry
 
-## Scope
+## Cribl on APIs.io
 
-- **Type:** Index
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Cribl is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cribl/](https://apis.io/providers/cribl/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (32)
 
-- Configuration
-- Data Lake
-- Data Pipelines
-- Data Routing
-- Edge Computing
-- Infrastructure as Code
-- Observability
-- Search
-- Security Data
-- Stream Processing
-- Telemetry
+- [Cribl API Credentials API](https://apis.io/apis/cribl/cribl-api-credentials-api/) — Manage API credentials used for OAuth 2.0 client credentials authentication. Credentials consist of a client ID and client secret used to obtain bearer…
+- [Cribl Authentication API](https://apis.io/apis/cribl/cribl-authentication-api/) — Obtain and manage authentication tokens for API access.
+- [Cribl Collectors API](https://apis.io/apis/cribl/cribl-collectors-api/) — Manage scheduled and on-demand data collection jobs from REST APIs, databases, scripts, and other sources.
+- [Cribl Database Connections API](https://apis.io/apis/cribl/cribl-database-connections-api/) — Configure and manage database connections used by collectors and lookup functions.
+- [Cribl Datasets API](https://apis.io/apis/cribl/cribl-datasets-api/) — Manage Cribl Lake datasets that define storage buckets for observability and security data in open formats.
+- [Cribl Destinations API](https://apis.io/apis/cribl/cribl-destinations-api/) — Manage data output destinations where processed events are sent, including Splunk, S3, Elasticsearch, and webhook endpoints.
+- [Cribl Edge Destinations API](https://apis.io/apis/cribl/cribl-edge-destinations-api/) — Manage data output destinations for edge nodes including forwarding to Stream workers, cloud storage, and analytics platforms.
+- [Cribl Edge Fleets API](https://apis.io/apis/cribl/cribl-edge-fleets-api/) — Manage edge fleets that organize groups of edge nodes deployed on endpoints for local data collection and processing.
+- [Cribl Edge Nodes API](https://apis.io/apis/cribl/cribl-edge-nodes-api/) — Monitor and manage individual edge nodes deployed on endpoints including their status, version, and resource utilization.
+- [Cribl Edge Pipelines API](https://apis.io/apis/cribl/cribl-edge-pipelines-api/) — Manage processing pipelines running on edge nodes for local data transformation and filtering before forwarding.
+- [Cribl Edge Routes API](https://apis.io/apis/cribl/cribl-edge-routes-api/) — Manage routes on edge nodes for directing collected data to appropriate pipelines and destinations.
+- [Cribl Edge Sources API](https://apis.io/apis/cribl/cribl-edge-sources-api/) — Manage data input sources on edge nodes including file monitors, Windows Event Log, system metrics, AppScope, and other local collection methods.
+- [Cribl Functions API](https://apis.io/apis/cribl/cribl-functions-api/) — Retrieve available processing functions that can be used within pipelines for data transformation.
+- [Cribl Groups API](https://apis.io/apis/cribl/cribl-groups-api/) — Manage Worker Groups and Edge Fleets, which organize and deploy configurations to sets of worker nodes or edge agents.
+- [Cribl Health API](https://apis.io/apis/cribl/cribl-health-api/) — Check the health and availability of the Cribl Cloud management plane services.
+- [Cribl Jobs API](https://apis.io/apis/cribl/cribl-jobs-api/) — Monitor and manage running and completed collection and processing jobs.
+- [Cribl Lake Datasets API](https://apis.io/apis/cribl/cribl-lake-datasets-api/) — Manage Cribl Lake datasets for storing and organizing observability data in open formats.
+- [Cribl Lookups API](https://apis.io/apis/cribl/cribl-lookups-api/) — Manage lookup files and tables used for data enrichment in pipelines.
+- [Cribl Nodes API](https://apis.io/apis/cribl/cribl-nodes-api/) — Monitor and manage individual worker nodes and edge nodes within groups and fleets.
+- [Cribl Notifications API](https://apis.io/apis/cribl/cribl-notifications-api/) — Configure notification rules and targets for alerting on data flow anomalies and system events.
+- [Cribl Packs API](https://apis.io/apis/cribl/cribl-packs-api/) — Install, manage, and distribute reusable configuration packs containing pipelines, routes, and other resources.
+- [Cribl Pipelines API](https://apis.io/apis/cribl/cribl-pipelines-api/) — Manage processing pipelines that contain ordered sequences of functions for transforming, filtering, and enriching events.
+- [Cribl Retention API](https://apis.io/apis/cribl/cribl-retention-api/) — Configure data retention policies that control how long data is stored in Lake datasets before automatic cleanup.
+- [Cribl Routes API](https://apis.io/apis/cribl/cribl-routes-api/) — Manage routes that filter and direct incoming data across pipelines and destinations using filter expressions.
+- [Cribl Saved Searches API](https://apis.io/apis/cribl/cribl-saved-searches-api/) — Create and manage saved search queries for reuse and sharing across teams and workflows.
+- [Cribl Search Jobs API](https://apis.io/apis/cribl/cribl-search-jobs-api/) — Execute and manage search queries across live and stored observability data with support for federated search across multiple data sources.
+- [Cribl Search Notifications API](https://apis.io/apis/cribl/cribl-search-notifications-api/) — Configure notification rules that trigger alerts based on search results using webhook and other notification targets.
+- [Cribl Sources API](https://apis.io/apis/cribl/cribl-sources-api/) — Manage data input sources that collect events from various systems including Syslog, HTTP, Kafka, Splunk, and other protocols.
+- [Cribl System API](https://apis.io/apis/cribl/cribl-system-api/) — Access system-level settings including Git configuration, licensing, and global preferences.
+- [Cribl Versioning API](https://apis.io/apis/cribl/cribl-versioning-api/) — Manage configuration versions, commits, and deployment history.
+- [Cribl Worker Groups API](https://apis.io/apis/cribl/cribl-worker-groups-api/) — Manage Stream worker groups that organize worker nodes and deploy shared pipeline configurations across clusters.
+- [Cribl Workspaces API](https://apis.io/apis/cribl/cribl-workspaces-api/) — Manage Cribl Cloud workspaces which are unique VPC containers each isolating an instance of the Cribl Product Suite including Stream, Edge, Search, and Lake.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-05
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Cribl Cloud API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Cribl Cloud API is a RESTful control plane API for programmatically configuring and managing Cribl resources across Stream, Edge, Search, and Lake deployments. It allows developers to retrieve and manage data, automate repetitive manual processes, and integrate with third-party applications. The API uses OAuth 2.0 client credentials and follows a resource-based structure where each endpoint corresponds to a specific Cribl resource or collection.
+- [Cribl Agentic Access](https://apis.io/agentic-access/cribl/cribl-agentic-access/)
 
-- **Human URL:** [https://docs.cribl.io/api-reference/](https://docs.cribl.io/api-reference/)
-- **Base URL:** `https://api.cribl.cloud`
+#### JSON Schema (38)
 
-#### Tags
+The data models the API reads and writes.
 
-- Cloud
-- Configuration
-- Control Plane
-- Data Pipelines
-- Management
-- Observability
+- [ApiCredential](https://apis.io/schemas/cribl/cribl-apicredential/)
+- [ApiCredentialCreate](https://apis.io/schemas/cribl/cribl-apicredentialcreate/)
+- [ApiCredentialUpdate](https://apis.io/schemas/cribl/cribl-apicredentialupdate/)
+- [ApiCredentialWithSecret](https://apis.io/schemas/cribl/cribl-apicredentialwithsecret/)
+- [Collector](https://apis.io/schemas/cribl/cribl-collector/)
+- [DatabaseConnection](https://apis.io/schemas/cribl/cribl-databaseconnection/)
+- [Cribl Destination](https://apis.io/schemas/cribl/cribl-destination/)
+- [DestinationStatus](https://apis.io/schemas/cribl/cribl-destinationstatus/)
+- [EdgeDestination](https://apis.io/schemas/cribl/cribl-edgedestination/)
+- [EdgeFleet](https://apis.io/schemas/cribl/cribl-edgefleet/)
+- [EdgeNode](https://apis.io/schemas/cribl/cribl-edgenode/)
+- [EdgePipeline](https://apis.io/schemas/cribl/cribl-edgepipeline/)
+- [EdgeRoute](https://apis.io/schemas/cribl/cribl-edgeroute/)
+- [EdgeSource](https://apis.io/schemas/cribl/cribl-edgesource/)
+- [Function](https://apis.io/schemas/cribl/cribl-function/)
+- [GitSettings](https://apis.io/schemas/cribl/cribl-gitsettings/)
+- [Group](https://apis.io/schemas/cribl/cribl-group/)
+- [HealthStatus](https://apis.io/schemas/cribl/cribl-healthstatus/)
+- [Job](https://apis.io/schemas/cribl/cribl-job/)
+- [LakeDataset](https://apis.io/schemas/cribl/cribl-lakedataset/)
+- [Lookup](https://apis.io/schemas/cribl/cribl-lookup/)
+- [Node](https://apis.io/schemas/cribl/cribl-node/)
+- [Notification](https://apis.io/schemas/cribl/cribl-notification/)
+- [Pack](https://apis.io/schemas/cribl/cribl-pack/)
+- [Cribl Pipeline](https://apis.io/schemas/cribl/cribl-pipeline/)
+- …and 13 more published on APIs.io
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.cribl.io/api-reference/)
-- [OpenAPI](openapi/cribl-cloud-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-cloud-api-rules.yml)
-- [Capabilities](capabilities/cribl-cloud-api-capabilities.yml)
+Data models expressed in JSON Structure.
 
-### Cribl Stream API
+- [Cribl Structure](https://apis.io/json-structure/cribl/cribl-structure/)
 
-The Cribl Stream API provides programmatic access to Cribl Stream, an observability pipeline platform that processes and routes telemetry data in real time. Through the API, developers can manage pipelines, routes, sources, destinations, and worker groups. It enables automation of data collection, transformation, and routing workflows.
+#### JSON-LD (1)
 
-- **Human URL:** [https://docs.cribl.io/stream/](https://docs.cribl.io/stream/)
-- **Base URL:** `https://api.example.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Cribl Context](https://apis.io/jsonld/cribl/cribl-context/)
 
-- Data Pipelines
-- Observability
-- Routing
-- Stream Processing
-- Telemetry
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.cribl.io/stream/)
-- [OpenAPI](openapi/cribl-stream-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-stream-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-stream-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-stream-api-rules.yml)
-- [Capabilities](capabilities/cribl-stream-api-capabilities.yml)
+- [Cribl Domain Vocabulary](https://apis.io/vocabularies/cribl/cribl-vocabulary/)
 
-### Cribl Edge API
+#### Collections (38)
 
-The Cribl Edge API provides programmatic access to Cribl Edge, which extends Stream capabilities to the network edge by deploying lightweight agents on endpoints. The API allows developers to manage edge fleets, configure data collection from endpoints, and control data processing closer to the source.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.cribl.io/edge/](https://docs.cribl.io/edge/)
-- **Base URL:** `https://api.example.com`
+- [Cribl As Code API Credentials API](https://apis.io/collections/cribl/open-cribl-api-credentials-api/)
+- [Cribl As Code API](https://apis.io/collections/cribl/open-cribl-as-code-api/)
+- [Cribl As Code API Credentials Authentication API](https://apis.io/collections/cribl/open-cribl-authentication-api/)
+- [Cribl Cloud API](https://apis.io/collections/cribl/open-cribl-cloud-api/)
+- [Cribl As Code API Credentials Collectors API](https://apis.io/collections/cribl/open-cribl-collectors-api/)
+- [Cribl As Code API Credentials Database Connections API](https://apis.io/collections/cribl/open-cribl-database-connections-api/)
+- [Cribl As Code API Credentials Datasets API](https://apis.io/collections/cribl/open-cribl-datasets-api/)
+- [Cribl As Code API Credentials Destinations API](https://apis.io/collections/cribl/open-cribl-destinations-api/)
+- [Cribl Edge API](https://apis.io/collections/cribl/open-cribl-edge-api/)
+- [Cribl As Code API Credentials Edge Destinations API](https://apis.io/collections/cribl/open-cribl-edge-destinations-api/)
+- [Cribl As Code API Credentials Edge Fleets API](https://apis.io/collections/cribl/open-cribl-edge-fleets-api/)
+- [Cribl As Code API Credentials Edge Nodes API](https://apis.io/collections/cribl/open-cribl-edge-nodes-api/)
+- [Cribl As Code API Credentials Edge Pipelines API](https://apis.io/collections/cribl/open-cribl-edge-pipelines-api/)
+- [Cribl As Code API Credentials Edge Routes API](https://apis.io/collections/cribl/open-cribl-edge-routes-api/)
+- [Cribl As Code API Credentials Edge Sources API](https://apis.io/collections/cribl/open-cribl-edge-sources-api/)
+- [Cribl As Code API Credentials Functions API](https://apis.io/collections/cribl/open-cribl-functions-api/)
+- [Cribl As Code API Credentials Groups API](https://apis.io/collections/cribl/open-cribl-groups-api/)
+- [Cribl As Code API Credentials Health API](https://apis.io/collections/cribl/open-cribl-health-api/)
+- [Cribl As Code API Credentials Jobs API](https://apis.io/collections/cribl/open-cribl-jobs-api/)
+- [Cribl Lake API](https://apis.io/collections/cribl/open-cribl-lake-api/)
+- [Cribl As Code API Credentials Lake Datasets API](https://apis.io/collections/cribl/open-cribl-lake-datasets-api/)
+- [Cribl As Code API Credentials Lookups API](https://apis.io/collections/cribl/open-cribl-lookups-api/)
+- [Cribl As Code API Credentials Nodes API](https://apis.io/collections/cribl/open-cribl-nodes-api/)
+- [Cribl As Code API Credentials Notifications API](https://apis.io/collections/cribl/open-cribl-notifications-api/)
+- [Cribl As Code API Credentials Packs API](https://apis.io/collections/cribl/open-cribl-packs-api/)
+- …and 13 more published on APIs.io
 
-#### Tags
+#### Governance rules (7)
 
-- Agents
-- Data Collection
-- Edge Computing
-- Observability
-- Telemetry
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Cribl — as code api rules](https://apis.io/rules/cribl/cribl-as-code-api-rules/)
+- [Cribl — cloud api rules](https://apis.io/rules/cribl/cribl-cloud-api-rules/)
+- [Cribl — edge api rules](https://apis.io/rules/cribl/cribl-edge-api-rules/)
+- [Cribl — jsonschema rules](https://apis.io/rules/cribl/cribl-jsonschema-spectral-rules/)
+- [Cribl — lake api rules](https://apis.io/rules/cribl/cribl-lake-api-rules/)
+- [Cribl — search api rules](https://apis.io/rules/cribl/cribl-search-api-rules/)
+- [Cribl — stream api rules](https://apis.io/rules/cribl/cribl-stream-api-rules/)
 
-- [Documentation](https://docs.cribl.io/edge/)
-- [OpenAPI](openapi/cribl-edge-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-edge-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-edge-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-edge-api-rules.yml)
-- [Capabilities](capabilities/cribl-edge-api-capabilities.yml)
+#### Security (3)
 
-### Cribl Search API
+Authentication, trust centre, and vulnerability disclosure.
 
-The Cribl Search API provides programmatic access to Cribl Search, a tool for exploring and querying both live and stored observability data in real time. Developers can use the API to execute search queries, retrieve results, and integrate search capabilities into their own applications and workflows.
+- [Cribl Authentication](https://apis.io/security/cribl/cribl-authentication/)
+- [Cribl Domain Security](https://apis.io/security/cribl/cribl-domain-security/)
+- [Cribl Vulnerability Disclosure](https://apis.io/security/cribl/cribl-vulnerability-disclosure/)
 
-- **Human URL:** [https://docs.cribl.io/search/](https://docs.cribl.io/search/)
-- **Base URL:** `https://api.example.com`
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- Analytics
-- Data Exploration
-- Federated Search
-- Observability
-- Querying
+- [Cribl Scopes](https://apis.io/scopes/cribl/cribl-scopes/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.cribl.io/search/)
-- [OpenAPI](openapi/cribl-search-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-search-api-rules.yml)
-- [Capabilities](capabilities/cribl-search-api-capabilities.yml)
+Published plans, tiers and prices.
 
-### Cribl Lake API
+- [Cribl Plans Pricing](https://apis.io/plans/cribl/cribl-plans-pricing/)
 
-The Cribl Lake API provides programmatic access to Cribl Lake, a data lake solution purpose-built for observability and security data. The API enables developers to manage data storage, retention policies, and access controls for large volumes of telemetry data in open formats.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.cribl.io/lake/](https://docs.cribl.io/lake/)
-- **Base URL:** `https://api.example.com`
+Published request limits.
 
-#### Tags
+- [Cribl Rate Limits](https://apis.io/rate-limits/cribl/cribl-rate-limits/)
 
-- Analytics
-- Data Lake
-- Data Management
-- Observability
-- Storage
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.cribl.io/lake/)
-- [OpenAPI](openapi/cribl-lake-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-lake-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-lake-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-lake-api-rules.yml)
-- [Capabilities](capabilities/cribl-lake-api-capabilities.yml)
+- [Cribl Finops](https://apis.io/finops/cribl/cribl-finops/)
 
-### Cribl As Code API
+## Where to find this API
 
-The Cribl As Code API enables developers to manage Cribl configurations programmatically using infrastructure-as-code principles. It supports exporting and importing configurations across deployments, enabling version control, CI/CD integration, and reproducible infrastructure management. Developers can use the API alongside SDKs for Python, Go, and TypeScript or through Terraform providers.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.cribl.io/cribl-as-code/api/](https://docs.cribl.io/cribl-as-code/api/)
-- **Base URL:** `https://gateway.cribl.cloud`
-
-#### Tags
-
-- Automation
-- Configuration
-- DevOps
-- Infrastructure as Code
-- Version Control
-
-#### Properties
-
-- [Documentation](https://docs.cribl.io/cribl-as-code/api/)
-- [OpenAPI](openapi/cribl-as-code-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cribl-as-code-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cribl-as-code-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/cribl-as-code-api-rules.yml)
-- [Capabilities](capabilities/cribl-as-code-api-capabilities.yml)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/criblio)
-- [LinkedIn](https://www.linkedin.com/company/cribl)
-- [JSON-LD](json-ld/cribl-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/cribl-pipeline-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cribl-route-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cribl-source-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cribl-destination-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cribl-worker-group-schema.json) — [JSON Schema](https://json-schema.org/specification)
 - [Website](https://cribl.io/)
 - [Documentation](https://docs.cribl.io/)
-- [Portal](https://docs.cribl.io/)
-- [Login](https://login.cribl.cloud/)
+- [Pricing](https://cribl.io/pricing/plan/)
 - [Blog](https://cribl.io/blog/)
-- [Privacy Policy](https://cribl.io/privacy-policy/)
-- [Terms of Service](https://cribl.io/terms-of-service/)
-- [Integrations](https://cribl.io/integrations/)
-- [L L Ms Txt](https://docs.cribl.io/llms.txt)
+- [Terms of service](https://cribl.io/terms-of-service/)
+- [Privacy policy](https://cribl.io/privacy-policy/)
+- [GitHub](https://github.com/criblio)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 50.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 58.7 |
+| Contract governance | 13.6 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 69.7 |
+
+**Agent readiness 20.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cribl/](https://apis.io/providers/cribl/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cribl: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cribl/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
